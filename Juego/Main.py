@@ -9,16 +9,16 @@ Dada la consigna asignada, deberán desarrollar de a dos el juego. Aplicando los
 Desde lo funcional:
 ●	Aplicar tipos de datos avanzados: listas, diccionarios, tuplas, sets.
 ●	Funciones. El código debe estar debidamente modularizado y documentado. Tengan en cuenta los objetivos de la programación 
-con funciones. Realizar módulos.py para la correcta organización de las mismas.
+    con funciones. Realizar módulos.py para la correcta organización de las mismas.
 ●	Manejo de strings: para normalizar datos, realizar validaciones, funcionamiento inherente a la lógica del juego, etc.
 ●	Archivos csv y Json. Se deberán utilizar los dos tipos de archivos tanto para persistir datos (score, premios, etc) como 
-para leer los elementos del juego (rutas de imágenes, preguntas, respuestas, palabras, puntuaciones, etc)
+    para leer los elementos del juego (rutas de imágenes, preguntas, respuestas, palabras, puntuaciones, etc)
 ●	Matrices: deberán aplicar por lo menos una matriz dentro de la lógica del juego.
 ●	Funciones lambda: deberán aplicar por lo menos una función lambda.
 
 Desde lo visual:
 ●	Imágenes. Según la temática del juego a desarrollar, habrá imágenes estáticas y/o dinámicas 
-(que van cambiando con cada acción del jugador)
+    (que van cambiando con cada acción del jugador)
 ●	Texto: toda interacción con el jugador implica que esos mensajes se muestran por la ventana del juego.
 ●	Figuras:  para representar botones, o cualquier elemento del juego que necesiten.
 ●	Manejo de eventos: para la interacción con el usuario.
@@ -60,8 +60,8 @@ Si el jugador se queda sin tiempo o agota todos los intentos y la figura del aho
 
 Comodines:
 ●	Descubrir una letra: al elegir este comodín el juego descubre una letra al azar. Si existen más incidencias de esa letra 
-no las descubre. 
+    no las descubre. 
 ●	Tiempo extra: al elegir este comodín, se aumentará 30 segundos a la partida actual.
 ●	Multiplicar tiempo restante: este comodín se podrá elegir al comienzo de la partida (durante los primeros 10 segundos). 
-El mismo duplicará el tiempo restante una vez encontrada la palabra. Si el jugador no la descubre, el comodín queda sin efecto.
+    El mismo duplicará el tiempo restante una vez encontrada la palabra. Si el jugador no la descubre, el comodín queda sin efecto.
 """
