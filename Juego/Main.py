@@ -65,10 +65,6 @@ Comodines:
 ●	Multiplicar tiempo restante: este comodín se podrá elegir al comienzo de la partida (durante los primeros 10 segundos). 
     El mismo duplicará el tiempo restante una vez encontrada la palabra. Si el jugador no la descubre, el comodín queda sin efecto.
 """
-import pygame 
-
-pygame.init()
-
 
 import pygame, Tematicas
 
