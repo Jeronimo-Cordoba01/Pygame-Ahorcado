@@ -66,9 +66,11 @@ Comodines:
     El mismo duplicará el tiempo restante una vez encontrada la palabra. Si el jugador no la descubre, el comodín queda sin efecto.
 """
 
-import pygame, Tematicas, sys, Funciones
+import pygame, Tematicas, sys
+from Funciones import *
 
 SIZE = (800,600)
+FPS = 30
 
 pygame.init()
 
@@ -89,6 +91,7 @@ pygame.mixer.music.set_volume(0.5)
 PANTALLA.blit(fondo, (0,0))
 
 while True:
+    fondo.dibujar()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
