@@ -66,3 +66,7 @@ Comodines:
     El mismo duplicará el tiempo restante una vez encontrada la palabra. Si el jugador no la descubre, el comodín queda sin efecto.
 """
 
+import pygame, Tematicas
+
+pygame.init()
+
