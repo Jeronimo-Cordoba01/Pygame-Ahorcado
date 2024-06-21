@@ -69,8 +69,9 @@ Comodines:
 import pygame, Tematicas, sys
 from Funciones import *
 
-SIZE = (800,600)
+SIZE = (800,800)
 FPS = 30
+BLANCO = (255,255,255)
 
 pygame.init()
 
@@ -84,16 +85,17 @@ fondo = pygame.transform.scale(fondo, SIZE)
 icono = pygame.image.load(r"Pygame-Ahorcado\Recursos\Imagenes\Icono.jpg")
 pygame.display.set_icon(icono)
 
-pygame.mixer.music.load(r"Pygame-Ahorcado\Recursos\Audio\Musica-de-fondo.mp3")
-pygame.mixer.music.play(-1)
-pygame.mixer.music.set_volume(0.5)
+#pygame.mixer.music.load(r"Pygame-Ahorcado\Recursos\Audio\Musica-de-fondo.mp3")
+#pygame.mixer.music.play(-1)
+#pygame.mixer.music.set_volume(0.5)
 
 PANTALLA.blit(fondo, (0,0))
 
-horca_color = horca(PANTALLA)  
+horca_color = horca(PANTALLA) 
+pygame.draw.line(PANTALLA, BLANCO, (50,500), (100,500), 5)
 
 while True:
-    horca_color.dibujar()  
+    horca_color.dibujar()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
