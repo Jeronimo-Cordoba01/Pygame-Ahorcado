@@ -74,11 +74,13 @@ pygame.init()
 
 PANTALLA = pygame.display.set_mode(SIZE)
 
-pygame.display.set_caption("Nuestro primer jueguito ahorcado")
+pygame.display.set_caption("Nuestro primer jueguito")
 
 fondo = pygame.image.load(r"Pygame-Ahorcado\Recursos\Imagenes\Pizzaron.png")
 fondo = pygame.transform.scale(fondo, SIZE)
 
+icono = pygame.image.load(r"Pygame-Ahorcado\Recursos\Imagenes\Icono.jpg")
+pygame.display.set_icon(icono)
 
 pygame.mixer.music.load(r"Pygame-Ahorcado\Recursos\Audio\Musica-de-fondo.mp3")
 pygame.mixer.music.play(-1)
