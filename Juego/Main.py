@@ -90,13 +90,18 @@ pygame.mixer.music.set_volume(0.5)
 
 PANTALLA.blit(fondo, (0,0))
 
+horca_color = horca(PANTALLA)  
+
 while True:
+<<<<<<< HEAD
+=======
+    horca_color.dibujar()  
+>>>>>>> 16413a44553b63cd64b9da43d65f3ca095edfed7
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
         
-    
     pygame.display.update()
 
 
