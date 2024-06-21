@@ -68,7 +68,7 @@ Comodines:
 
 import pygame, Tematicas, sys
 
-SIZE = (781,548)
+SIZE = (800,600)
 
 pygame.init()
 
@@ -76,10 +76,10 @@ PANTALLA = pygame.display.set_mode(SIZE)
 
 pygame.display.set_caption("Ahorcado")
 
-fondo = pygame.image.load("Pygame-Ahorcado\Recursos\Imagenes\Pizzaron.png")
+fondo = pygame.image.load(r"Pygame-Ahorcado\Recursos\Imagenes\Pizzaron.png")
 fondo = pygame.transform.scale(fondo, SIZE)
 
-pygame.mixer.music.load("Pygame-Ahorcado\Recursos\Audio\Musica-de-fondo.mp3")
+pygame.mixer.music.load(r"Pygame-Ahorcado\Recursos\Audio\Musica-de-fondo.mp3")
 pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(0.5)
 
