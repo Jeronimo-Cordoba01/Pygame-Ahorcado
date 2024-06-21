@@ -16,3 +16,5 @@ class horca:
         base_final = (self.base_x + self.largo_base, self.base_y)
         pygame.draw.line(self.pantalla, self.color_blanco, base_inicial, base_final, 5)
 
+        
+
