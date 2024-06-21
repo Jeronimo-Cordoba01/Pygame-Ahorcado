@@ -66,12 +66,12 @@ Comodines:
     El mismo duplicará el tiempo restante una vez encontrada la palabra. Si el jugador no la descubre, el comodín queda sin efecto.
 """
 
-import pygame, Tematicas, sys
+import pygame, sys, csv
 from Funciones import *
 
-SIZE = (800,800)
+SIZE = (1100,800)
 FPS = 30
-BLANCO = (255,255,255)
+#BLANCO = (255,255,255)
 
 pygame.init()
 
@@ -88,11 +88,14 @@ pygame.display.set_icon(icono)
 #pygame.mixer.music.load(r"Pygame-Ahorcado\Recursos\Audio\Musica-de-fondo.mp3")
 #pygame.mixer.music.play(-1)
 #pygame.mixer.music.set_volume(0.5)
+#letra_incorrecta_sonido = pygame.mixer.music.load(r"Pygame-Ahorcado\Recursos\Audio\Falla-letra.mp3")
+#letra_correcta_sonido = pygame.mixer.music.load(r"Pygame-Ahorcado\Recursos\Audio\Letra-correcta.mp3")
+#sonido_victoria = pygame.mixer.music.load(r"Pygame-Ahorcado\Recursos\Audio\Happy-wheels.mp3")
 
 PANTALLA.blit(fondo, (0,0))
 
 horca_color = horca(PANTALLA) 
-pygame.draw.line(PANTALLA, BLANCO, (50,500), (100,500), 5)
+#pygame.draw.line(PANTALLA, BLANCO, (50,500), (100,500), 5)
 
 while True:
     horca_color.dibujar()
