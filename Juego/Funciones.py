@@ -63,11 +63,12 @@ class Puntuacion:
             json.dump(self.puntuacion, file)
             
 class Palabra:
-    def __init__(self, archivo_csv):
-        self.palabras = self.leer_palabras(archivo_csv)
+    def __init__(self, path:str = r"Pygame-Ahorcado\Recursos\Archivos\tematicas_palabras.csv"):
+        self.palabras = self.leer_palabras(path)
         self.palabra_actual = random.choice(self.palabras)
     
-    def leer_palabras(self, archivo_csv):
-        with open(archivo_csv, mode='r') as file:
+    def leer_palabras(self,path:str = r"Pygame-Ahorcado\Recursos\Archivos\tematicas_palabras.csv") -> list:
+        with open(path, mode='r', encoding= "utf8") as file:
+            next(file)
             reader = csv.reader(file)
             return [row[0] for row in reader]
