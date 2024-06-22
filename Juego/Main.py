@@ -71,7 +71,7 @@ from Funciones import *
 
 SIZE = (1100,800)
 FPS = 30
-#BLANCO = (255,255,255)
+BLANCO = (255,255,255)
 
 pygame.init()
 
@@ -95,7 +95,7 @@ pygame.display.set_icon(icono)
 PANTALLA.blit(fondo, (0,0))
 
 horca_color = Horca(PANTALLA) 
-#pygame.draw.line(PANTALLA, BLANCO, (50,500), (100,500), 5)
+pygame.draw.line(PANTALLA, BLANCO, (50,500), (100,500), 5)
 
 while True:
     horca_color.dibujar()
