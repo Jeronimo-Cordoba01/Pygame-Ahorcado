@@ -89,8 +89,14 @@ class Palabra:
             return False
     
     def obtener_palabra_mostrada(self):
-        palabra_mostrada = ''.join([letra if letra in self.letras_correctas else '_' for letra in self.palabra_actual])
-        letras_incorrectas_mostradas = ', '.join(sorted(self.letras_incorrectas))
+        palabra_mostrada = ""
+        for letra in self.palabra_actual:
+            if letra in self.letras_correctas:
+                palabra_mostrada += letra
+            else:
+                palabra_mostrada += '_'
+        
+        letras_incorrectas_mostradas = ", ".join(sorted(self.letras_incorrectas))
         return palabra_mostrada, letras_incorrectas_mostradas
     
     def palabra_completa(self):
