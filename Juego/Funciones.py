@@ -1,4 +1,4 @@
-import pygame, json, csv, random
+import pygame, json, csv, random, time
 
 class Horca:
     def __init__(self, pantalla):
@@ -63,22 +63,22 @@ class Puntuacion:
             json.dump(self.puntuacion, file)
             
 class Palabra:
-    def __init__(self, path:str = r"Pygame-Ahorcado\Recursos\Archivos\tematicas_palabras.csv"):
+    def __init__(self, path: str = r"Pygame-Ahorcado\Recursos\Archivos\tematicas_palabras.csv"):
         self.palabras = self.leer_palabras(path)
-        self.palabra_actual = random.choice(self.palabras)
+        self.nueva_palabra()
     
-    def leer_palabras(self,path:str = r"Pygame-Ahorcado\Recursos\Archivos\tematicas_palabras.csv") -> list:
-        with open(path, mode='r', encoding= "utf8") as file:
+    def leer_palabras(self, path: str) -> list:
+        with open(path, mode='r', encoding='utf8') as file:
             next(file)
             reader = csv.reader(file)
-            return [row[0] for row in reader]
-        
+            return [row[0].strip().lower() for row in reader]
+    
     def nueva_palabra(self):
         self.palabra_actual = random.choice(self.palabras)
-        self.letra_correcta = set(self.palabra_actual)
-        self.letra_incorrecta = set(self.palabra_actual)
-        self.tiempo = 60
-
+        self.letras_correctas = set()
+        self.letras_incorrectas = set()
+        self.tiempo_inicial = time.time()
+    
     def validar_letra(self, letra):
         letra = letra.lower()
         if letra in self.palabra_actual:
@@ -87,3 +87,14 @@ class Palabra:
         else:
             self.letras_incorrectas.add(letra)
             return False
+    
+    def obtener_palabra_mostrada(self):
+        palabra_mostrada = ''.join([letra if letra in self.letras_correctas else '_' for letra in self.palabra_actual])
+        letras_incorrectas_mostradas = ', '.join(sorted(self.letras_incorrectas))
+        return palabra_mostrada, letras_incorrectas_mostradas
+    
+    def palabra_completa(self):
+        return set(self.palabra_actual) == self.letras_correctas
+    
+    def tiempo_restante(self):
+        return 60 - (time.time() - self.tiempo_inicial)
