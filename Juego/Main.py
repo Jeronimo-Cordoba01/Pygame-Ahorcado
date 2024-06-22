@@ -97,11 +97,12 @@ PANTALLA.blit(fondo, (0,0))
 horca_color = Horca(PANTALLA) 
 pygame.draw.line(PANTALLA, BLANCO, (50,500), (100,500), 5)
 
-while True:
+Jugando = True
+while Jugando:
     horca_color.dibujar()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            False
+            Jugando = False
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 horca_color.dibujar()
@@ -109,4 +110,5 @@ while True:
         
     pygame.display.update()
 
-
+pygame.quit()
+sys.exit()
