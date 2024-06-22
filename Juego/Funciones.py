@@ -71,3 +71,18 @@ class Palabra:
         with open(archivo_csv, mode='r') as file:
             reader = csv.reader(file)
             return [row[0] for row in reader]
+        
+    def nueva_palabra(self):
+        self.palabra_actual = random.choice(self.palabras)
+        self.letra_correcta = set(self.palabra_actual)
+        self.letra_incorrecta = set(self.palabra_actual)
+        self.tiempo = 60
+
+    def validar_letra(self, letra):
+        letra = letra.lower()
+        if letra in self.palabra_actual:
+            self.letras_correctas.add(letra)
+            return True
+        else:
+            self.letras_incorrectas.add(letra)
+            return False
