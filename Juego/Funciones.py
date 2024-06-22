@@ -80,7 +80,7 @@ class Palabra:
         self.tiempo_inicial = time.time()
     
     def validar_letra(self, letra):
-        letra = letra.lower()
+        letra = letra.lower().ishalpha()
         if letra in self.palabra_actual:
             self.letras_correctas.add(letra)
             return True
