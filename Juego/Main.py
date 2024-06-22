@@ -101,8 +101,11 @@ while True:
     horca_color.dibujar()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+            False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                horca_color.dibujar()
+                break
         
     pygame.display.update()
 
