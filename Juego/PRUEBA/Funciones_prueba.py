@@ -29,7 +29,7 @@ class Horca:
         viga_vertical_chiquita_final = (self.base_x + self.largo_base // 2 + self.largo_viga, self.base_y - self.alto_viga + self.alto_viga_chiquita)
         pygame.draw.line(self.pantalla, self.color_blanco, viga_vertical_chiquita_inicial, viga_vertical_chiquita_final, 5)
         
-
+    
 class Puntuacion:
     def __init__(self):
         self.puntuacion = 0
@@ -46,41 +46,33 @@ class Puntuacion:
             
 class Palabra:
     def __init__(self, path: str = r"Pygame-Ahorcado\Recursos\Archivos\tematicas_palabras.csv"):
-        self.palabras = self.obtener_palabras_csv(path)
-        self.palabra_aleatoria()
+        self.palabras = self.leer_palabras(path)
+        self.nueva_palabra()
     
-    def obtener_palabras_csv():
-        palabras = {}
-        with open("tematicas_palabras.csv", "r", encoding="utf-8") as archivo:
-            lector = csv.DictReader(archivo)
-            for fila in lector:
-                tema = fila['Tema']
-                palabra = fila['Palabra']
-                if tema not in palabras:
-                    palabras[tema] = []
-                palabras[tema].append(palabra)
-        return palabras
+    def leer_palabras(self, path: str) -> list:
+        with open(path, mode='r', encoding='utf8') as file:
+            next(file)
+            reader = csv.reader(file)
+            return [row[0].strip().lower() for row in reader]
     
-    def palabra_aleatoria_csv(self):
-        self.palabra_aleatoria = random.choice(self.palabras)
-        self.intentos = 6
+    def nueva_palabra(self):
+        self.palabra_actual = random.choice(self.palabras)
         self.letras_correctas = set()
         self.letras_incorrectas = set()
         self.tiempo_inicial = time.time()
     
     def validar_letra(self, letra):
-        letra = letra.lower().ishalpha()
-        if letra in self.palabra_aleatoria:
+        letra = letra.lower()
+        if letra in self.palabra_actual:
             self.letras_correctas.add(letra)
             return True
         else:
             self.letras_incorrectas.add(letra)
-            self.intentos -= 1
             return False
     
     def obtener_palabra_mostrada(self):
         palabra_mostrada = ""
-        for letra in self.palabra_aleatoria:
+        for letra in self.palabra_actual:
             if letra in self.letras_correctas:
                 palabra_mostrada += letra
             else:
@@ -90,7 +82,7 @@ class Palabra:
         return palabra_mostrada, letras_incorrectas_mostradas
     
     def palabra_completa(self):
-        return set(self.palabra_aleatoria) == self.letras_correctas
+        return set(self.palabra_actual) == self.letras_correctas
     
     def tiempo_restante(self):
         return 60 - (time.time() - self.tiempo_inicial)
