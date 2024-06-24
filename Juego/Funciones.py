@@ -67,11 +67,17 @@ class Palabra:
         self.palabras = self.leer_palabras(path)
         self.nueva_palabra()
     
-    def leer_palabras(self, path: str) -> list:
-        with open(path, mode='r', encoding='utf8') as file:
-            next(file)
-            reader = csv.reader(file)
-            return [row[0].strip().lower() for row in reader]
+    def obtener_palabras_csv():
+        palabras = {}
+        with open("tematicas_palabras.csv", "r", encoding="utf-8") as archivo:
+            lector = csv.DictReader(archivo)
+            for fila in lector:
+                tema = fila['Tema']
+                palabra = fila['Palabra']
+                if tema not in palabras:
+                    palabras[tema] = []
+                palabras[tema].append(palabra)
+        return palabras
     
     def nueva_palabra(self):
         self.palabra_actual = random.choice(self.palabras)
