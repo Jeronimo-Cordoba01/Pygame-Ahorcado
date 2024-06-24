@@ -66,10 +66,8 @@ Comodines:
     El mismo duplicará el tiempo restante una vez encontrada la palabra. Si el jugador no la descubre, el comodín queda sin efecto.
 """
 
-import pygame, sys
+import pygame, sys, os
 from Funciones import *
-from Ahoracado import *
-
 SIZE = (1100,800)
 FPS = 30
 BLANCO = (255,255,255)
@@ -89,16 +87,19 @@ pygame.display.set_icon(icono)
 pygame.mixer.music.load(r"Pygame-Ahorcado\\Recursos\\Audio\\Musica-de-fondo.mp3")
 pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(0.5)
-letra_incorrecta_sonido = pygame.mixer.music.load(r"Pygame-Ahorcado\\Recursos\\Audio\\Falla-letra.mp3")
-letra_correcta_sonido = pygame.mixer.music.load(r"Pygame-Ahorcado\\Recursos\\Audio\\Letra-correcta.mp3")
-sonido_victoria = pygame.mixer.music.load(r"Pygame-Ahorcado\\Recursos\\Audio\\Happy-wheels.mp3")
+def cargar_sonidos():
+    sonidos = {
+        "falla": pygame.mixer.Sound(os.path.join("Recursos/Audio", "Falla-letra.mp3")),
+        "correcta": pygame.mixer.Sound(os.path.join("Recursos/Audio", "Letra-correcta.mp3")),
+        "fondo": pygame.mixer.Sound(os.path.join("Recursos/Audio", "Musica-de-fondo.mp3")),
+    }
+    return sonidos
 
 PANTALLA.blit(fondo, (0,0))
 
 horca = Horca(PANTALLA) 
-juego = JuegoAhorcado()
 
-estado = juego.cargar_estado_json()
+estado = 0
 letras_incorrectas = estado.get("letras_incorrectas", [])
 puntuacion = estado.get("puntuacion", 0)
 
