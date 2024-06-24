@@ -79,9 +79,8 @@ class Palabra:
                 palabras[tema].append(palabra)
         return palabras
     
-    def palabra_aleatoria_random(self):
-        self.palabra_aleatoria = random.choice(self.palabras)
-        self.intentos_restantes = 6
+    def nueva_palabra(self):
+        self.palabra_actual = random.choice(self.palabras)
         self.letras_correctas = set()
         self.letras_incorrectas = set()
         self.tiempo_inicial = time.time()
@@ -107,7 +106,7 @@ class Palabra:
         return palabra_mostrada, letras_incorrectas_mostradas
     
     def palabra_completa(self):
-        return set(self.palabra_aleatoria) == self.letras_correctas
+        return set(self.palabra_actual) == self.letras_correctas
     
     def tiempo_restante(self):
         return 60 - (time.time() - self.tiempo_inicial)
