@@ -123,18 +123,10 @@ class JuegoAhorcado:
         }
         self.guardar_estado_json(estado)
 
-<<<<<<< HEAD
     def dibujar_texto(self, texto, pos):
         texto_superficie = self.font.render(texto, True, (255, 255, 255))
         self.pantalla.blit(texto_superficie, pos)
-=======
-estado = juego.cargar_estado_json()
-letras_incorrectas = estado.get("letras_incorrectas", [])
-puntuacion = estado.get("puntuacion", 0)
-horca_color = Horca(PANTALLA) 
-#pygame.draw.line(PANTALLA, BLANCO, (50,500), (100,500), 5)
->>>>>>> 336c0671f44e60ce81f1d253351830d9a5130dc2
-
+        
     def jugar(self, palabra):
         self.palabra_oculta = ["_"] * len(palabra)
         self.tiempo_inicial = time.time()
