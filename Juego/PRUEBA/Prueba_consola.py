@@ -40,7 +40,7 @@ def jugar():
             print(f"Letra incorrecta. Te quedan {intentos_restantes} intentos.")
         
         if palabra_adivinada(palabra_secreta, letras_adivinadas):
-            print("¡Felicidades, has adivinado la palabra!")
+            print("Ganaste!, has adivinado la palabra")
             break
     else:
         print(f"Ya no te quedan intentos, perdiste, La palabra era {palabra_secreta}.")

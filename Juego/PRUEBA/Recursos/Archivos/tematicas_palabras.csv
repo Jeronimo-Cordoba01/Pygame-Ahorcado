@@ -1,0 +1,106 @@
+Historia,Matemáticas,Ciencias,Entretenimiento,Deportes,Programación,Literatura,Geografía
+Belgrano,Álgebra,Química,Cine,Fútbol,Python,Shakespeare,Asia
+Rosas,Geometría,Física,Teatro,Baloncesto,Java,Cervantes,Europa
+Milei,Cálculo,Biología,Música,Tenis,C++,García Márquez,África
+San Martín,Trigonometría,Astronomía,Televisión,Atletismo,JavaScript,Borges,América
+Sarmiento,Aritmética,Geología,Videojuegos,Natación,HTML,Kafka,Oceanía
+Perón,Probabilidad,Ecología,Literatura,Ciclismo,CSS,Poe,Antártida
+Evita,Estadística,Genética,Cómics,Boxeo,Ruby,Austen,Atlántico
+Mitre,Matrices,Botánica,Animación,Rugby,SQL,Tolkien,Pacífico
+Moreno,Vectores,Zoología,Circo,Golf,Swift,Orwell,Andes
+Castelli,Fracciones,Microbiología,Danza,Voleibol,PHP,Dickens,Alpes
+Napoleón,Derivadas,Ecología,Series,Surf,Rust,Joyce,Antillas
+Juana de Arco,Logaritmos,Paleontología,Podcast,Hockey,Haskell,Homer,Sahara
+Churchill,Integrales,Geofísica,Karaoke,Patinaje,Perl,Aesop,Rockies
+Luther King,Números Complejos,Evolución,Ópera,Carrera,MATLAB,Dante,Himalayas
+Colón,Topología,Astrobiología,Novela,Boxeo,COBOL,Faulkner,Ganges
+Gandhi,Teoría de Números,Epidemiología,Magia,Parapente,Scala,Hemingway,Amazonas
+Mandela,Análisis Real,Climatología,Stand-up,Skate,Fortran,Chekhov,Siberia
+Lincoln,Matemáticas Discretas,Oceanografía,Baile,Escalada,Lua,Chaucer,Mediterráneo
+Einstein,Teoría de Juegos,Geografía Física,Circo,Atletismo,Kotlin,Twain,Báltico
+Dante,Investigación de Operaciones,Astroquímica,Ballet,Surf,R,Cummings,Cárpatos
+Darwin,Matemáticas Aplicadas,Antropología,Cuentos,Equitación,Objective-C,Yeats,Cordillera Cantábrica
+Freud,Estadística Descriptiva,Ecología,Circo,Tiro,Bash,Milton,Apalaches
+Bach,Estadística Inferencial,Geología,Series,Kayak,Clojure,Eliot,Andes
+Descartes,Álgebra Lineal,Zoología,Karaoke,Natación,Elixir,Woolf,Caribe
+Pasteur,Álgebra Abstracta,Virología,Mímica,Senderismo,Erlang,Orwell,Alpes
+Edison,Geometría Analítica,Oncología,Origami,Rafting,Forth,Frost,Selva Negra
+Tesla,Geometría Diferencial,Farmacología,Puzzles,Buceo,Groovy,Emerson,Kilimanjar
+Colbert,Geometría Euclidiana,Nanotecnología,Ilusionismo,Snowboard,Haxe,Wordsworth,Pirineos
+Lavoisier,Geometría No Euclidiana,Neurociencia,Improv,Ski,Hack,Rimbaud,Ural
+Franklin,Cálculo Diferencial,Patología,Modelaje,Senderismo,Julia,Shelley,Aconcagua
+Marie Curie,Análisis Funcional,Bioquímica,Drama,Pesca,OCaml,Baudelaire,Pamirs
+Pasteur,Álgebra de Boole,Biotecnología,Pantomima,Arquería,Scheme,Proust,Alpes
+Aristóteles,Álgebra Homológica,Ecofisiología,Dibujos animados,Escalada,Nim,Lorca,Himalaya
+Herodoto,Álgebra Multilineal,Ornitología,Conciertos,Ciclismo,Smalltalk,Eco,Karpatos
+Sócrates,Álgebra Universal,Entomología,Telenovela,Tenis,Verilog,Brecht,Atlas
+Platón,Álgebra Simétrica,Fitosociología,Videojuegos,Beisbol,VHDL,Gorki,Urales
+Confucio,Geometría Sintética,Geoquímica,Bandas,Atletismo,VHDL,Salinger,Apalaches
+Sun Tzu,Geometría Algebraica,Ecotoxicología,Opera,Hípica,SPARK,Proust,Cáucaso
+Bismarck,Geometría Proyectiva,Micología,Karaoke,Natación,LabVIEW,Virgil,Taurus
+Castro,Trigonometría Esférica,Bioinformática,Podcast,Gimnasia,AWK,Chaucer,Andes
+Napoleón,Teoría de Galois,Anatomía Comparada,Teatro,Parkour,Eiffel,Fitzgerald,Himalayas
+Hannibal,Geometría Convexa,Genómica,Radio,Karate,TypeScript,Joyce,Rocky Mountains
+Cleopatra,Geometría Computacional,Biogeografía,Performance,Fencing,PostScript,Homer,Sahara
+Julio César,Geometría Discreta,Astrogeología,Danza,Badminton,OCaml,Aesop,Rockies
+Tutankamón,Geometría Hiperbólica,Fisicoquímica,Mimo,Judo,Cython,Tolstoy,Atlántico
+Da Vinci,Geometría Integral,Genética Poblacional,Musical,Kitesurf,Ring,Stendhal,Pacífico
+Miguel Ángel,Geometría de Fractales,Oceanografía,Literatura,Esgrima,Modula-2,Zola,África
+Rousseau,Geometría Convexa,Palinología,Baile,Billar,Simula,Goethe,Asia
+Hobbes,Geometría Descriptiva,Química Analítica,Cuentos,Rugby,Prolog,Hugo,Europa
+Locke,Geometría Axiomática,Fotogrametría,Ópera,Triatlón,Simula,Mann,Oceania
+Kant,Geometría Diferencial,Petrografía,Circo,Esquí,Eiffel,Conrad,América
+Hegel,Geometría Esférica,Fisiología Animal,Series,Ski,TypeScript,Wilde,Mediterráneo
+Voltaire,Geometría Multidimensional,Toxicología,Magia,Tiro,Fortran,Ibsen,Siberia
+Comte,Geometría Plana,Virología,Novelas,Tiro,Bash,Cummings,Andes
+Proudhon,Geometría Proyectiva,Entomología,Ballet,Rápel,Elixir,Lawrence,Caribe
+Bakunin,Geometría Sagrada,Genética Humana,Ópera,Ciclismo,Clojure,Tennyson,Pacífico
+Saint-Simon,Geometría Tridimensional,Embriología,Teatro,Triatlón,Haskell,Bronte,Antártida
+Fourier,Geometría No Euclidiana,Neurobiología,Series,Parkour,Rust,Shelley,Atlántico
+Hume,Geometría Computacional,Fisiopatología,Música,Boxeo,Scala,Blake,Andes
+Berkeley,Geometría Algebraica,Microbiología,Ballet,Buceo,Kotlin,Crane,Sahara
+Descartes,Geometría Analítica,Bioquímica,Musical,Esgrima,Lua,Yeats,Atlántico
+Spinoza,Geometría Convexa,Biotecnología,Mimo,Kitesurf,Swift,Byron,Mediterráneo
+Leibniz,Geometría Discreta,Química Orgánica,Karaoke,Hockey,Perl,Frost,Sahara
+Hobbes,Geometría Diferencial,Botánica,Ópera,Fútbol,Haskell,Tennyson,Andes
+Berkeley,Geometría Euclidiana,Zoología,Teatro,Ski,Eiffel,Chaucer,Himalayas
+Hume,Geometría Analítica,Fisiología,Radio,Golf,OCaml,Byron,Apalaches
+Kant,Geometría Descriptiva,Microbiología,Improv,Rugby,Nim,Dickens,Pirineos
+Schopenhauer,Geometría Diferencial,Ecología,Performance,Patinaje,Smalltalk,Austen,Urales
+Nietzsche,Geometría Algebraica,Genética,Musical,Judo,Verilog,Orwell,Cáucaso
+Hegel,Geometría Euclidiana,Biotecnología,Series,Parkour,SPARK,Tolstoy,Caribe
+Marx,Geometría Hiperbólica,Virología,Podcast,Escalada,LabVIEW,Blake,Pamirs
+Engels,Geometría Proyectiva,Neurobiología,Mimo,Badminton,AWK,Bronte,Rockies
+Rousseau,Geometría Analítica,Fisicoquímica,Ópera,Ski,Ring,Shelley,Ural
+Kierkegaard,Geometría Tridimensional,Biotecnología,Karaoke,Tenis,Prolog,Proust,Andes
+Husserl,Geometría Diferencial,Microbiología,Novela,Natación,Modula-2,Gorki,Alpes
+Heidegger,Geometría Euclidiana,Química Analítica,Ballet,Golf,TypeScript,Fitzgerald,Siberia
+Sartre,Geometría Analítica,Biología Molecular,Radio,Tiro,Fortran,Stendhal,Mediterráneo
+Foucault,Geometría Proyectiva,Fisiología Animal,Teatro,Parapente,Scala,Zola,Himalayas
+Derrida,Geometría Tridimensional,Bioquímica,Series,Rápel,Rust,Goethe,Atlántico
+Deleuze,Geometría Descriptiva,Genética Humana,Ópera,Snowboard,Swift,Hugo,Andes
+Guattari,Geometría Multidimensional,Botánica,Karaoke,Bádminton,Perl,Mann,Pacífico
+Althusser,Geometría Axiomática,Fisiopatología,Mimo,Esquí,Haskell,Conrad,América
+Gramsci,Geometría Diferencial,Zoología,Improv,Buceo,Rust,Eliot,Cáucaso
+Lukács,Geometría No Euclidiana,Fisiología,Música,Fencing,Scala,Byron,Sahara
+Adorno,Geometría Computacional,Biología Molecular,Ópera,Boxeo,Kotlin,Crane,Pirineos
+Horkheimer,Geometría Algebraica,Microbiología,Teatro,Karate,Lua,Yeats,Rockies
+Benjamin,Geometría Proyectiva,Fisiología Animal,Series,Ciclismo,Swift,Byron,Ural
+Habermas,Geometría Analítica,Bioquímica,Karaoke,Surf,OCaml,Blake,Andes
+Mao Zedong,Geometría Compleja,Astrofísica,Cómics,Cricket,Scratch,Steinbeck,Himalayas
+Simón Bolívar,Geometría Analítica,Meteorología,Ópera,Esgrima,Logo,Kerouac,Sierra Madre
+Lenin,Geometría Descriptiva,Patología,Series,Maratón,Snap!,Pynchon,Pampa
+Trotsky,Geometría Diferencial,Ecología,Podcast,Rafting,BASIC,Updike,Cordillera
+Ho Chi Minh,Geometría Tridimensional,Geobotánica,Radio,Montañismo,LISP,Vonnegut,Andes
+Robespierre,Geometría No Euclidiana,Microbiología,Novelas,Snowboard,Smalltalk,Angelou,Himalayas
+Tito,Geometría Algebraica,Química Orgánica,Ópera,Fútbol,COBOL,Thoreau,Kilimanjar
+Khrushchev,Geometría Proyectiva,Genética,Pantomima,Natación,ALGOL,Bradbury,Apalaches
+Gorbachov,Geometría Analítica,Biología Celular,Teatro,Esquí,R,Wharton,Andes
+Pericles,Geometría Descriptiva,Neurociencia,Series,Kitesurf,Scheme,Morrison,Sahara
+Temístocles,Geometría Diferencial,Geología,Podcast,Tenis,Eiffel,Whitman,Himalayas
+Aristides,Geometría Algebraica,Oceanografía,Ópera,Golf,TypeScript,Hughes,Rockies
+Alcibíades,Geometría Proyectiva,Antropología,Teatro,Karate,Fortran,Hesse,Alpes
+Milcíades,Geometría Analítica,Fisiología,Series,Parkour,OCaml,Musil,Sahara
+Pisístrato,Geometría Tridimensional,Genética Humana,Karaoke,Fencing,Modula-2,Pound,Urales
+Hipias,Geometría Euclidiana,Bioquímica,Novelas,Boxeo,Nim,Eliot,Cáucaso
+Clístenes,Geometría Diferencial,Zoología,Ópera,Judo,Smalltalk,Auden,Pirineos

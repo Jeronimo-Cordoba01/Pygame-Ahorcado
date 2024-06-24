@@ -46,20 +46,25 @@ class Puntuacion:
             
 class Palabra:
     def __init__(self, path: str = r"Pygame-Ahorcado\Recursos\Archivos\tematicas_palabras.csv"):
-        self.palabras = self.leer_palabras(path)
+        self.palabras = self.obtener_palabras_csv(path)
         self.nueva_palabra()
     
-    def leer_palabras(self, path: str) -> list:
-        with open(path, mode='r', encoding='utf8') as file:
-            next(file)
-            reader = csv.reader(file)
-            return [row[0].strip().lower() for row in reader]
+    def obtener_palabras_csv(self, path):
+        palabras = {}
+        with open(path, "r", encoding="utf-8") as archivo:
+            lector = csv.DictReader(archivo)
+            for fila in lector:
+                tema = fila['Tema']
+                palabra = fila['Palabra']
+                if tema not in palabras:
+                    palabras[tema] = []
+                palabras[tema].append(palabra)
+        return palabras
     
     def nueva_palabra(self):
         self.palabra_actual = random.choice(self.palabras)
         self.letras_correctas = set()
         self.letras_incorrectas = set()
-        self.tiempo_inicial = time.time()
     
     def validar_letra(self, letra):
         letra = letra.lower()
@@ -84,5 +89,3 @@ class Palabra:
     def palabra_completa(self):
         return set(self.palabra_actual) == self.letras_correctas
     
-    def tiempo_restante(self):
-        return 60 - (time.time() - self.tiempo_inicial)
