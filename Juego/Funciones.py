@@ -67,18 +67,6 @@ class Palabra:
         self.palabras = self.leer_palabras(path)
         self.nueva_palabra()
     
-    def obtener_palabras_csv():
-        palabras = {}
-        with open("tematicas_palabras.csv", "r", encoding="utf-8") as archivo:
-            lector = csv.DictReader(archivo)
-            for fila in lector:
-                tema = fila['Tema']
-                palabra = fila['Palabra']
-                if tema not in palabras:
-                    palabras[tema] = []
-                palabras[tema].append(palabra)
-        return palabras
-    
     def nueva_palabra(self):
         self.palabra_actual = random.choice(self.palabras)
         self.letras_correctas = set()
@@ -105,8 +93,16 @@ class Palabra:
         letras_incorrectas_mostradas = ", ".join(sorted(self.letras_incorrectas))
         return palabra_mostrada, letras_incorrectas_mostradas
     
-    def palabra_completa(self):
-        return set(self.palabra_actual) == self.letras_correctas
+    def palabra_completa(self, puntuacion: Puntuacion):
+        tiempo_transcurrido = time.time() - self.tiempo_inicial
+        if set(self.palabra_actual) == self.letras_correctas:
+            puntuacion.aumentar(10) 
+            return True, "¡Felicidades! Has adivinado la palabra correctamente."
+        elif tiempo_transcurrido > 60:
+            puntuacion.disminuir(5) 
+            return False, "Se acabó el tiempo. La palabra era: " + self.palabra_actual
+        else:
+            return False, "Aún tienes tiempo para adivinar la palabra."
     
     def tiempo_restante(self):
         return 60 - (time.time() - self.tiempo_inicial)
