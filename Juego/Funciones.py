@@ -64,18 +64,31 @@ class Puntuacion:
             
 class Palabra:
     def __init__(self, path: str = r"Pygame-Ahorcado\Recursos\Archivos\tematicas_palabras.csv"):
-        self.palabras = self.leer_palabras(path)
-        self.nueva_palabra()
+        self.palabras = self.obtener_palabras_csv(path)
+        self.palabra_aleatoria()
     
-    def nueva_palabra(self):
-        self.palabra_actual = random.choice(self.palabras)
+    def obtener_palabras_csv():
+        palabras = {}
+        with open("tematicas_palabras.csv", "r", encoding="utf-8") as archivo:
+            lector = csv.DictReader(archivo)
+            for fila in lector:
+                tema = fila['Tema']
+                palabra = fila['Palabra']
+                if tema not in palabras:
+                    palabras[tema] = []
+                palabras[tema].append(palabra)
+        return palabras
+    
+    def palabra_aleatoria_csv(self):
+        self.palabra_aleatoria = random.choice(self.palabras)
+        self.intentos = 6
         self.letras_correctas = set()
         self.letras_incorrectas = set()
         self.tiempo_inicial = time.time()
     
     def validar_letra(self, letra):
         letra = letra.lower().ishalpha()
-        if letra in self.palabra_actual:
+        if letra in self.palabra_aleatoria:
             self.letras_correctas.add(letra)
             return True
         else:
@@ -84,7 +97,7 @@ class Palabra:
     
     def obtener_palabra_mostrada(self):
         palabra_mostrada = ""
-        for letra in self.palabra_actual:
+        for letra in self.palabra_aleatoria:
             if letra in self.letras_correctas:
                 palabra_mostrada += letra
             else:
@@ -93,16 +106,8 @@ class Palabra:
         letras_incorrectas_mostradas = ", ".join(sorted(self.letras_incorrectas))
         return palabra_mostrada, letras_incorrectas_mostradas
     
-    def palabra_completa(self, puntuacion: Puntuacion):
-        tiempo_transcurrido = time.time() - self.tiempo_inicial
-        if set(self.palabra_actual) == self.letras_correctas:
-            puntuacion.aumentar(10) 
-            return True, "¡Felicidades! Has adivinado la palabra correctamente."
-        elif tiempo_transcurrido > 60:
-            puntuacion.disminuir(5) 
-            return False, "Se acabó el tiempo. La palabra era: " + self.palabra_actual
-        else:
-            return False, "Aún tienes tiempo para adivinar la palabra."
+    def palabra_completa(self):
+        return set(self.palabra_aleatoria) == self.letras_correctas
     
     def tiempo_restante(self):
         return 60 - (time.time() - self.tiempo_inicial)
