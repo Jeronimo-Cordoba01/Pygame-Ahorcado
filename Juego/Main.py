@@ -68,59 +68,84 @@ Comodines:
 
 import pygame, sys, os
 from Funciones import *
-SIZE = (1100,800)
+
+SIZE = (1100, 800)
 FPS = 30
-BLANCO = (255,255,255)
+BLANCO = (255, 255, 255)
 
 pygame.init()
 
 PANTALLA = pygame.display.set_mode(SIZE)
-
 pygame.display.set_caption("Nuestro primer jueguito")
 
-fondo = pygame.image.load(r"Pygame-Ahorcado\\Recursos\\Imagenes\\Pizzaron.png")
+fondo = pygame.image.load(r"Pygame-Ahorcado/Recursos/Imagenes/Pizzaron.png")
 fondo = pygame.transform.scale(fondo, SIZE)
 
-icono = pygame.image.load(r"Pygame-Ahorcado\\Recursos\\Imagenes\\Icono.jpg")
+icono = pygame.image.load(r"Pygame-Ahorcado/Recursos/Imagenes/Icono.jpg")
 pygame.display.set_icon(icono)
 
-pygame.mixer.music.load(r"Pygame-Ahorcado\\Recursos\\Audio\\Musica-de-fondo.mp3")
+pygame.mixer.music.load(r"Pygame-Ahorcado/Recursos/Audio/Musica-de-fondo.mp3")
 pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(0.5)
+
 def cargar_sonidos():
     sonidos = {
-        "falla": pygame.mixer.Sound(os.path.join("Recursos/Audio", "Falla-letra.mp3")),
-        "correcta": pygame.mixer.Sound(os.path.join("Recursos/Audio", "Letra-correcta.mp3")),
-        "fondo": pygame.mixer.Sound(os.path.join("Recursos/Audio", "Musica-de-fondo.mp3")),
+        "falla": pygame.mixer.Sound(os.path.join("Pygame-Ahorcado/Recursos/Audio", "Falla-letra.mp3")),
+        "correcta": pygame.mixer.Sound(os.path.join("Pygame-Ahorcado/Recursos/Audio", "Letra-correcta.mp3")),
+        "fondo": pygame.mixer.Sound(os.path.join("Pygame-Ahorcado/Recursos/Audio", "Musica-de-fondo.mp3")),
     }
     return sonidos
 
-PANTALLA.blit(fondo, (0,0))
+sonidos = cargar_sonidos()
+
+PANTALLA.blit(fondo, (0, 0))
 
 horca = Horca(PANTALLA) 
+palabra = Palabra()
 
-estado = 0
-letras_incorrectas = estado.get("letras_incorrectas", [])
-puntuacion = estado.get("puntuacion", 0)
+puntuacion = Puntuacion()
 
 Jugando = True
+clock = pygame.time.Clock()
+
 while Jugando:
+    PANTALLA.blit(fondo, (0, 0))
     horca.dibujar()
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             Jugando = False
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                horca.dibujar()
-                break
+            if event.key == pygame.K_ESCAPE:
+                Jugando = False
+            elif event.key >= pygame.K_a and event.key <= pygame.K_z:
+                letra = chr(event.key)
+                if palabra.validar_letra(letra):
+                    sonidos["correcta"].play()
+                    if palabra.palabra_completa():
+                        puntuacion.aumentar(10)
+                        palabra.palabra_aleatoria()
+                else:
+                    sonidos["falla"].play()
+                    horca.actualizar()
+                    if horca.partes >= 6:
+                        puntuacion.disminuir(5)
+                        palabra.palabra_aleatoria()
+                        horca.partes = 0
+
+    palabra_mostrada, letras_incorrectas_mostradas = palabra.obtener_palabra_mostrada()
     
     font = pygame.font.SysFont(None, 55)
-    texto_puntuacion = font.render(f'Puntuación: {puntuacion}', True, BLANCO)
-    texto_letras_incorrectas = font.render(f'Letras incorrectas: {" ".join(letras_incorrectas)}', True, BLANCO)
+    texto_puntuacion = font.render(f'Puntuación: {puntuacion.puntuacion}', True, BLANCO)
+    texto_palabra = font.render(f'Palabra: {palabra_mostrada}', True, BLANCO)
+    texto_letras_incorrectas = font.render(f'Letras incorrectas: {letras_incorrectas_mostradas}', True, BLANCO)
+    
     PANTALLA.blit(texto_puntuacion, (50, 50))
-    PANTALLA.blit(texto_letras_incorrectas, (50, 150))
+    PANTALLA.blit(texto_palabra, (50, 150))
+    PANTALLA.blit(texto_letras_incorrectas, (50, 250))
     
     pygame.display.update()
+    clock.tick(FPS)
 
 pygame.quit()
 sys.exit()

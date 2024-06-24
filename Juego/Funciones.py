@@ -45,13 +45,13 @@ class Puntuacion:
             json.dump(self.puntuacion, file)
             
 class Palabra:
-    def __init__(self, path: str = r"Pygame-Ahorcado\Recursos\Archivos\tematicas_palabras.csv"):
+    def __init__(self, path: str = "Pygame-Ahorcado/Recursos/Archivos/tematicas_palabras.csv"):
         self.palabras = self.obtener_palabras_csv(path)
         self.palabra_aleatoria()
     
-    def obtener_palabras_csv():
+    def obtener_palabras_csv(self, path):
         palabras = {}
-        with open("tematicas_palabras.csv", "r", encoding="utf-8") as archivo:
+        with open(path, "r", encoding="utf-8") as archivo:
             lector = csv.DictReader(archivo)
             for fila in lector:
                 tema = fila['Tema']
@@ -61,15 +61,16 @@ class Palabra:
                 palabras[tema].append(palabra)
         return palabras
     
-    def palabra_aleatoria_csv(self):
-        self.palabra_aleatoria = random.choice(self.palabras)
+    def palabra_aleatoria(self):
+        tema = random.choice(list(self.palabras.keys()))
+        self.palabra_aleatoria = random.choice(self.palabras[tema])
         self.intentos = 6
         self.letras_correctas = set()
         self.letras_incorrectas = set()
         self.tiempo_inicial = time.time()
     
     def validar_letra(self, letra):
-        letra = letra.lower().ishalpha()
+        letra = letra.lower()
         if letra in self.palabra_aleatoria:
             self.letras_correctas.add(letra)
             return True
