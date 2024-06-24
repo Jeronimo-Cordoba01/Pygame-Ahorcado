@@ -93,6 +93,7 @@ class Palabra:
             return True
         else:
             self.letras_incorrectas.add(letra)
+            self.intentos -= 1
             return False
     
     def obtener_palabra_mostrada(self):
