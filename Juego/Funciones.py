@@ -64,8 +64,8 @@ class Puntuacion:
             
 class Palabra:
     def __init__(self, path: str = r"Pygame-Ahorcado\Recursos\Archivos\tematicas_palabras.csv"):
-        self.palabras = self.leer_palabras(path)
-        self.nueva_palabra()
+        self.palabras = self.obtener_palabras_csv(path)
+        self.palabra_aleatoria()
     
     def obtener_palabras_csv():
         palabras = {}
@@ -79,15 +79,16 @@ class Palabra:
                 palabras[tema].append(palabra)
         return palabras
     
-    def nueva_palabra(self):
-        self.palabra_actual = random.choice(self.palabras)
+    def palabra_aleatoria_random(self):
+        self.palabra_aleatoria = random.choice(self.palabras)
+        self.intentos_restantes = 6
         self.letras_correctas = set()
         self.letras_incorrectas = set()
         self.tiempo_inicial = time.time()
     
     def validar_letra(self, letra):
         letra = letra.lower().ishalpha()
-        if letra in self.palabra_actual:
+        if letra in self.palabra_aleatoria:
             self.letras_correctas.add(letra)
             return True
         else:
@@ -96,7 +97,7 @@ class Palabra:
     
     def obtener_palabra_mostrada(self):
         palabra_mostrada = ""
-        for letra in self.palabra_actual:
+        for letra in self.palabra_aleatoria:
             if letra in self.letras_correctas:
                 palabra_mostrada += letra
             else:
@@ -106,7 +107,7 @@ class Palabra:
         return palabra_mostrada, letras_incorrectas_mostradas
     
     def palabra_completa(self):
-        return set(self.palabra_actual) == self.letras_correctas
+        return set(self.palabra_aleatoria) == self.letras_correctas
     
     def tiempo_restante(self):
         return 60 - (time.time() - self.tiempo_inicial)
