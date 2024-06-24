@@ -66,60 +66,122 @@ Comodines:
     El mismo duplicará el tiempo restante una vez encontrada la palabra. Si el jugador no la descubre, el comodín queda sin efecto.
 """
 
-import pygame, sys
-from Funciones import *
-from Ahoracado import *
+import pygame, json, csv, random, time
 
-SIZE = (1100,800)
-FPS = 30
-BLANCO = (255,255,255)
+class JuegoAhorcado:
+    def __init__(self, pantalla):
+        self.intentos = 6
+        self.tiempo_limite = 60
+        self.letras_adivinadas = set()
+        self.letras_incorrectas = set()
+        self.puntuacion = 0
+        self.pantalla = pantalla
+        self.font = pygame.font.SysFont(None, 55)
+        self.palabra_oculta = []
+        self.tiempo_inicial = 0
 
-pygame.init()
+    def obtener_palabras_csv(self):
+        palabras = {}
+        with open('tematicas_palabras.csv', 'r', encoding='utf-8') as archivo:
+            lector = csv.DictReader(archivo)
+            for fila in lector:
+                tema = fila['Tema']
+                palabra = fila['Palabra']
+                if tema not in palabras:
+                    palabras[tema] = []
+                palabras[tema].append(palabra)
+        return palabras
 
-PANTALLA = pygame.display.set_mode(SIZE)
+    def guardar_estado_json(self, estado):
+        with open('Estado.json', 'w', encoding='utf-8') as archivo:
+            json.dump(estado, archivo, ensure_ascii=False, indent=4)
 
-pygame.display.set_caption("Nuestro primer jueguito")
+    def cargar_estado_json(self):
+        with open('Estado.json', 'r', encoding='utf-8') as archivo:
+            estado = json.load(archivo)
+        return estado
 
-fondo = pygame.image.load(r"Pygame-Ahorcado\\Recursos\\Imagenes\\Pizzaron.png")
-fondo = pygame.transform.scale(fondo, SIZE)
+    def seleccionar_palabra(self, palabras, tema):
+        return random.choice(palabras[tema])
 
-icono = pygame.image.load(r"Pygame-Ahorcado\\Recursos\\Imagenes\\Icono.jpg")
-pygame.display.set_icon(icono)
+    def normalizar_palabra(self, palabra):
+        return palabra.lower().strip()
 
-pygame.mixer.music.load(r"Pygame-Ahorcado\\Recursos\\Audio\\Musica-de-fondo.mp3")
-pygame.mixer.music.play(-1)
-pygame.mixer.music.set_volume(0.5)
-letra_incorrecta_sonido = pygame.mixer.music.load(r"Pygame-Ahorcado\\Recursos\\Audio\\Falla-letra.mp3")
-letra_correcta_sonido = pygame.mixer.music.load(r"Pygame-Ahorcado\\Recursos\\Audio\\Letra-correcta.mp3")
-sonido_victoria = pygame.mixer.music.load(r"Pygame-Ahorcado\\Recursos\\Audio\\Happy-wheels.mp3")
+    def verificar_letra(self, palabra, letra):
+        return letra in palabra
 
-PANTALLA.blit(fondo, (0,0))
+    def obtener_indices(self, palabra, letra):
+        return [i for i, l in enumerate(palabra) if l == letra]
 
-horca = Horca(PANTALLA) 
-juego = JuegoAhorcado()
+    def actualizar_estado(self, palabra):
+        estado = {
+            "palabra": palabra,
+            "intentos_restantes": self.intentos,
+            "letras_adivinadas": list(self.letras_adivinadas),
+            "letras_incorrectas": list(self.letras_incorrectas),
+            "puntuacion": self.puntuacion
+        }
+        self.guardar_estado_json(estado)
 
-estado = juego.cargar_estado_json()
-letras_incorrectas = estado.get("letras_incorrectas", [])
-puntuacion = estado.get("puntuacion", 0)
+    def dibujar_texto(self, texto, pos):
+        texto_superficie = self.font.render(texto, True, (255, 255, 255))
+        self.pantalla.blit(texto_superficie, pos)
 
-Jugando = True
-while Jugando:
-    horca.dibujar()
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            Jugando = False
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                horca.dibujar()
-                break
-    
-    font = pygame.font.SysFont(None, 55)
-    texto_puntuacion = font.render(f'Puntuación: {puntuacion}', True, BLANCO)
-    texto_letras_incorrectas = font.render(f'Letras incorrectas: {" ".join(letras_incorrectas)}', True, BLANCO)
-    PANTALLA.blit(texto_puntuacion, (50, 50))
-    PANTALLA.blit(texto_letras_incorrectas, (50, 150))
-    
-    pygame.display.update()
+    def jugar(self, palabra):
+        self.palabra_oculta = ["_"] * len(palabra)
+        self.tiempo_inicial = time.time()
+        jugando = True
+        
+        while jugando:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    jugando = False
+                elif event.type == pygame.KEYDOWN:
+                    letra = event.unicode.lower()
+                    if letra.isalpha() and len(letra) == 1:
+                        if letra in self.letras_adivinadas or letra in self.letras_incorrectas:
+                            pass
+                        elif letra in palabra:
+                            self.letras_adivinadas.add(letra)
+                            indices = self.obtener_indices(palabra, letra)
+                            for i in indices:
+                                self.palabra_oculta[i] = letra
+                            self.puntuacion += 10
+                        else:
+                            self.intentos -= 1
+                            self.letras_incorrectas.add(letra)
+                            self.puntuacion -= 5
+                
+            self.pantalla.fill((0, 0, 0))
+            self.dibujar_texto(" ".join(self.palabra_oculta), (50, 150))
+            self.dibujar_texto(f"Intentos restantes: {self.intentos}", (50, 50))
+            self.dibujar_texto(f"Puntuación: {self.puntuacion}", (50, 100))
+            pygame.display.flip()
+            
+            if "_" not in self.palabra_oculta or self.intentos <= 0 or time.time() - self.tiempo_inicial >= self.tiempo_limite:
+                jugando = False
+        
+        if "_" not in self.palabra_oculta:
+            self.puntuacion += 50
+        else:
+            self.puntuacion -= 20
+        
+        self.actualizar_estado(palabra)
 
-pygame.quit()
-sys.exit()
+    def main(self):
+        palabras = self.obtener_palabras_csv()
+        temas = list(palabras.keys())
+        
+        tema = random.choice(temas)
+        palabra = self.seleccionar_palabra(palabras, tema)
+        palabra = self.normalizar_palabra(palabra)
+        
+        self.jugar(palabra)
+
+if __name__ == "__main__":
+    pygame.init()
+    pantalla = pygame.display.set_mode((800, 600))
+    pygame.display.set_caption("Juego del Ahorcado")
+    juego = JuegoAhorcado(pantalla)
+    juego.main()
+    pygame.quit()
