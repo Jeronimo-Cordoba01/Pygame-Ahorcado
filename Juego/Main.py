@@ -102,7 +102,7 @@ PANTALLA.blit(fondo, (0, 0))
 
 horca = Horca(PANTALLA) 
 palabra = Palabra()
-
+comodines = Comodines(palabra)
 puntuacion = Puntuacion()
 
 Jugando = True
