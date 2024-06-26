@@ -67,21 +67,21 @@ class Palabra:
         self.palabras = self.obtener_palabras_csv(path)
         self.palabra_aleatoria()
     
-    def obtener_palabras_csv(self, path):
+    def obtener_palabras_csv(self, path: str):
         palabras = {}
         with open(path, "r", encoding="utf-8") as archivo:
             lector = csv.DictReader(archivo)
             for fila in lector:
-                tema = fila['Tema']
+                columna = fila[0]
                 palabra = fila['Palabra']
-                if tema not in palabras:
-                    palabras[tema] = []
-                palabras[tema].append(palabra)
+                if columna not in palabras:
+                    palabras[columna] = []
+                palabras[columna].append(palabra)
         return palabras
     
     def palabra_aleatoria(self):
-        tema = random.choice(list(self.palabras.keys()))
-        self.palabra_aleatoria = random.choice(self.palabras[tema])
+        columna = random.choice(list(self.palabras.keys()))
+        self.palabra_aleatoria = random.choice(self.palabras[columna])
         self.intentos = 6
         self.letras_correctas = set()
         self.letras_incorrectas = set()

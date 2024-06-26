@@ -66,47 +66,76 @@ Comodines:
     El mismo duplicará el tiempo restante una vez encontrada la palabra. Si el jugador no la descubre, el comodín queda sin efecto.
 """
 
-import pygame, sys, os
-from Funciones import *
-
-SIZE = (1100, 800)
-FPS = 30
-BLANCO = (255, 255, 255)
+import pygame
+import sys
+from funciones import *
+import json
 
 pygame.init()
 
-PANTALLA = pygame.display.set_mode(SIZE)
-pygame.display.set_caption("Nuestro primer jueguito")
+# Configuración de pantalla
+ANCHO = 1000
+ALTO = 800
+DIMENSIONES = (ANCHO, ALTO)
+screen = pygame.display.set_mode(DIMENSIONES)
+pygame.display.set_caption("Ahorcado")
 
-fondo = pygame.image.load(r"Pygame-Ahorcado/Recursos/Imagenes/Pizzaron.png")
-fondo = pygame.transform.scale(fondo, SIZE)
-
-icono = pygame.image.load(r"Pygame-Ahorcado/Recursos/Imagenes/Icono.jpg")
+# Cargar imágenes
+icono = pygame.image.load(r'prueba2.0\Recursos\Imagenes\Icono.jpg')
 pygame.display.set_icon(icono)
+horca = pygame.image.load(r'prueba2.0\Recursos\Imagenes\Horca.png')
+horca = pygame.transform.scale(horca, (200,200))
+soga = pygame.image.load(r'prueba2.0\Recursos\Imagenes\Soga.png')
+soga = pygame.transform.scale(soga, (350,350))
+soga_pos = soga.get_rect(topright=(500,500))
+pizarra = pygame.image.load(r'prueba2.0\Recursos\Imagenes\Pizzaron.png')
+pizarra = pygame.transform.scale(pizarra, DIMENSIONES)
+comodin_letra = pygame.image.load(r"prueba2.0\Recursos\Imagenes\descubrir_letra.jpg")
+comodin_letra = pygame.transform.scale(comodin_letra, (100,100))
+comodin_tiempo_extra = pygame.image.load(r"prueba2.0\Recursos\Imagenes\tiempo_extra.jpg")
+comodin_tiempo_extra = pygame.transform.scale(comodin_tiempo_extra, (100,100))
+comodin_multiplicar_tiempo = pygame.image.load(r"prueba2.0\Recursos\Imagenes\multiplicar_tiempo.jpg")
+comodin_multiplicar_tiempo = pygame.transform.scale(comodin_multiplicar_tiempo, (100,100))
 
-pygame.mixer.music.load(r"Pygame-Ahorcado/Recursos/Audio/Musica-de-fondo.mp3")
-pygame.mixer.music.play(-1)
-pygame.mixer.music.set_volume(0.5)
+#posicion de los comodines 
+comodin_letra_pos = comodin_letra.get_rect(topleft=(50, 500))
+comodin_tiempo_pos = comodin_tiempo_extra.get_rect(topleft=(200, 500))
+comodin_multiplicar_pos = comodin_multiplicar_tiempo.get_rect(topleft=(350, 500))
 
-def cargar_sonidos():
-    sonidos = {
-        "falla": pygame.mixer.Sound(os.path.join("Pygame-Ahorcado/Recursos/Audio", "Falla-letra.mp3")),
-        "correcta": pygame.mixer.Sound(os.path.join("Pygame-Ahorcado/Recursos/Audio", "Letra-correcta.mp3")),
-        "fondo": pygame.mixer.Sound(os.path.join("Pygame-Ahorcado/Recursos/Audio", "Musica-de-fondo.mp3")),
-    }
-    return sonidos
+# Cargar sonidos
+sonido_falla = pygame.mixer.Sound(r'prueba2.0\Recursos\Audios\Falla-letra.mp3')
+sonido_acierto = pygame.mixer.Sound(r'prueba2.0\Recursos\Audios\Letra-correcta.mp3')
+musica_fondo = pygame.mixer.Sound(r'prueba2.0\Recursos\Audios\Musica-de-fondo.mp3')
+musica_ganador = pygame.mixer.Sound(r'prueba2.0\Recursos\Audios\Happy-wheels.mp3')
 
-sonidos = cargar_sonidos()
+# Reproducir música de fondo
+pygame.mixer.Sound.play(musica_fondo, loops=-1)
 
-PANTALLA.blit(fondo, (0, 0))
+# Json y csv
+tematicas_palabras = leer_palabras(r'prueba2.0\Recursos\Archivos\tematicas_palabras.csv')
+puntuacion_inicial = {"score": 0}
+guardar_puntuacion = guardar_json(r"prueba2.0\Recursos\Archivos\Puntuacion.json", puntuacion_inicial)
 
-horca = Horca(PANTALLA) 
-palabra = Palabra()
-comodines = Comodines(palabra)
-puntuacion = Puntuacion()
+# Función principal del juego
+def main():
+    tematica, palabra = seleccionar_palabra(tematicas_palabras)
+    letras_adivinadas = []
+    letras_incorrectas = cargar_json(r'prueba2.0\Recursos\Archivos\Letras_incorrectas.json').get('letras', [])
+    puntuacion = cargar_json(r"prueba2.0\Recursos\Archivos\Puntuacion.json").get('score', 0)
+    tiempo_restante = 60
+    letras_ingresadas = set()
+    comodin_letra_usado = False
+    comodin_tiempo_extra_usado = False
+    comodin_multiplicar_tiempo_usado = False 
 
-Jugando = True
-clock = pygame.time.Clock()
+    font = pygame.font.Font(None, 36)
+    clock = pygame.time.Clock()
+    tiempo_inicial = pygame.time.get_ticks() #desde que inicializo el programa
+
+    def mostrar_texto(texto, pos):
+        text = font.render(texto, True, (0, 0, 0))
+        screen.blit(text, pos)
+
 
 while Jugando:
     PANTALLA.blit(fondo, (0, 0))
