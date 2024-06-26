@@ -66,11 +66,10 @@ Comodines:
     El mismo duplicará el tiempo restante una vez encontrada la palabra. Si el jugador no la descubre, el comodín queda sin efecto.
 """
 
-import pygame
-import sys
-from funciones import *
-import json
+import pygame, sys, json
+from Funciones import *
 
+# Inicialización de Pygame
 pygame.init()
 
 # Configuración de pantalla
@@ -111,7 +110,7 @@ musica_ganador = pygame.mixer.Sound(r'prueba2.0\Recursos\Audios\Happy-wheels.mp3
 # Reproducir música de fondo
 pygame.mixer.Sound.play(musica_fondo, loops=-1)
 
-# Json y csv
+# Cargar palabras desde el CSV
 tematicas_palabras = leer_palabras(r'prueba2.0\Recursos\Archivos\tematicas_palabras.csv')
 puntuacion_inicial = {"score": 0}
 guardar_puntuacion = guardar_json(r"prueba2.0\Recursos\Archivos\Puntuacion.json", puntuacion_inicial)
@@ -124,6 +123,7 @@ def main():
     puntuacion = cargar_json(r"prueba2.0\Recursos\Archivos\Puntuacion.json").get('score', 0)
     tiempo_restante = 60
     letras_ingresadas = set()
+    #usar_comodin = False
     comodin_letra_usado = False
     comodin_tiempo_extra_usado = False
     comodin_multiplicar_tiempo_usado = False 
@@ -136,4 +136,75 @@ def main():
         text = font.render(texto, True, (0, 0, 0))
         screen.blit(text, pos)
 
+    while True:
+        screen.fill((255, 255, 255))
+        screen.blit(pizarra, (0, 0))
+        screen.blit(horca, (150, 100))
+        screen.blit(soga, (150, 100))
+        screen.blit(comodin_letra, comodin_letra_pos)
+        screen.blit(comodin_tiempo_extra, comodin_tiempo_pos)
+        screen.blit(comodin_multiplicar_tiempo, comodin_multiplicar_pos)
 
+        palabra_mostrada = ' '.join([letra if letra in letras_adivinadas else '_' for letra in palabra])
+        mostrar_texto(f"Temática: {tematica}", (50, 50))
+        mostrar_texto(palabra_mostrada, (50, 150))
+        mostrar_texto(f"Puntuación: {puntuacion}", (50, 250))
+        mostrar_texto(f"Tiempo: {tiempo_restante}", (50, 350))
+        mostrar_texto(f"Letras Incorrectas: {', '.join(letras_incorrectas)}", (50, 450))
+
+        pygame.display.flip()
+
+        tiempo_actual = pygame.time.get_ticks() 
+        tiempo_transcurrido = (tiempo_actual - tiempo_inicial) * 0.001
+        tiempo_restante = 60 - int(tiempo_transcurrido)
+        if tiempo_restante == 0:
+            print("¡Se acabó el tiempo!")
+            break
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                letra = pygame.key.name(event.key).lower()
+                if letra.isalpha() and letra not in letras_ingresadas:
+                    letras_ingresadas.add(letra)
+                    if letra in palabra:
+                        letras_adivinadas.append(letra)
+                        pygame.mixer.Sound.play(sonido_acierto)
+                        actualizar_puntuacion(10)
+                        puntuacion += 10
+                    else:
+                        letras_incorrectas.append(letra)
+                        pygame.mixer.Sound.play(sonido_falla)
+                        actualizar_puntuacion(-5)
+                        puntuacion -= 5
+                        registrar_letra_incorrecta(letra)
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                pos = pygame.mouse.get_pos()
+                if comodin_letra_pos.collidepoint(pos) and comodin_letra_usado == False:
+                    letra_descubierta = descubrir_letra(palabra, letras_adivinadas)
+                    if letra_descubierta:
+                        letras_adivinadas.append(letra_descubierta)
+                    comodin_letra_usado = True
+                elif comodin_tiempo_pos.collidepoint(pos) and comodin_tiempo_extra_usado == False:
+                    tiempo_restante += 30
+                    comodin_tiempo_extra_usado = True
+                elif comodin_multiplicar_pos.collidepoint(pos) and comodin_multiplicar_tiempo_usado == False and tiempo_transcurrido <= 10:
+                    tiempo_restante *= 2
+                    comodin_multiplicar_tiempo_usado = True
+
+        if set(palabra) <= set(letras_adivinadas):
+            mostrar_texto("¡Adivinaste la palabra!", (ANCHO // 2 - 100, ALTO // 2))
+            mostrar_texto(f"La palabra era: {palabra}", (ANCHO // 2 - 100, ALTO // 2 + 50))
+            pygame.display.flip()
+            pygame.time.delay(3000)
+            actualizar_puntuacion(tiempo_restante)
+            pygame.mixer.Sound.play(musica_ganador)
+            break
+
+        clock.tick(60)
+
+# Ejecutar juego
+if __name__ == "__main__":
+    main()
