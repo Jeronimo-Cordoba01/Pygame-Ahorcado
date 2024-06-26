@@ -36,7 +36,8 @@ while Jugando:
         if event.type == pygame.QUIT:
             Jugando = False
         elif event.type == pygame.KEYDOWN:
-            horca.dibujar()
+            pass
+
         
     pygame.display.update()
 

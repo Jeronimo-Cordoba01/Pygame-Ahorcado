@@ -1,7 +1,11 @@
 import random 
 
 def obtener_palabra_aleatoria():
-    palabra = ["programacion", "codigo", "juego"]
+    palabra = ["programacion", "codigo", "juego", "libro", "cielo",
+            "gato", "ventana", "rio", "sombra", "luz", "flor", "árbol",
+            "viento", "mesa", "silla", "camino", "nube", "sol",
+            "estrella", "mar", "montaña", "casa", "jardin"
+            ]
     palabra_aleatoria = random.choice(palabra)
     return palabra_aleatoria
 
