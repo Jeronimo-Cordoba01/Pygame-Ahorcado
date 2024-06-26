@@ -2,7 +2,7 @@ import csv
 import json
 import random
 
-def leer_palabras(path: str = r"prueba2.0\Recursos\Archivos\tematicas_palabras.csv"):
+def leer_palabras(path: str = r"Recursos\Archivos\tematicas_palabras.csv"):
     tematicas_palabras = {}
     with open(path, newline='', encoding= "utf-8") as csvfile:
         reader = csv.reader(csvfile)
@@ -33,12 +33,12 @@ def guardar_json(path: str, data):
     with open(path, 'w', encoding= "utf-8") as file:
         json.dump(data, file)
 
-def actualizar_puntuacion(puntos, path: str =r'prueba2.0\Recursos\Archivos\Letras_incorrectas.json'):
+def actualizar_puntuacion(puntos, path: str =r'Recursos\Archivos\Letras_incorrectas.json'):
     puntuacion = cargar_json(path)
     puntuacion['score'] = puntuacion.get('score', 0) + puntos
     guardar_json(path, puntuacion)
 
-def registrar_letra_incorrecta(letra, path: str =r'prueba2.0\Recursos\Archivos\Puntuacion.json'):
+def registrar_letra_incorrecta(letra, path: str =r'Recursos\Archivos\Puntuacion.json'):
     letras_incorrectas = cargar_json(path)
     letras_incorrectas['letras'] = letras_incorrectas.get('letras', []) + [letra]
     guardar_json(path, letras_incorrectas)

@@ -80,20 +80,20 @@ screen = pygame.display.set_mode(DIMENSIONES)
 pygame.display.set_caption("Ahorcado")
 
 # Cargar imágenes
-icono = pygame.image.load(r'prueba2.0\Recursos\Imagenes\Icono.jpg')
+icono = pygame.image.load(r'Recursos\Imagenes\Icono.jpg')
 pygame.display.set_icon(icono)
-horca = pygame.image.load(r'prueba2.0\Recursos\Imagenes\Horca.png')
+horca = pygame.image.load(r'Recursos\Imagenes\Horca\Horca.png')
 horca = pygame.transform.scale(horca, (200,200))
-soga = pygame.image.load(r'prueba2.0\Recursos\Imagenes\Soga.png')
+soga = pygame.image.load(r'Recursos\Imagenes\Horca\Soga.png')
 soga = pygame.transform.scale(soga, (350,350))
 soga_pos = soga.get_rect(topright=(500,500))
-pizarra = pygame.image.load(r'prueba2.0\Recursos\Imagenes\Pizzaron.png')
+pizarra = pygame.image.load(r'Recursos\Imagenes\Pizzaron.png')
 pizarra = pygame.transform.scale(pizarra, DIMENSIONES)
-comodin_letra = pygame.image.load(r"prueba2.0\Recursos\Imagenes\descubrir_letra.jpg")
+comodin_letra = pygame.image.load(r"Recursos\Imagenes\Comodines\descubrir_letra.jpg")
 comodin_letra = pygame.transform.scale(comodin_letra, (100,100))
-comodin_tiempo_extra = pygame.image.load(r"prueba2.0\Recursos\Imagenes\tiempo_extra.jpg")
+comodin_tiempo_extra = pygame.image.load(r"Recursos\Imagenes\Comodines\tiempo_extra.jpg")
 comodin_tiempo_extra = pygame.transform.scale(comodin_tiempo_extra, (100,100))
-comodin_multiplicar_tiempo = pygame.image.load(r"prueba2.0\Recursos\Imagenes\multiplicar_tiempo.jpg")
+comodin_multiplicar_tiempo = pygame.image.load(r"Recursos\Imagenes\Comodines\multiplicar_tiempo.jpg")
 comodin_multiplicar_tiempo = pygame.transform.scale(comodin_multiplicar_tiempo, (100,100))
 
 #posicion de los comodines 
@@ -102,25 +102,25 @@ comodin_tiempo_pos = comodin_tiempo_extra.get_rect(topleft=(200, 500))
 comodin_multiplicar_pos = comodin_multiplicar_tiempo.get_rect(topleft=(350, 500))
 
 # Cargar sonidos
-sonido_falla = pygame.mixer.Sound(r'prueba2.0\Recursos\Audios\Falla-letra.mp3')
-sonido_acierto = pygame.mixer.Sound(r'prueba2.0\Recursos\Audios\Letra-correcta.mp3')
-musica_fondo = pygame.mixer.Sound(r'prueba2.0\Recursos\Audios\Musica-de-fondo.mp3')
-musica_ganador = pygame.mixer.Sound(r'prueba2.0\Recursos\Audios\Happy-wheels.mp3')
+sonido_falla = pygame.mixer.Sound(r'Recursos\Audio\Falla-letra.mp3')
+sonido_acierto = pygame.mixer.Sound(r'Recursos\Audio\Letra-correcta.mp3')
+musica_fondo = pygame.mixer.Sound(r'Recursos\Audio\Musica-de-fondo.mp3')
+musica_ganador = pygame.mixer.Sound(r'Recursos\Audio\Happy-wheels.mp3')
 
 # Reproducir música de fondo
 pygame.mixer.Sound.play(musica_fondo, loops=-1)
 
 # Cargar palabras desde el CSV
-tematicas_palabras = leer_palabras(r'prueba2.0\Recursos\Archivos\tematicas_palabras.csv')
+tematicas_palabras = leer_palabras(r'Recursos\Archivos\tematicas_palabras.csv')
 puntuacion_inicial = {"score": 0}
-guardar_puntuacion = guardar_json(r"prueba2.0\Recursos\Archivos\Puntuacion.json", puntuacion_inicial)
+guardar_puntuacion = guardar_json(r"Recursos\Archivos\Puntuacion.json", puntuacion_inicial)
 
 # Función principal del juego
 def main():
     tematica, palabra = seleccionar_palabra(tematicas_palabras)
     letras_adivinadas = []
-    letras_incorrectas = cargar_json(r'prueba2.0\Recursos\Archivos\Letras_incorrectas.json').get('letras', [])
-    puntuacion = cargar_json(r"prueba2.0\Recursos\Archivos\Puntuacion.json").get('score', 0)
+    letras_incorrectas = cargar_json(r'Recursos\Archivos\Letras_incorrectas.json').get('letras', [])
+    puntuacion = cargar_json(r"Recursos\Archivos\Puntuacion.json").get('score', 0)
     tiempo_restante = 60
     letras_ingresadas = set()
     #usar_comodin = False
