@@ -80,7 +80,7 @@ screen = pygame.display.set_mode(DIMENSIONES)
 pygame.display.set_caption("Ahorcado")
 
 # Cargar imágenes
-icono = pygame.image.load(r'Recursos\Imagenes\Icono.jpg')
+icono = pygame.image.load(r"Recursos\Imagenes\Icono.jpg")
 pygame.display.set_icon(icono)
 horca = pygame.image.load(r'Recursos\Imagenes\Horca\Horca.png')
 horca = pygame.transform.scale(horca, (200,200))
