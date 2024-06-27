@@ -35,7 +35,7 @@ def guardar_json(path: str, data):
 
 def actualizar_puntuacion(puntos, path: str =r'Recursos\Archivos\Letras_incorrectas.json'):
     puntuacion = cargar_json(path)
-    puntuacion['score'] = puntuacion.get('score', 0) + puntos
+    puntuacion['puntuacion'] = puntuacion.get('puntuacion', 0) + puntos
     guardar_json(path, puntuacion)
 
 def registrar_letra_incorrecta(letra, path: str =r'Recursos\Archivos\Puntuacion.json'):
@@ -50,3 +50,7 @@ def descubrir_letra(palabra, letras_adivinadas):
         letra = random.choice(letras_disponibles)
         return letra
     return None
+
+#comodin tiempo extra
+def tiempo_extra(tiempo_restante, tiempo_extra = 30):
+    return tiempo_restante + tiempo_extra
