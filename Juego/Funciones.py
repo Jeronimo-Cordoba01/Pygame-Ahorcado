@@ -52,7 +52,3 @@ def descubrir_letra(palabra, letras_adivinadas):
 #comodin tiempo extra
 def tiempo_extra(tiempo_restante, tiempo_extra=30):
     return tiempo_restante + tiempo_extra
-
-#comodin tiempo extra
-def tiempo_extra(tiempo_restante, tiempo_extra = 30):
-    return tiempo_restante + tiempo_extra

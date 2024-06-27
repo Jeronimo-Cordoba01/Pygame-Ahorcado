@@ -82,11 +82,6 @@ pygame.display.set_caption("Ahorcado")
 # Cargar imágenes
 icono = pygame.image.load(r"Recursos\Imagenes\Icono.jpg")
 pygame.display.set_icon(icono)
-# horca = pygame.image.load(r'Recursos\Imagenes\Horca\Horca.png')
-# horca = pygame.transform.scale(horca, (350,350))
-# soga = pygame.image.load(r'Recursos\Imagenes\Horca\Soga.png')
-# soga = pygame.transform.scale(soga, (350,350))
-# soga_pos = soga.get_rect(topright=(500,500))
 pizarra = pygame.image.load(r'Recursos\Imagenes\Pizzaron.png')
 pizarra = pygame.transform.scale(pizarra, DIMENSIONES)
 comodin_letra = pygame.image.load(r"Recursos\Imagenes\Comodines\descubrir_letra.jpg")
@@ -96,16 +91,16 @@ comodin_tiempo_extra = pygame.transform.scale(comodin_tiempo_extra, (100,100))
 comodin_multiplicar_tiempo = pygame.image.load(r"Recursos\Imagenes\Comodines\multiplicar_tiempo.jpg")
 comodin_multiplicar_tiempo = pygame.transform.scale(comodin_multiplicar_tiempo, (100,100))
 
-ahorcado_imagenes = [
-    pygame.image.load(r""),
-    pygame.image.load(r""),
-    pygame.image.load(r""),
-    pygame.image.load(r""),
-    pygame.image.load(r""),
-    pygame.image.load(r""),
-]
+# ahorcado_imagenes = [
+#     pygame.image.load(r""),
+#     pygame.image.load(r""),
+#     pygame.image.load(r""),
+#     pygame.image.load(r""),
+#     pygame.image.load(r""),
+#     pygame.image.load(r""),
+# ]
 
-ahorcado_imagenes = [pygame.transform.scale(ahorcado_imagenes, (200,200))]
+# ahorcado_imagenes = [pygame.transform.scale(ahorcado_imagenes, (350,350))]
 
 
 #posicion de los comodines 
@@ -122,6 +117,8 @@ musica_fondo = pygame.mixer.Sound(r'Recursos\Audio\Musica-de-fondo.mp3')
 pygame.mixer.Sound.play(musica_fondo, loops=-1)
 pygame.mixer.Sound.set_volume(musica_fondo, 0.1)
 musica_ganador = pygame.mixer.Sound(r'Recursos\Audio\Happy-wheels.mp3')
+musica_perdedor = pygame.mixer.Sound(r"Recursos\Audio\Sonido de perdedor.mp3")
+pygame.mixer.Sound.set_volume(musica_perdedor, 0.1)
 
 # Cargar palabras desde el CSV
 tematicas_palabras = leer_palabras(r'Recursos\Archivos\tematicas_palabras.csv')
@@ -153,8 +150,6 @@ def main():
     while True:
         screen.fill((255, 255, 255))
         screen.blit(pizarra, (0, 0))
-        # screen.blit(horca, (150, 100))
-        # screen.blit(soga, (150, 100))
         screen.blit(comodin_letra, comodin_letra_pos)
         screen.blit(comodin_tiempo_extra, comodin_tiempo_pos)
         screen.blit(comodin_multiplicar_tiempo, comodin_multiplicar_pos)
@@ -165,6 +160,7 @@ def main():
         mostrar_texto(f"Puntuación: {puntuacion}", (50, 250))
         mostrar_texto(f"Tiempo: {tiempo_restante}", (50, 350))
         mostrar_texto(f"Letras Incorrectas: {', '.join(letras_incorrectas)}", (50, 450))
+        mostrar_texto(f"Intentos restantes: {intentos_restantes}", (50,600))
 
         pygame.display.flip()
 
@@ -200,6 +196,10 @@ def main():
                             print("No te quedan mas intentos, perdiste!")
                             mostrar_texto("No te quedan mas intentos, perdiste!", (400, 400))
                             mostrar_texto(f"La palabra era: {palabra}", (400, 450))
+                            pygame.mixer.Sound.play(musica_perdedor)
+                            pygame.display.flip()
+                            pygame.time.delay(3000)
+                            return 
 
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 pos = pygame.mouse.get_pos()
