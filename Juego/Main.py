@@ -133,18 +133,17 @@ def main():
     puntuacion = cargar_json(r"Recursos\Archivos\Puntuacion.json").get('puntuacion', 0)
     tiempo_restante = 60
     letras_ingresadas = set()
-    #usar_comodin = False
     comodin_letra_usado = False
     comodin_tiempo_extra_usado = False
     comodin_multiplicar_tiempo_usado = False 
     intentos_restantes = 6 
 
-    font = pygame.font.Font(None, 36)
+    font = pygame.font.SysFont("Chalkdust", 25)
     clock = pygame.time.Clock()
     tiempo_inicial = pygame.time.get_ticks() #desde que inicializo el programa
 
     def mostrar_texto(texto, pos):
-        text = font.render(texto, True, (0, 0, 0))
+        text = font.render(texto, True, (255, 255, 255))
         screen.blit(text, pos)
 
     while True:
@@ -153,6 +152,7 @@ def main():
         screen.blit(comodin_letra, comodin_letra_pos)
         screen.blit(comodin_tiempo_extra, comodin_tiempo_pos)
         screen.blit(comodin_multiplicar_tiempo, comodin_multiplicar_pos)
+        #screen.blit(ahorcado_imagenes[6 - intentos_restantes])
 
         palabra_mostrada = ' '.join([letra if letra in letras_adivinadas else '_' for letra in palabra])
         mostrar_texto(f"Temática: {tematica}", (50, 50))
