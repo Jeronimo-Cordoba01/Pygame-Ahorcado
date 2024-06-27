@@ -132,21 +132,22 @@ def main():
     letras_incorrectas = cargar_json(r'Recursos\Archivos\Letras_incorrectas.json').get('letras', [])
     puntuacion = cargar_json(r"Recursos\Archivos\Puntuacion.json").get('puntuacion', 0)
     tiempo_restante = 60
+    incremento_de_tiempo = 0
     letras_ingresadas = set()
     comodin_letra_usado = False
     comodin_tiempo_extra_usado = False
     comodin_multiplicar_tiempo_usado = False 
     intentos_restantes = 6 
 
-    font = pygame.font.SysFont("Chalkdust", 25)
+    font = pygame.font.SysFont("appleberry", 25)
     clock = pygame.time.Clock()
     tiempo_inicial = pygame.time.get_ticks() #desde que inicializo el programa
 
     def mostrar_texto(texto, pos):
         text = font.render(texto, True, (255, 255, 255))
         screen.blit(text, pos)
-
-    while True:
+    jugando = True
+    while jugando:
         screen.fill((255, 255, 255))
         screen.blit(pizarra, (0, 0))
         screen.blit(comodin_letra, comodin_letra_pos)
@@ -209,11 +210,13 @@ def main():
                         letras_adivinadas.append(letra_descubierta)
                     comodin_letra_usado = True
                 elif comodin_tiempo_pos.collidepoint(pos) and comodin_tiempo_extra_usado == False:
-                    tiempo_extra(tiempo_restante)
+                    incremento_de_tiempo += 30 
+                    print(f"Tiempo restante después de usar el comodín de tiempo extra: {tiempo_restante + 30}")
                     #tiempo_restante += 30
                     comodin_tiempo_extra_usado = True
                 elif comodin_multiplicar_pos.collidepoint(pos) and comodin_multiplicar_tiempo_usado == False and tiempo_transcurrido <= 10:
-                    tiempo_restante *= 2
+                    incremento_de_tiempo += tiempo_restante 
+                    print(f"Tiempo restante después de usar el comodín de multiplicar tiempo: {tiempo_restante * 2}")
                     comodin_multiplicar_tiempo_usado = True
 
         if set(palabra) <= set(letras_adivinadas):
@@ -224,9 +227,9 @@ def main():
             pygame.mixer.Sound.play(musica_ganador)
             pygame.display.flip()
             pygame.time.delay(3000)
-            break
+            return
 
-        clock.tick(60)
+        clock.tick()
 
 # Ejecutar juego
 if __name__ == "__main__":
