@@ -187,8 +187,8 @@ def main():
                     if letra_descubierta:
                         letras_adivinadas.append(letra_descubierta)
                     comodin_letra_usado = True
-                elif comodin_tiempo_pos.collidepoint(pos) and comodin_tiempo_extra_usado == False:
-                    tiempo_restante += 30
+                elif comodin_tiempo_pos.collidepoint(pos) and not comodin_tiempo_extra_usado:
+                    tiempo_restante = tiempo_extra(tiempo_restante)
                     comodin_tiempo_extra_usado = True
                 elif comodin_multiplicar_pos.collidepoint(pos) and comodin_multiplicar_tiempo_usado == False and tiempo_transcurrido <= 10:
                     tiempo_restante *= 2
