@@ -1,6 +1,4 @@
-import csv
-import json
-import random
+import csv, json, random
 
 def leer_palabras(path: str = r"Recursos\Archivos\tematicas_palabras.csv"):
     tematicas_palabras = {}
@@ -43,13 +41,17 @@ def registrar_letra_incorrecta(letra, path: str =r'Recursos\Archivos\Puntuacion.
     letras_incorrectas['letras'] = letras_incorrectas.get('letras', []) + [letra]
     guardar_json(path, letras_incorrectas)
 
-#comodin
+#comodin descubrir_letra
 def descubrir_letra(palabra, letras_adivinadas):
     letras_disponibles = [letra for letra in palabra if letra not in letras_adivinadas]
     if letras_disponibles:
         letra = random.choice(letras_disponibles)
         return letra
     return None
+
+#comodin tiempo extra
+def tiempo_extra(tiempo_restante, tiempo_extra=30):
+    return tiempo_restante + tiempo_extra
 
 #comodin tiempo extra
 def tiempo_extra(tiempo_restante, tiempo_extra = 30):
