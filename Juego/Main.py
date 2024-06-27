@@ -135,6 +135,21 @@ def main():
     def mostrar_texto(texto, pos):
         text = font.render(texto, True, (0, 0, 0))
         screen.blit(text, pos)
+        
+    def pantalla_inicio(screen, font):
+        screen.blint(r"Recursos\Imagenes\Pizzaron.png", (0, 0))
+        text_surface = font.render("Introduce tu nombre:", True, (0, 0, 0))
+        screen.blit(text_surface, (300, 300))
+        
+        ingreso_nombre = pygame.Rect(300, 350, 140, 32)
+        pygame.draw.rect(screen, (255, 255, 255), ingreso_nombre)
+        
+        boton_rect = pygame.Rect(300, 400, 140, 32)
+        pygame.draw.rect(screen, (255, 255, 255), boton_rect)
+        text_surface = font.render("Jugar", True, (0, 0, 0))
+        screen.blit(text_surface, (boton_rect.x + 10, boton_rect.y + 10))
+        
+        return ingreso_nombre, boton_rect
 
     while True:
         screen.fill((255, 255, 255))
