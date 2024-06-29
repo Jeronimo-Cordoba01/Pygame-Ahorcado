@@ -70,6 +70,11 @@ def registrar_letra_incorrecta(letra, path: str =r'Recursos\Archivos\Letras_inco
     letras_incorrectas = cargar_json(path)
     letras_incorrectas['letras'] = letras_incorrectas.get('letras', []) + [letra]
     guardar_json(path, letras_incorrectas)
+    
+def limpiar_letras_incorrectas(path: str = r'Recursos\Archivos\Letras_incorrectas.json'):
+    letras_incorrectas = {'letras': []}
+    guardar_json(path, letras_incorrectas)
+
 
 #comodin descubrir_letra
 def descubrir_letra(palabra, letras_adivinadas):
