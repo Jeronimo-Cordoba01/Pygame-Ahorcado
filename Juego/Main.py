@@ -127,8 +127,12 @@ tematicas_palabras = leer_palabras(r'Recursos\Archivos\tematicas_palabras.csv')
 puntuacion_inicial = {"puntuacion": 0}
 guardar_puntuacion = guardar_json(r"Recursos\Archivos\Puntuacion.json", puntuacion_inicial)
 
+
 # Función principal del juego
 def main():
+    font = pygame.font.SysFont("appleberry", 50)
+    pantalla_de_inicio(screen, pizarra, font, ANCHO, ALTO)
+
     tematica, palabra = seleccionar_palabra(tematicas_palabras)
     letras_adivinadas = []
     letras_incorrectas = cargar_json(r'Recursos\Archivos\Letras_incorrectas.json').get('letras', [])
@@ -139,15 +143,16 @@ def main():
     comodin_letra_usado = False
     comodin_tiempo_extra_usado = False
     comodin_multiplicar_tiempo_usado = False 
-    intentos_restantes = 6 
+    intentos_restantes = 8 
 
-    font = pygame.font.SysFont("appleberry", 25)
+    font = pygame.font.SysFont("appleberry", 30)
     clock = pygame.time.Clock()
     tiempo_inicial = pygame.time.get_ticks() #desde que inicializo el programa
 
     def mostrar_texto(texto, pos):
         text = font.render(texto, True, (255, 255, 255))
         screen.blit(text, pos)
+
     jugando = True
     while jugando:
         screen.fill((255, 255, 255))
@@ -155,7 +160,7 @@ def main():
         screen.blit(comodin_letra, comodin_letra_pos)
         screen.blit(comodin_tiempo_extra, comodin_tiempo_pos)
         screen.blit(comodin_multiplicar_tiempo, comodin_multiplicar_pos)
-        #screen.blit(ahorcado_imagenes[6 - intentos_restantes])
+        #screen.blit(ahorcado_imagenes[8 - intentos_restantes])
 
         palabra_mostrada = ' '.join([letra if letra in letras_adivinadas else '_' for letra in palabra])
         mostrar_texto(f"Temática: {tematica}", (50, 50))
@@ -225,7 +230,7 @@ def main():
             print("¡Adivinaste la palabra!")
             mostrar_texto("¡Adivinaste la palabra!", (400, 400))
             mostrar_texto(f"La palabra era: {palabra}", (400, 450))
-            actualizar_puntuacion(tiempo_restante)
+            actualizar_puntuacion(tiempo_restante) #se añaden los puntos del tiempo restante 
             pygame.mixer.Sound.play(musica_ganador)
             pygame.display.flip()
             pygame.time.delay(3000)
