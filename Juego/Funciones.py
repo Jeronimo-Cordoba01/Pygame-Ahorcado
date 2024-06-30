@@ -87,3 +87,19 @@ def descubrir_letra(palabra, letras_adivinadas):
 #comodin tiempo extra
 def tiempo_extra(tiempo_restante, tiempo_extra=30):
     return tiempo_restante + tiempo_extra
+
+def mostrar_mensaje_final(screen, pizarra, mensaje, palabra, ANCHO, ALTO):
+    font = pygame.font.SysFont("appleberry", 50)
+    screen.fill((255,255,255))
+    screen.blit(pizarra, (0,0))
+
+    mensaje_final = font.render(mensaje, True,(255,255,255))
+    palabra_oculta = font.render(f"La palabra era: {palabra}", True, (255,255,255))
+
+    mensaje_rect = mensaje_final.get_rect(center=(ANCHO // 2, ALTO // 2 - 50))
+    palabra_rect = palabra_oculta.get_rect(center=(ANCHO // 2, ALTO // 2 + 50))
+
+    screen.blit(mensaje_final, mensaje_rect)
+    screen.blit(palabra_oculta, palabra_rect)
+    pygame.display.flip()
+    pygame.time.delay(1000)

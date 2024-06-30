@@ -178,6 +178,10 @@ def main():
         tiempo_restante = 60 - int(tiempo_transcurrido)
         if tiempo_restante == 0:
             print("¡Se acabó el tiempo!")
+            mostrar_mensaje_final(screen, pizarra, "¡Se acabo el tiempo!", palabra, ANCHO, ALTO )
+            pygame.mixer.Sound.stop(musica_fondo)
+            pygame.mixer.Sound.play(musica_perdedor)
+            pygame.time.delay(4000)
             break
 
         for event in pygame.event.get():
@@ -203,11 +207,10 @@ def main():
 
                         if intentos_restantes == 0:
                             print("No te quedan mas intentos, perdiste!")
-                            mostrar_texto("No te quedan mas intentos, perdiste!", (400, 400))
-                            mostrar_texto(f"La palabra era: {palabra}", (400, 450))
+                            mostrar_mensaje_final(screen, pizarra, "No te quedan mas intentos, perdiste!", palabra, ANCHO, ALTO)
+                            pygame.mixer.Sound.stop(musica_fondo)
                             pygame.mixer.Sound.play(musica_perdedor)
-                            pygame.display.flip()
-                            pygame.time.delay(3000)
+                            pygame.time.delay(4000)
                             return 
 
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -229,12 +232,11 @@ def main():
 
         if set(palabra) <= set(letras_adivinadas):
             print("¡Adivinaste la palabra!")
-            mostrar_texto("¡Adivinaste la palabra!", (400, 400))
-            mostrar_texto(f"La palabra era: {palabra}", (400, 450))
-            actualizar_puntuacion(tiempo_restante) #se añaden los puntos del tiempo restante 
+            mostrar_mensaje_final(screen, pizarra, "¡Adivinaste la palabra!", palabra, ANCHO, ALTO)
+            actualizar_puntuacion(tiempo_restante) #se añaden los puntos del tiempo restante
+            pygame.mixer.Sound.stop(musica_fondo)
             pygame.mixer.Sound.play(musica_ganador)
-            pygame.display.flip()
-            pygame.time.delay(3000)
+            pygame.time.delay(4000)
             return
 
         clock.tick()
