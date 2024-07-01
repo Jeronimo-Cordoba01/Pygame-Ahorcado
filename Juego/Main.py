@@ -127,6 +127,54 @@ tematicas_palabras = leer_palabras(r'Recursos\Archivos\tematicas_palabras.csv')
 puntuacion_inicial = {"puntuacion": 0}
 guardar_puntuacion = guardar_json(r"Recursos\Archivos\Puntuacion.json", puntuacion_inicial)
 
+class botones:
+    def __init__(self, dimensiones: tuple, posicion: tuple):
+        self.dimensiones = (200, 100)
+        self.posiciones = 0
+        self.color = (255, 255, 255)
+        self.ubicacion = (posicion)
+        self.ubicacion = pygame.Rect(self.ubicacion, self.dimensiones)
+        
+    def tipos_botones(self, screen):
+        pygame.draw.rect(screen, self.color, self.ubicacion)
+        
+        texto_rect = pygame.font.SysFont("appleberry", 50).render("Play", True, (0, 0, 0))
+        texto_rect = texto_rect.get_rect(center = self.ubicacion.center)
+        screen.blit(texto_rect, texto_rect)
+        
+#TODOS LOS BENDITOS BOTONES
+tamaño_boton = (200, 100)
+boton_a = botones(tamaño_boton, (50, 50), (255, 255, 255),"A", (screen, pizarra, ANCHO, ALTO))
+boton_b = botones(tamaño_boton, (50, 250), (255, 255, 255),"B", (screen, pizarra, ANCHO, ALTO))
+boton_c = botones(tamaño_boton, (50, 450), (255, 255, 255),"C", (screen, pizarra, ANCHO, ALTO))
+boton_d = botones(tamaño_boton, (50, 650), (255, 255, 255),"D", (screen, pizarra, ANCHO, ALTO))
+boton_e = botones(tamaño_boton, (50, 850), (255, 255, 255),"E", (screen, pizarra, ANCHO, ALTO))
+boton_f = botones(tamaño_boton, (250, 50), (255, 255, 255),"F", (screen, pizarra, ANCHO, ALTO))
+boton_g = botones(tamaño_boton, (250, 250), (255, 255, 255),"G", (screen, pizarra, ANCHO, ALTO))
+boton_h = botones(tamaño_boton, (250, 450), (255, 255, 255),"H", (screen, pizarra, ANCHO, ALTO))
+boton_i = botones(tamaño_boton, (250, 650), (255, 255, 255),"I", (screen, pizarra, ANCHO, ALTO))
+boton_j = botones(tamaño_boton, (250, 850), (255, 255, 255),"J", (screen, pizarra, ANCHO, ALTO))
+boton_k = botones(tamaño_boton, (450, 50), (255, 255, 255),"K", (screen, pizarra, ANCHO, ALTO))
+boton_l = botones(tamaño_boton, (450, 250), (255, 255, 255),"L", (screen, pizarra, ANCHO, ALTO))
+boton_m = botones(tamaño_boton, (450, 450), (255, 255, 255),"M", (screen, pizarra, ANCHO, ALTO))
+boton_n = botones(tamaño_boton, (450, 650), (255, 255, 255),"N", (screen, pizarra, ANCHO, ALTO))
+boton_ñ = botones(tamaño_boton, (450, 850), (255, 255, 255),"Ñ", (screen, pizarra, ANCHO, ALTO))
+boton_o = botones(tamaño_boton, (650, 50), (255, 255, 255),"O", (screen, pizarra, ANCHO, ALTO))
+boton_p = botones(tamaño_boton, (650, 250), (255, 255, 255),"P", (screen, pizarra, ANCHO, ALTO))
+boton_q = botones(tamaño_boton, (650, 450), (255, 255, 255),"Q", (screen, pizarra, ANCHO, ALTO))
+boton_r = botones(tamaño_boton, (650, 650), (255, 255, 255),"R", (screen, pizarra, ANCHO, ALTO))
+boton_s = botones(tamaño_boton, (650, 850), (255, 255, 255),"S", (screen, pizarra, ANCHO, ALTO))
+boton_t = botones(tamaño_boton, (850, 50), (255, 255, 255),"T", (screen, pizarra, ANCHO, ALTO))
+boton_u = botones(tamaño_boton, (850, 250), (255, 255, 255),"U", (screen, pizarra, ANCHO, ALTO))
+boton_v = botones(tamaño_boton, (850, 450), (255, 255, 255),"V", (screen, pizarra, ANCHO, ALTO))
+boton_w = botones(tamaño_boton, (850, 650), (255, 255, 255),"W", (screen, pizarra, ANCHO, ALTO))
+boton_x = botones(tamaño_boton, (850, 850), (255, 255, 255),"X", (screen, pizarra, ANCHO, ALTO))
+boton_y = botones(tamaño_boton, (1050, 50), (255, 255, 255),"Y", (screen, pizarra, ANCHO, ALTO))
+boton_z = botones(tamaño_boton, (1050, 250), (255, 255, 255),"Z", (screen, pizarra, ANCHO, ALTO))
+
+todos_botones = [boton_a, boton_b, boton_c, boton_d, boton_e, boton_f, boton_g, boton_h, boton_i, boton_j, boton_k, boton_l, 
+                boton_m, boton_n, boton_ñ, boton_o, boton_p, boton_q, boton_r, boton_s, boton_t, boton_u, boton_v, boton_w, boton_x, 
+                boton_y, boton_z]
 
 # Función principal del juego
 def main():
