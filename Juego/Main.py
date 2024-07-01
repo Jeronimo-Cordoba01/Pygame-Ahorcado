@@ -68,6 +68,7 @@ Comodines:
 
 import pygame, sys, json
 from Funciones import *
+from Pantallas import *
 
 # Inicialización de Pygame
 pygame.init()
@@ -127,11 +128,12 @@ tematicas_palabras = leer_palabras(r'Recursos\Archivos\tematicas_palabras.csv')
 puntuacion_inicial = {"puntuacion": 0}
 guardar_puntuacion = guardar_json(r"Recursos\Archivos\Puntuacion.json", puntuacion_inicial)
 
-
+                
 # Función principal del juego
 def main():
     font = pygame.font.SysFont("appleberry", 50)
     pantalla_de_inicio(screen, pizarra, font, ANCHO, ALTO)
+    pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO)
 
     limpiar_letras_incorrectas()
     tematica, palabra = seleccionar_palabra(tematicas_palabras)

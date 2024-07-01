@@ -1,34 +1,4 @@
-import csv, json, random, pygame, sys
-
-def pantalla_de_inicio(screen, pizarra, font, ANCHO, ALTO):
-    titulo = font.render("Bienvenido al juego del ahorcado", True, (255,255,255))
-    boton_play = font.render("Play", True, (255,255,255), (255, 182, 193))
-    
-    boton_play_rect = boton_play.get_rect()
-    boton_play_rect.center = (ANCHO // 2, ALTO // 2)
-
-    pos_titulo = (ANCHO // 2 - titulo.get_width() // 2, 270)
-
-    screen.blit(pizarra, (0,0))
-    screen.blit(titulo, pos_titulo)
-    screen.blit(boton_play, boton_play_rect)
-
-    pygame.display.flip()
-    
-    jugando = False
-    while not jugando:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:
-                    jugando = True
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    pos = pygame.mouse.get_pos()
-                    if boton_play_rect.collidepoint(pos):
-                        jugando = True
+import csv, json, random, pygame 
 
 def leer_palabras(path: str = r"Recursos\Archivos\tematicas_palabras.csv"):
     tematicas_palabras = {}
@@ -86,20 +56,4 @@ def descubrir_letra(palabra, letras_adivinadas):
 #comodin tiempo extra
 def tiempo_extra(tiempo_restante, tiempo_extra=30):
     return tiempo_restante + tiempo_extra
-
-def mostrar_mensaje_final(screen, pizarra, mensaje, palabra, ANCHO, ALTO):
-    font = pygame.font.SysFont("appleberry", 50)
-    screen.fill((255,255,255))
-    screen.blit(pizarra, (0,0))
-
-    mensaje_final = font.render(mensaje, True,(255,255,255))
-    palabra_oculta = font.render(f"La palabra era: {palabra}", True, (255,255,255))
-
-    mensaje_rect = mensaje_final.get_rect(center=(ANCHO // 2, ALTO // 2 - 50))
-    palabra_rect = palabra_oculta.get_rect(center=(ANCHO // 2, ALTO // 2 + 50))
-
-    screen.blit(mensaje_final, mensaje_rect)
-    screen.blit(palabra_oculta, palabra_rect)
-    pygame.display.flip()
-    pygame.time.delay(1000)
 
