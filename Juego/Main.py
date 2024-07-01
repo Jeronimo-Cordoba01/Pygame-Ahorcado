@@ -92,8 +92,8 @@ comodin_multiplicar_tiempo = pygame.image.load(r"Recursos\Imagenes\Comodines\Mul
 comodin_multiplicar_tiempo = pygame.transform.scale(comodin_multiplicar_tiempo, (100,100))
 
 # ahorcado_imagenes = [
-#     pygame.image.load(r""),
-#     pygame.image.load(r""),
+#     pygame.image.load(r"Recursos\Imagenes\Horca\Horca.png"),
+#     pygame.image.load(r"Recursos\Imagenes\Horca\Soga.png"),
 #     pygame.image.load(r"Recursos\Imagenes\Horca\Cabeza.png"),
 #     pygame.image.load(r"Recursos\Imagenes\Horca\Torso.png"),
 #     pygame.image.load(r"Recursos\Imagenes\Horca\Brazo Izquierdo.png"),
