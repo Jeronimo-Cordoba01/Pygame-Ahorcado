@@ -75,10 +75,9 @@ def limpiar_letras_incorrectas(path: str = r'Recursos\Archivos\Letras_incorrecta
     letras_incorrectas = {'letras': []}
     guardar_json(path, letras_incorrectas)
 
-
 #comodin descubrir_letra
 def descubrir_letra(palabra, letras_adivinadas):
-    letras_disponibles = [letra for letra in palabra if letra not in letras_adivinadas]
+    letras_disponibles = list(filter(lambda letra: letra not in letras_adivinadas, palabra))
     if letras_disponibles:
         letra = random.choice(letras_disponibles)
         return letra
@@ -103,3 +102,4 @@ def mostrar_mensaje_final(screen, pizarra, mensaje, palabra, ANCHO, ALTO):
     screen.blit(palabra_oculta, palabra_rect)
     pygame.display.flip()
     pygame.time.delay(1000)
+

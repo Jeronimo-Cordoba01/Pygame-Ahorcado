@@ -150,9 +150,11 @@ def main():
     clock = pygame.time.Clock()
     tiempo_inicial = pygame.time.get_ticks() #desde que inicializo el programa
 
-    def mostrar_texto(texto, pos):
-        text = font.render(texto, True, (255, 255, 255))
-        screen.blit(text, pos)
+    mostrar_texto = lambda texto, pos: screen.blit(font.render(texto, True, (255,255,255)), pos)
+
+    # def mostrar_texto(texto, pos):
+    #     text = font.render(texto, True, (255, 255, 255))
+    #     screen.blit(text, pos)
 
     jugando = True
     while jugando:
