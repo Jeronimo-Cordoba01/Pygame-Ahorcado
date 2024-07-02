@@ -33,7 +33,7 @@ def pantalla_de_inicio(screen, pizarra, font, ANCHO, ALTO):
 
 #INGRESAR NOMBRE
 def pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO):
-    input_box = pygame.Rect(ANCHO // 2 - 100, ALTO // 2, 200, 50)
+    input_box = pygame.Rect(ANCHO // 2 - 150, ALTO // 2, 300, 50)
     color_inactivo = pygame.Color((255, 255, 255))
     color_activo = pygame.Color((255, 182, 193))
     color_actual = color_inactivo
@@ -63,7 +63,7 @@ def pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO):
                         run = True
                     elif event.key == pygame.K_BACKSPACE:
                         text = text[:-1]
-                    else:
+                    elif len(text) < 10:
                         text += event.unicode 
             
         screen.fill((255,255,255))
@@ -94,4 +94,3 @@ def mostrar_mensaje_final(screen, pizarra, mensaje, palabra, ANCHO, ALTO):
     screen.blit(palabra_oculta, palabra_rect)
     pygame.display.flip()
     pygame.time.delay(1000)
-
