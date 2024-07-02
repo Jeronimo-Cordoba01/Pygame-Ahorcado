@@ -57,3 +57,8 @@ def descubrir_letra(palabra, letras_adivinadas):
 def tiempo_extra(tiempo_restante, tiempo_extra=30):
     return tiempo_restante + tiempo_extra
 
+#comodin multiplicar tiempo
+def multi_tiempo(tiempo_restante, palabra_encontrada, tiempo_transcurrido):
+    if tiempo_transcurrido <= 10 and palabra_encontrada:
+        return tiempo_restante * 2
+    return tiempo_restante

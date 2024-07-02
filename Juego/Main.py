@@ -69,6 +69,7 @@ Comodines:
 import pygame, sys, json
 from Funciones import *
 from Pantallas import *
+from Letritas import *
 
 # Inicialización de Pygame
 pygame.init()
@@ -105,6 +106,8 @@ comodin_multiplicar_tiempo = pygame.transform.scale(comodin_multiplicar_tiempo, 
 
 # ahorcado_imagenes = [pygame.transform.scale(ahorcado_imagenes, (350,350))]
 
+# Crear botones
+#botones = Boton.crear_botones(screen, pizarra, 100, 100)
 
 #posicion de los comodines 
 comodin_letra_pos = comodin_letra.get_rect(topleft=(50, 500))
@@ -165,6 +168,9 @@ def main():
         screen.blit(comodin_tiempo_extra, comodin_tiempo_pos)
         screen.blit(comodin_multiplicar_tiempo, comodin_multiplicar_pos)
         #screen.blit(ahorcado_imagenes[6 - intentos_restantes])
+        
+        # for boton in botones:
+        #     boton.dibujar()
 
         palabra_mostrada = ' '.join([letra if letra in letras_adivinadas else '_' for letra in palabra])
         mostrar_texto(f"Temática: {tematica}", (50, 50))
@@ -218,19 +224,18 @@ def main():
 
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 pos = pygame.mouse.get_pos()
-                if comodin_letra_pos.collidepoint(pos) and comodin_letra_usado == False:
-                    letra_descubierta = descubrir_letra(palabra, letras_adivinadas)
+                if comodin_letra_pos.collidepoint(pos) and not comodin_letra_usado:
+                    letra_descubierta = descubrir_letra("palabra", letras_adivinadas)  # Reemplazar "palabra" con la palabra real del juego
                     if letra_descubierta:
                         letras_adivinadas.append(letra_descubierta)
                     comodin_letra_usado = True
-                elif comodin_tiempo_pos.collidepoint(pos) and comodin_tiempo_extra_usado == False:
-                    incremento_de_tiempo += 30 
-                    print(f"Tiempo restante después de usar el comodín de tiempo extra: {tiempo_restante + 30}")
-                    #tiempo_restante += 30
+                elif comodin_tiempo_pos.collidepoint(pos) and not comodin_tiempo_extra_usado:
+                    tiempo_actual = tiempo_extra(tiempo_actual)
+                    print(f"Tiempo restante después de usar el comodín de tiempo extra: {tiempo_actual}")
                     comodin_tiempo_extra_usado = True
-                elif comodin_multiplicar_pos.collidepoint(pos) and comodin_multiplicar_tiempo_usado == False and tiempo_transcurrido <= 10:
-                    incremento_de_tiempo += tiempo_restante 
-                    print(f"Tiempo restante después de usar el comodín de multiplicar tiempo: {tiempo_restante * 2}")
+                elif comodin_multiplicar_pos.collidepoint(pos) and not comodin_multiplicar_tiempo_usado and tiempo_transcurrido <= 10:
+                    tiempo_actual = multi_tiempo(tiempo_actual, letras_adivinadas, tiempo_transcurrido)
+                    print(f"Tiempo restante después de usar el comodín de multiplicar tiempo: {tiempo_actual}")
                     comodin_multiplicar_tiempo_usado = True
 
         if set(palabra) <= set(letras_adivinadas):
