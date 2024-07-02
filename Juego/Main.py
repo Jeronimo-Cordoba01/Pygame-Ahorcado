@@ -70,6 +70,7 @@ import pygame, sys, json
 from Funciones import *
 from Pantallas import *
 from Letritas import *
+from Comodines import *
 
 # Inicialización de Pygame
 pygame.init()
@@ -93,18 +94,17 @@ comodin_tiempo_extra = pygame.transform.scale(comodin_tiempo_extra, (100,100))
 comodin_multiplicar_tiempo = pygame.image.load(r"Recursos\Imagenes\Comodines\Multiplicar_tiempo.jpg")
 comodin_multiplicar_tiempo = pygame.transform.scale(comodin_multiplicar_tiempo, (100,100))
 
-# ahorcado_imagenes = [
-#     pygame.image.load(r"Recursos\Imagenes\Horca\Horca.png"),
-#     pygame.image.load(r"Recursos\Imagenes\Horca\Soga.png"),
-#     pygame.image.load(r"Recursos\Imagenes\Horca\Cabeza.png"),
-#     pygame.image.load(r"Recursos\Imagenes\Horca\Torso.png"),
-#     pygame.image.load(r"Recursos\Imagenes\Horca\Brazo Izquierdo.png"),
-#     pygame.image.load(r"Recursos\Imagenes\Horca\Brazo Derecho.png"),
-#     pygame.image.load(r"Recursos\Imagenes\Horca\Pierna Izquierda.png"),
-#     pygame.image.load(r"Recursos\Imagenes\Horca\Pierna Derecha.png"),
-# ]
+ahorcado_imagenes = [
+    pygame.image.load(r"Recursos\Imagenes\Horca\1.horca.png"),
+    pygame.image.load(r"Recursos\Imagenes\Horca\2.Ahorcado_cabeza.png"),
+    pygame.image.load(r"Recursos\Imagenes\Horca\3.Ahorcado_torse.png"),
+    pygame.image.load(r"Recursos\Imagenes\Horca\4.Ahorcado_brazo.png"),
+    pygame.image.load(r"Recursos\Imagenes\Horca\5.Ahorcado_dos_brazos.png"),
+    pygame.image.load(r"Recursos\Imagenes\Horca\6.Ahorcado_pierna.png"),
+    pygame.image.load(r"Recursos\Imagenes\Horca\7.ahorcado_completo.png"),
+]
 
-# ahorcado_imagenes = [pygame.transform.scale(ahorcado_imagenes, (350,350))]
+ahorcado_imagenes = [pygame.transform.scale(img, (450,450)) for img in ahorcado_imagenes]
 
 # Crear botones
 #botones = Boton.crear_botones(screen, pizarra, 100, 100)
@@ -143,7 +143,6 @@ def main():
     letras_incorrectas = cargar_json(r'Recursos\Archivos\Letras_incorrectas.json').get('letras', [])
     puntuacion = cargar_json(r"Recursos\Archivos\Puntuacion.json").get('puntuacion', 0)
     tiempo_restante = 60
-    incremento_de_tiempo = 0
     letras_ingresadas = set()
     comodin_letra_usado = False
     comodin_tiempo_extra_usado = False
@@ -156,10 +155,6 @@ def main():
 
     mostrar_texto = lambda texto, pos: screen.blit(font.render(texto, True, (255,255,255)), pos)
 
-    # def mostrar_texto(texto, pos):
-    #     text = font.render(texto, True, (255, 255, 255))
-    #     screen.blit(text, pos)
-
     jugando = True
     while jugando:
         screen.fill((255, 255, 255))
@@ -167,7 +162,7 @@ def main():
         screen.blit(comodin_letra, comodin_letra_pos)
         screen.blit(comodin_tiempo_extra, comodin_tiempo_pos)
         screen.blit(comodin_multiplicar_tiempo, comodin_multiplicar_pos)
-        #screen.blit(ahorcado_imagenes[6 - intentos_restantes])
+        screen.blit(ahorcado_imagenes[6 - intentos_restantes], (400, 50))
         
         # for boton in botones:
         #     boton.dibujar()
@@ -216,9 +211,12 @@ def main():
 
                         if intentos_restantes == 0:
                             print("No te quedan mas intentos, perdiste!")
-                            mostrar_mensaje_final(screen, pizarra, "No te quedan mas intentos, perdiste!", palabra, ANCHO, ALTO)
+                            screen.blit(ahorcado_imagenes[6], (400, 50))
+                            pygame.display.flip()
+                            pygame.time.delay(2000)
                             pygame.mixer.Sound.stop(musica_fondo)
                             pygame.mixer.Sound.play(musica_perdedor)
+                            mostrar_mensaje_final(screen, pizarra, "No te quedan mas intentos, perdiste!", palabra, ANCHO, ALTO)
                             pygame.time.delay(4000)
                             return 
 
