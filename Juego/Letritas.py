@@ -1,5 +1,7 @@
 import pygame
 
+BLANCO = (255, 255, 255)
+
 class Boton:
     def __init__(self, tamaño, posicion, color, texto, pantalla, pizarra, ancho, alto):
         self.tamaño = tamaño
@@ -25,11 +27,15 @@ class Boton:
 def crear_botones(pantalla, pizarra, ancho, alto):
     tamaño_boton = (200, 100)
     letras = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
-    posiciones = [(50, 50), (50, 150), (50, 250), (50, 350), (50, 450), (50, 550), 
-                (250, 50), (250, 150), (250, 250), (250, 350), (250, 450), (250, 550),
-                (450, 50), (450, 150), (450, 250), (450, 350), (450, 450), (450, 550),
-                (650, 50), (650, 150), (650, 250), (650, 350), (650, 450), (650, 550),
-                (850, 50), (850, 150), (850, 250), (850, 350)]
+    posiciones = [
+        (50, 50), (50, 150), (50, 250), (50, 350), (50, 450), (50, 550), 
+        (250, 50), (250, 150), (250, 250), (250, 350), (250, 450), (250, 550),
+        (450, 50), (450, 150), (450, 250), (450, 350), (450, 450), (450, 550),
+        (650, 50), (650, 150), (650, 250), (650, 350), (650, 450), (650, 550),
+        (850, 50), (850, 150), (850, 250), (850, 350)
+    ]
     
-    botones = [Boton(tamaño_boton, posiciones[i], (255, 255, 255), letra, pantalla, pizarra, ancho, alto) for i, letra in enumerate(letras)]
+    # Extendido para mayor legibilidad
+    botones = [Boton(tamaño_boton, posiciones[i], BLANCO, letra, pantalla, pizarra, ancho, alto) for i, letra in enumerate(letras)]
+    
     return botones
