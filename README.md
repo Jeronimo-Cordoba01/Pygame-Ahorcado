@@ -22,15 +22,15 @@
 ## Idea del Juego:
 El juego del ahorcado consiste en adivinar una palabra relacionada con una temática específica, seleccionada de manera aleatoria. Las temáticas pueden incluir historia, entretenimiento, deportes, matemáticas, programación, entre otras.
 
-### Funcionamiento:
-1. **Selección de palabra**:
+### :video_game: Funcionamiento: :video_game:
+1. **:books: Selección de palabra :books:**:
    - Se elige una palabra al azar relacionada con una temática.
    - Ejemplo:
      - Temática: Programación
      - _ a _ _ a _ _ _
      - Palabra: Variable
 
-2. **Adivinanza de letras**:
+2. **:eyeglasses: Adivinanza de letras :eyeglasses:**:
    - El jugador ingresa una letra.
    - Si la letra está en la palabra, se revela en su posición correcta.
    - Si la letra no está, se dibuja una parte de la figura del ahorcado.
@@ -49,8 +49,8 @@ El juego del ahorcado consiste en adivinar una palabra relacionada con una temá
 
 ### :black_joker: Comodines: :black_joker:
 - **Descubrir una letra**: Revela una letra al azar en la palabra.
-![](Recursos\Imagenes\Comodines\Adivinar_letra.jpg)
+![Descubrir una letra ](Recursos\Imagenes\Comodines\Adivinar_letra.jpg)
 - **Tiempo extra**: Aumenta 30 segundos al tiempo de la partida actual.
-![](Recursos\Imagenes\Comodines\Tiempo_extra.jpg)
+![Tiempo extra](Recursos\Imagenes\Comodines\Tiempo_extra.jpg)
 - **Multiplicar tiempo restante**: Duplica el tiempo restante al encontrar la palabra (disponible solo durante los primeros 10 segundos de la partida).
-![](Recursos\Imagenes\Comodines\Multiplicar_tiempo.jpg)
+![Multiplicar tiempo](Recursos\Imagenes\Comodines\Multiplicar_tiempo.jpg)
