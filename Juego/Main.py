@@ -171,15 +171,16 @@ def main():
         mostrar_texto(f"Temática: {tematica}", (50, 50))
         mostrar_texto(palabra_mostrada, (50, 150))
         mostrar_texto(f"Puntuación: {puntuacion}", (50, 250))
-        mostrar_texto(f"Tiempo: {tiempo_restante}", (50, 350))
+        mostrar_texto(f"Tiempo: {round(tiempo_restante)}", (50, 350))
         mostrar_texto(f"Letras Incorrectas: {', '.join(letras_incorrectas)}", (50, 450))
         mostrar_texto(f"Intentos restantes: {intentos_restantes}", (50,600))
 
         pygame.display.flip()
 
-        tiempo_actual = pygame.time.get_ticks() 
-        tiempo_transcurrido = (tiempo_actual - tiempo_inicial) * 0.001
-        tiempo_restante = 60 - int(tiempo_transcurrido)
+        tiempo_actual = pygame.time.get_ticks()
+        tiempo_transcurrido = (tiempo_actual - tiempo_inicial)  * 0.001
+        tiempo_restante -= tiempo_transcurrido
+        tiempo_inicial = tiempo_actual
         if tiempo_restante == 0:
             print("¡Se acabó el tiempo!")
             mostrar_mensaje_final(screen, pizarra, "¡Se acabo el tiempo!", palabra, ANCHO, ALTO )
@@ -223,17 +224,15 @@ def main():
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 pos = pygame.mouse.get_pos()
                 if comodin_letra_pos.collidepoint(pos) and not comodin_letra_usado:
-                    letra_descubierta = descubrir_letra("palabra", letras_adivinadas)  # Reemplazar "palabra" con la palabra real del juego
+                    letra_descubierta = descubrir_letra(palabra, letras_adivinadas)
                     if letra_descubierta:
                         letras_adivinadas.append(letra_descubierta)
                     comodin_letra_usado = True
                 elif comodin_tiempo_pos.collidepoint(pos) and not comodin_tiempo_extra_usado:
-                    tiempo_actual = tiempo_extra(tiempo_actual)
-                    print(f"Tiempo restante después de usar el comodín de tiempo extra: {tiempo_actual}")
+                    tiempo_restante = tiempo_extra(tiempo_restante)
                     comodin_tiempo_extra_usado = True
                 elif comodin_multiplicar_pos.collidepoint(pos) and not comodin_multiplicar_tiempo_usado and tiempo_transcurrido <= 10:
-                    tiempo_actual = multi_tiempo(tiempo_actual, letras_adivinadas, tiempo_transcurrido)
-                    print(f"Tiempo restante después de usar el comodín de multiplicar tiempo: {tiempo_actual}")
+                    tiempo_restante = multi_tiempo(tiempo_restante, tiempo_transcurrido)
                     comodin_multiplicar_tiempo_usado = True
 
         if set(palabra) <= set(letras_adivinadas):
@@ -245,7 +244,7 @@ def main():
             pygame.time.delay(4000)
             return
 
-        clock.tick()
+        clock.tick(30)
 
 # Ejecutar juego
 if __name__ == "__main__":
