@@ -31,16 +31,19 @@ def guardar_json(path: str, data):
     with open(path, 'w', encoding= "utf-8") as file:
         json.dump(data, file)
 
-def actualizar_puntuacion(puntos, path: str =r'Recursos\Archivos\Puntuacion.json'):
-    puntuacion = cargar_json(path)
-    puntuacion['puntuacion'] = puntuacion.get('puntuacion', 0) + puntos
-    guardar_json(path, puntuacion)
+def actualizar_puntuacion(puntos, nombre, path: str =r'Recursos\Archivos\Data_jugador.json'):
+    data_jugador = cargar_json(path)
+    if data_jugador.get('nombre') == nombre:
+        data_jugador['puntuacion'] = data_jugador.get('puntuacion', 0) + puntos
+        guardar_json(path, data_jugador)
 
-def registrar_letra_incorrecta(letra, path: str =r'Recursos\Archivos\Letras_incorrectas.json'):
-    letras_incorrectas = cargar_json(path)
-    letras_incorrectas['letras'] = letras_incorrectas.get('letras', []) + [letra]
-    guardar_json(path, letras_incorrectas)
+def registrar_letra_incorrecta(letra, nombre, path: str =r"Recursos\Archivos\Data_jugador.json"):
+    data_jugador = cargar_json(path)
+    if data_jugador.get('nombre') == nombre:
+        data_jugador['letras_incorrectas'] = data_jugador.get('letras_incorrectas', []) + [letra]
+        guardar_json(path, data_jugador)
     
-def limpiar_letras_incorrectas(path: str = r'Recursos\Archivos\Letras_incorrectas.json'):
-    letras_incorrectas = {'letras': []}
-    guardar_json(path, letras_incorrectas)
+def limpiar_letras_incorrectas(path: str = r'Recursos\Archivos\Data_jugador.json'):
+    data_jugador = cargar_json(path)
+    data_jugador['letras_incorrectas'] = []
+    guardar_json(path, data_jugador)

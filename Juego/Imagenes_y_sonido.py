@@ -2,9 +2,12 @@ import pygame
 
 pygame.mixer.init()
 
+#configuracion de pantalla
 ANCHO = 1000
 ALTO = 800
 DIMENSIONES = (ANCHO, ALTO)
+screen = pygame.display.set_mode(DIMENSIONES)
+pygame.display.set_caption("Ahorcado")
 
 #imagenes
 icono = pygame.image.load(r"Recursos\Imagenes\Icono.jpg")

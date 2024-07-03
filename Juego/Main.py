@@ -76,10 +76,6 @@ from Imagenes_y_sonido import *
 # Inicialización de Pygame
 pygame.init()
 
-# Configuración de pantalla
-screen = pygame.display.set_mode(DIMENSIONES)
-pygame.display.set_caption("Ahorcado")
-
 #posicion de los comodines 
 comodin_letra_pos = comodin_letra.get_rect(topleft=(50, 500))
 comodin_tiempo_pos = comodin_tiempo_extra.get_rect(topleft=(200, 500))
@@ -87,20 +83,27 @@ comodin_multiplicar_pos = comodin_multiplicar_tiempo.get_rect(topleft=(350, 500)
 
 # Cargar palabras desde el CSV
 tematicas_palabras = leer_palabras(r'Recursos\Archivos\tematicas_palabras.csv')
-puntuacion_inicial = {"puntuacion": 0}
-guardar_puntuacion = guardar_json(r"Recursos\Archivos\Puntuacion.json", puntuacion_inicial)
 
 # Función principal del juego
 def main():
     font = pygame.font.SysFont("appleberry", 50)
     pantalla_de_inicio(screen, pizarra, font, ANCHO, ALTO)
-    pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO)
+    nombre_jugador = pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO)
+
+    data_jugador = {
+        "nombre": nombre_jugador,
+        "puntuacion": 0,
+        "letras_incorrectas": []
+    }
+
+    guardar_json(r"Recursos\Archivos\Data_jugador.json", data_jugador)
 
     limpiar_letras_incorrectas()
     tematica, palabra = seleccionar_palabra(tematicas_palabras)
     letras_adivinadas = []
-    letras_incorrectas = cargar_json(r'Recursos\Archivos\Letras_incorrectas.json').get('letras', [])
-    puntuacion = cargar_json(r"Recursos\Archivos\Puntuacion.json").get('puntuacion', 0)
+    data_jugador = cargar_json(r"Recursos\Archivos\Data_jugador.json")
+    letras_incorrectas = data_jugador.get('letras_incorrectas', [])
+    puntuacion = data_jugador.get('puntuacion', 0)
     tiempo_restante = 60
     letras_ingresadas = set()
     comodin_letra_usado = False
@@ -138,7 +141,7 @@ def main():
         tiempo_transcurrido = (tiempo_actual - tiempo_inicial)  * 0.001
         tiempo_restante -= tiempo_transcurrido
         tiempo_inicial = tiempo_actual
-        if tiempo_restante == 0:
+        if tiempo_restante <= 0:
             print("¡Se acabó el tiempo!")
             mostrar_mensaje_final(screen, pizarra, "¡Se acabo el tiempo!", palabra, ANCHO, ALTO )
             pygame.mixer.Sound.stop(musica_fondo)
@@ -157,14 +160,14 @@ def main():
                     if letra in palabra:
                         letras_adivinadas.append(letra)
                         pygame.mixer.Sound.play(sonido_acierto)
-                        actualizar_puntuacion(10)
+                        actualizar_puntuacion(10, nombre_jugador)
                         puntuacion += 10
                     else:
                         letras_incorrectas.append(letra)
                         pygame.mixer.Sound.play(sonido_falla)
-                        actualizar_puntuacion(-5)
+                        actualizar_puntuacion(-5, nombre_jugador)
                         puntuacion -= 5
-                        registrar_letra_incorrecta(letra)
+                        registrar_letra_incorrecta(letra, nombre_jugador)
                         intentos_restantes -= 1
                         if intentos_restantes == 0:
                             print("No te quedan mas intentos, perdiste!")
@@ -185,14 +188,14 @@ def main():
                     if letra_clic in palabra:
                         letras_adivinadas.append(letra_clic)
                         pygame.mixer.Sound.play(sonido_acierto)
-                        actualizar_puntuacion(10)
+                        actualizar_puntuacion(10, nombre_jugador)
                         puntuacion += 10
                     else:
                         letras_incorrectas.append(letra_clic)
                         pygame.mixer.Sound.play(sonido_falla)
-                        actualizar_puntuacion(-5)
+                        actualizar_puntuacion(-5, nombre_jugador)
                         puntuacion -= 5
-                        registrar_letra_incorrecta(letra_clic)
+                        registrar_letra_incorrecta(letra_clic, nombre_jugador)
                         intentos_restantes -= 1
                         if intentos_restantes == 0:
                             print("No te quedan mas intentos, perdiste!")
@@ -220,7 +223,7 @@ def main():
         if set(palabra) <= set(letras_adivinadas):
             print("¡Adivinaste la palabra!")
             mostrar_mensaje_final(screen, pizarra, "¡Adivinaste la palabra!", palabra, ANCHO, ALTO)
-            actualizar_puntuacion(tiempo_restante) #se añaden los puntos del tiempo restante
+            actualizar_puntuacion(tiempo_restante, nombre_jugador) #se añaden los puntos del tiempo restante
             pygame.mixer.Sound.stop(musica_fondo)
             pygame.mixer.Sound.play(musica_ganador)
             pygame.time.delay(4000)
