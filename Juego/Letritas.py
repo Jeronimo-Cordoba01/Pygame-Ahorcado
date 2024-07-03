@@ -1,41 +1,36 @@
-import pygame
+import pygame, string
 
-BLANCO = (255, 255, 255)
+def dibujar_letras(screen, font, letras_ingresadas):
+    letras = string.ascii_lowercase #para obtener el abecedario
+    letra_eje_x = 500 #derecha
+    letra_eje_y = 500 #arriba
+    espacio_entre_letras = 30
+    letras_por_fila = 13 
+    font = pygame.font.SysFont("appleberry", 40)
 
-class Boton:
-    def __init__(self, tamaño, posicion, color, texto, pantalla, pizarra, ancho, alto):
-        self.tamaño = tamaño
-        self.posicion = posicion
-        self.color = color
-        self.texto = texto
-        self.pantalla = pantalla
-        self.pizarra = pizarra
-        self.ancho = ancho
-        self.alto = alto
-        self.rect = pygame.Rect(posicion, tamaño)
-        self.font = pygame.font.Font(None, 36)
-        self.render_texto()
+    for i, letra in enumerate(letras):
+        fila = 0 if i < letras_por_fila else 1
+        columna = i % letras_por_fila
 
-    def render_texto(self):
-        self.text_surface = self.font.render(self.texto, True, self.color)
-        self.text_rect = self.text_surface.get_rect(center=self.rect.center)
+        letra_surface = font.render(letra, True, (255, 255, 255))
+        letra_rect = letra_surface.get_rect(topleft=(letra_eje_x + columna * espacio_entre_letras, letra_eje_y + fila * 40))
 
-    def dibujar(self):
-        pygame.draw.rect(self.pantalla, self.color, self.rect)
-        self.pantalla.blit(self.text_surface, self.text_rect)
+        if letra not in letras_ingresadas:
+            screen.blit(letra_surface, letra_rect)
+            
+def letra_click(pos):
+    letras = string.ascii_lowercase
+    letra_eje_x = 500
+    letra_eje_y = 500
+    espacio_entre_letras = 30
+    letras_por_fila = 13 
 
-def crear_botones(pantalla, pizarra, ancho, alto):
-    tamaño_boton = (200, 100)
-    letras = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
-    posiciones = [
-        (50, 50), (50, 150), (50, 250), (50, 350), (50, 450), (50, 550), 
-        (250, 50), (250, 150), (250, 250), (250, 350), (250, 450), (250, 550),
-        (450, 50), (450, 150), (450, 250), (450, 350), (450, 450), (450, 550),
-        (650, 50), (650, 150), (650, 250), (650, 350), (650, 450), (650, 550),
-        (850, 50), (850, 150), (850, 250), (850, 350)
-    ]
-    
-    # Extendido para mayor legibilidad
-    botones = [Boton(tamaño_boton, posiciones[i], BLANCO, letra, pantalla, pizarra, ancho, alto) for i, letra in enumerate(letras)]
-    
-    return botones
+    for i, letra in enumerate(letras):
+        fila = 0 if i < letras_por_fila else 1
+        columna = i % letras_por_fila
+
+        letra_rect = pygame.Rect(letra_eje_x + columna * espacio_entre_letras, letra_eje_y + fila * 40, 20, 20)
+        if letra_rect.collidepoint(pos):
+            return letra
+
+    return None

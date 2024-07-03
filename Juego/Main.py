@@ -163,9 +163,7 @@ def main():
         screen.blit(comodin_tiempo_extra, comodin_tiempo_pos)
         screen.blit(comodin_multiplicar_tiempo, comodin_multiplicar_pos)
         screen.blit(ahorcado_imagenes[6 - intentos_restantes], (400, 50))
-        
-        # for boton in botones:
-        #     boton.dibujar()
+        dibujar_letras(screen, font, letras_ingresadas)
 
         palabra_mostrada = ' '.join([letra if letra in letras_adivinadas else '_' for letra in palabra])
         mostrar_texto(f"Temática: {tematica}", (50, 50))
@@ -209,12 +207,11 @@ def main():
                         puntuacion -= 5
                         registrar_letra_incorrecta(letra)
                         intentos_restantes -= 1
-
                         if intentos_restantes == 0:
                             print("No te quedan mas intentos, perdiste!")
                             screen.blit(ahorcado_imagenes[6], (400, 50))
                             pygame.display.flip()
-                            pygame.time.delay(2000)
+                            pygame.time.delay(1000)
                             pygame.mixer.Sound.stop(musica_fondo)
                             pygame.mixer.Sound.play(musica_perdedor)
                             mostrar_mensaje_final(screen, pizarra, "No te quedan mas intentos, perdiste!", palabra, ANCHO, ALTO)
@@ -223,7 +220,36 @@ def main():
 
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 pos = pygame.mouse.get_pos()
-                if comodin_letra_pos.collidepoint(pos) and not comodin_letra_usado:
+                letra_clic = letra_click(pos)
+                if letra_clic and letra_clic not in letras_ingresadas:
+                    letras_ingresadas.add(letra_clic)
+                    # Lógica para procesar la letra ingresada por clic
+                    if letra_clic in palabra:
+                        letras_adivinadas.append(letra_clic)
+                        pygame.mixer.Sound.play(sonido_acierto)
+                        actualizar_puntuacion(10)
+                        puntuacion += 10
+                    else:
+                        letras_incorrectas.append(letra_clic)
+                        pygame.mixer.Sound.play(sonido_falla)
+                        actualizar_puntuacion(-5)
+                        puntuacion -= 5
+                        registrar_letra_incorrecta(letra_clic)
+                        intentos_restantes -= 1
+                        if intentos_restantes == 0:
+                            print("No te quedan mas intentos, perdiste!")
+                            screen.blit(ahorcado_imagenes[6], (400, 50))
+                            pygame.display.flip()
+                            pygame.time.delay(1000)
+                            pygame.mixer.Sound.stop(musica_fondo)
+                            pygame.mixer.Sound.play(musica_perdedor)
+                            mostrar_mensaje_final(screen, pizarra, "No te quedan mas intentos, perdiste!", palabra, ANCHO, ALTO)
+                            pygame.time.delay(4000)
+                            return 
+
+            #elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                #pos = pygame.mouse.get_pos()
+                elif comodin_letra_pos.collidepoint(pos) and not comodin_letra_usado:
                     letra_descubierta = descubrir_letra(palabra, letras_adivinadas)
                     if letra_descubierta:
                         letras_adivinadas.append(letra_descubierta)

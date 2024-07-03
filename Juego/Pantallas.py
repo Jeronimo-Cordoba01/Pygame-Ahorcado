@@ -1,4 +1,4 @@
-import pygame, sys 
+import pygame, sys
 
 #BIENVENIDA Y PLAY
 def pantalla_de_inicio(screen, pizarra, font, ANCHO, ALTO):
