@@ -4,6 +4,10 @@
 - Jerónimo Facundo Lucas Córdoba :man:
 - Sophia Antonella Augusto Valenzuela :woman:
 
+## :skull: Profesores :skull:
+- German Scarafilo
+- Giovanni Luchetta
+
 ## Enunciado:
 ### Requerimientos Funcionales:
 - **Tipos de datos avanzados**: Aplicación de listas, diccionarios, tuplas y sets. :white_check_mark:
