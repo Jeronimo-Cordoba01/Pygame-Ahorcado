@@ -35,16 +35,16 @@ El juego del ahorcado consiste en adivinar una palabra relacionada con una temá
    - Si la letra está en la palabra, se revela en su posición correcta.
    - Si la letra no está, se dibuja una parte de la figura del ahorcado.
 
-3. **Puntuación**:
-   - +10 puntos por letra adivinada correctamente.
-   - -5 puntos por intento fallido.
-   - Puntos adicionales basados en el tiempo restante (1 punto por segundo sobrante).
+3. **:moneybag: Puntuación :moneybag:**:
+   - +10 puntos por letra adivinada correctamente. :dollar:
+   - -5 puntos por intento fallido. :money_with_wings:
+   - Puntos adicionales basados en el tiempo restante (1 punto por segundo sobrante). :chart_with_upwards_trend:
 
-4. **Tiempo**:
+4. **:clock130: Tiempo :clock130:**:
    - El jugador tiene 60 segundos para adivinar cada palabra.
    - Si se queda sin tiempo, pierde.
 
-5. **:recycle: Continuación del juego** :
+5. **:recycle: Continuación del juego :recycle:** :
    - Si adivina la palabra antes de completar la figura del ahorcado, gana y sigue jugando con otra palabra y temática al azar.
 
 ### :black_joker: Comodines: :black_joker:
