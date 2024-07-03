@@ -86,6 +86,8 @@ def pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO):
         
     return text
 
+#PANTALLA VOLVER A JUGAR
+
 #PANTALLAS FINALES
 def mostrar_mensaje_final(screen, pizarra, mensaje, palabra, ANCHO, ALTO):
     font = pygame.font.SysFont("appleberry", 50)
