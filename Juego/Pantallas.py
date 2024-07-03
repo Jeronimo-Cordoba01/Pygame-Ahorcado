@@ -39,6 +39,7 @@ def pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO):
     color_actual = color_inactivo
     activo = False
     text = ""
+    mensaje = ""
 
     run = False
     while not run:
@@ -60,7 +61,10 @@ def pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO):
             elif event.type == pygame.KEYDOWN:
                 if activo:
                     if event.key == pygame.K_RETURN:
-                        run = True
+                        if len(text.strip()) > 0: #asegura que cualquier nombre ingresado solo con espacios en blanco (o incluso vacío) no sea considerado válido.
+                            return text
+                        else:
+                            mensaje = "Debe ingresar un nombre para continuar"
                     elif event.key == pygame.K_BACKSPACE:
                         text = text[:-1]
                     elif len(text) < 10:
@@ -70,9 +74,13 @@ def pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO):
         screen.blit(pizarra,(0,0))
         texto = font.render("Ingrese su nombre: ", True, (255,255,255))
         screen.blit(texto, (ANCHO // 2 - texto.get_width() // 2, ALTO // 2 - 50))
+        
         texto_surface = font.render(text, True, color_actual)
-
         screen.blit(texto_surface,(input_box.x + 5, input_box.y + 5))
+
+        if mensaje:
+            mensaje_surface = font.render(mensaje, True, (255,255,255))
+            screen.blit(mensaje_surface,(ANCHO // 2 - mensaje_surface.get_width() // 2, ALTO // 2 + 50 ))
         pygame.draw.rect(screen, color_actual, input_box, 2)
         pygame.display.flip()
         
