@@ -181,10 +181,13 @@ def main():
         tiempo_inicial = tiempo_actual
         if tiempo_restante == 0:
             print("¡Se acabó el tiempo!")
-            mostrar_mensaje_final(screen, pizarra, "¡Se acabo el tiempo!", palabra, ANCHO, ALTO )
+            volver_a_jugar = mostrar_mensaje_final(screen, pizarra, "¡Se acabo el tiempo!", palabra, ANCHO, ALTO )
             pygame.mixer.Sound.stop(musica_fondo)
             pygame.mixer.Sound.play(musica_perdedor)
             pygame.time.delay(4000)
+            if not volver_a_jugar:
+                pygame.quit()
+                sys.exit()
             break
 
         for event in pygame.event.get():
@@ -214,9 +217,12 @@ def main():
                             pygame.time.delay(1000)
                             pygame.mixer.Sound.stop(musica_fondo)
                             pygame.mixer.Sound.play(musica_perdedor)
-                            mostrar_mensaje_final(screen, pizarra, "No te quedan mas intentos, perdiste!", palabra, ANCHO, ALTO)
+                            volver_a_jugar = mostrar_mensaje_final(screen, pizarra, "No te quedan mas intentos, perdiste!", palabra, ANCHO, ALTO) ##
                             pygame.time.delay(4000)
-                            return 
+                            if not volver_a_jugar: 
+                                pygame.quit()
+                                sys.exit()
+                            break
 
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 pos = pygame.mouse.get_pos()
@@ -263,12 +269,15 @@ def main():
 
         if set(palabra) <= set(letras_adivinadas):
             print("¡Adivinaste la palabra!")
-            mostrar_mensaje_final(screen, pizarra, "¡Adivinaste la palabra!", palabra, ANCHO, ALTO)
+            volver_a_jugar = mostrar_mensaje_final(screen, pizarra, "¡Adivinaste la palabra!", palabra, ANCHO, ALTO)
             actualizar_puntuacion(tiempo_restante) #se añaden los puntos del tiempo restante
             pygame.mixer.Sound.stop(musica_fondo)
             pygame.mixer.Sound.play(musica_ganador)
             pygame.time.delay(4000)
-            return
+            if not volver_a_jugar: 
+                pygame.quit()
+                sys.exit()
+            break
 
         clock.tick(30)
 
