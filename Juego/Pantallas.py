@@ -87,6 +87,37 @@ def pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO):
     return text
 
 #PANTALLA VOLVER A JUGAR
+def pantalla_volver_a_jugar(screen, pizarra, font, ANCHO, ALTO):
+    screen.fill((255, 255, 255))
+    screen.blit(pizarra, (0, 0))
+
+    pregunta = font.render("¿Quieres volver a jugar?", True, (255, 255, 255))
+    boton_si = font.render("Sí", True, (255, 255, 255), (255, 182, 193))
+    boton_no = font.render("No", True, (255, 255, 255), (255, 182, 193))
+
+    pregunta_rect = pregunta.get_rect(center=(ANCHO // 2, ALTO // 2 - 50))
+    boton_si_rect = boton_si.get_rect(center=(ANCHO // 2 - 50, ALTO // 2 + 50))
+    boton_no_rect = boton_no.get_rect(center=(ANCHO // 2 + 50, ALTO // 2 + 50))
+
+    screen.blit(pregunta, pregunta_rect)
+    screen.blit(boton_si, boton_si_rect)
+    screen.blit(boton_no, boton_no_rect)
+
+    pygame.display.flip()
+
+    esperando_respuesta = True
+    while esperando_respuesta:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    pos = pygame.mouse.get_pos()
+                    if boton_si_rect.collidepoint(pos):
+                        return True
+                    elif boton_no_rect.collidepoint(pos):
+                        return False
 
 #PANTALLAS FINALES
 def mostrar_mensaje_final(screen, pizarra, mensaje, palabra, ANCHO, ALTO):
