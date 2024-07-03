@@ -1,4 +1,4 @@
-# Juego del Ahorcado - 2° Parcial Pygame
+# :snake: Juego del Ahorcado - 2° Parcial Pygame :snake:
 
 ## :ghost: Miembros del equipo: :ghost:
 - Jerónimo Facundo Lucas Córdoba :man:
