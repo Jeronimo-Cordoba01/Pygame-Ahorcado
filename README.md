@@ -28,6 +28,7 @@ El juego del ahorcado consiste en adivinar una palabra relacionada con una temá
 
 ### :video_game: Funcionamiento: :video_game:
 1. **:books: Selección de palabra :books:**:
+   - Ingresando su nombre 
    - Se elige una palabra al azar relacionada con una temática.
    - Ejemplo:
      - Temática: Programación
