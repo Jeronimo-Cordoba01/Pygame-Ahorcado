@@ -8,8 +8,8 @@
 - German Scarafilo
 - Giovanni Luchetta
 
-## Enunciado:
-### Requerimientos Funcionales:
+## :bookmark_tabs: Enunciado :bookmark_tabs::
+### :paperclip: Requerimientos Funcionales :paperclip::
 - **Tipos de datos avanzados**: Aplicación de listas, diccionarios, tuplas y sets. :white_check_mark:
 - **Funciones**: Modularización y documentación del código en módulos.py. :white_check_mark:
 - **Manejo de strings**: Normalización de datos, validaciones y lógica del juego. :white_check_mark:
@@ -17,13 +17,13 @@
 - **Matrices**: Aplicación dentro de la lógica del juego.
 - **Funciones lambda**: Implementación de al menos una función lambda. :white_check_mark:
 
-### Requerimientos Visuales:
+### :microscope: Requerimientos Visuales :microscope::
 - **Imágenes**: Estáticas y/o dinámicas según la acción del jugador. :white_check_mark:
 - **Texto**: Interacción con el jugador mostrada en la ventana del juego. :white_check_mark:
 - **Figuras**: Representación de botones u otros elementos del juego. :white_check_mark:
 - **Manejo de eventos**: Para la interacción con el usuario. :white_check_mark:
 
-## Idea del Juego:
+## :clipboard: Idea del Juego :clipboard::
 El juego del ahorcado consiste en adivinar una palabra relacionada con una temática específica, seleccionada de manera aleatoria. Las temáticas pueden incluir historia, entretenimiento, deportes, matemáticas, programación, entre otras.
 
 ### :video_game: Funcionamiento: :video_game:
