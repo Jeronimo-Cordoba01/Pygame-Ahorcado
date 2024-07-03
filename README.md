@@ -49,8 +49,8 @@ El juego del ahorcado consiste en adivinar una palabra relacionada con una temá
 
 ### :black_joker: Comodines: :black_joker:
 - **Descubrir una letra**: Revela una letra al azar en la palabra.
-<img src="Recursos/Imagenes/Comodines/Adivinar_letra.jpg" alt="Descubrir una letra" width="200"/>
+![Descubrir una letra](Recursos/Imagenes/Comodines/Adivinar_letra.jpg)
 - **Tiempo extra**: Aumenta 30 segundos al tiempo de la partida actual.
-<img src="Recursos/Imagenes/Comodines/Tiempo_extra.jpg" alt="Tiempo extra" width="200"/>
+![Tiempo extra](Recursos/Imagenes/Comodines/Tiempo_extra.jpg)
 - **Multiplicar tiempo restante**: Duplica el tiempo restante al encontrar la palabra (disponible solo durante los primeros 10 segundos de la partida).
-<img src="Recursos/Imagenes/Comodines/Multiplicar_tiempo.jpg" alt="Multiplicar tiempo" width="200"/>
+![Multiplicar tiempo](Recursos/Imagenes/Comodines/Multiplicar_tiempo.jpg)
