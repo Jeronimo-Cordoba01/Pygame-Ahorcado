@@ -9,16 +9,21 @@ def leer_palabras(path: str = r"Recursos\\Archivos\tematicas_palabras.csv"):
     - dict: Un diccionario donde las claves son las temáticas y los valores son listas de palabras asociadas a cada temática.
     """
     tematicas_palabras = {}
-    with open(path, newline='', encoding= "utf-8") as csvfile:
-        reader = csv.reader(csvfile)
-        headers = next(reader)  # Leer la primera fila como encabezados
-        for row in reader:
-            for i, palabra in enumerate(row):
+    with open(path, newline='', encoding="utf-8") as csvfile:
+        contenido = csvfile.read().splitlines()
+        
+        headers = contenido[0].split(',')
+        datos = contenido[1:]
+        
+        for row in datos:
+            columnas = row.split(',')
+            for i, palabra in enumerate(columnas):
                 tematica = headers[i]
                 palabra = palabra.lower()
                 if tematica not in tematicas_palabras:
                     tematicas_palabras[tematica] = []
                 tematicas_palabras[tematica].append(palabra)
+                
     return tematicas_palabras
 
 def seleccionar_palabra(tematicas_palabras):

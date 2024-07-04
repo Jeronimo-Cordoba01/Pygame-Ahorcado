@@ -128,14 +128,11 @@ def mostrar_mensaje_final(screen, pizarra, pregunta, palabra, ANCHO, ALTO):
     screen.blit(pizarra, (0,0))
 
     pregunta_final = font.render(pregunta, True,(255,255,255))
-    pregunta_final = font.render(pregunta, True,(255,255,255))
     palabra_oculta = font.render(f"La palabra era: {palabra}", True, (255,255,255))
 
     pregunta_rect = pregunta_final.get_rect(center=(ANCHO // 2, ALTO // 2 - 50))
-    pregunta_rect = pregunta_final.get_rect(center=(ANCHO // 2, ALTO // 2 - 50))
     palabra_rect = palabra_oculta.get_rect(center=(ANCHO // 2, ALTO // 2 + 50))
 
-    screen.blit(pregunta_final, pregunta_rect)
     screen.blit(pregunta_final, pregunta_rect)
     screen.blit(palabra_oculta, palabra_rect)
     pygame.display.flip()
