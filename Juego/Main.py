@@ -216,7 +216,7 @@ def main():
                 elif comodin_tiempo_pos.collidepoint(pos) and not comodin_tiempo_extra_usado:
                     tiempo_restante = tiempo_extra(tiempo_restante)
                     comodin_tiempo_extra_usado = True
-                elif comodin_multiplicar_pos.collidepoint(pos) and not comodin_multiplicar_tiempo_usado and tiempo_transcurrido <= 10:
+                elif comodin_multiplicar_pos.collidepoint(pos) and not comodin_multiplicar_tiempo_usado and tiempo_transcurrido >= 10:
                     tiempo_restante = multi_tiempo(tiempo_restante, tiempo_transcurrido)
                     comodin_multiplicar_tiempo_usado = True
 
@@ -227,7 +227,23 @@ def main():
             pygame.mixer.Sound.stop(musica_fondo)
             pygame.mixer.Sound.play(musica_ganador)
             pygame.time.delay(4000)
-            break
+            
+            continuar_jugando = desea_seguir_jugando(screen, pizarra, ANCHO, ALTO)
+            if continuar_jugando:
+                limpiar_letras_incorrectas()
+                tematica, palabra = seleccionar_palabra(tematicas_palabras)
+                letras_adivinadas = []
+                letras_incorrectas = []
+                puntuacion = 0
+                tiempo_restante = 60
+                letras_ingresadas = set()
+                comodin_letra_usado = False
+                comodin_tiempo_extra_usado = False
+                comodin_multiplicar_tiempo_usado = False
+                intentos_restantes = 6
+                tiempo_inicial = pygame.time.get_ticks()
+            else:
+                jugando = False
 
         clock.tick(30)
 
