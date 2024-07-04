@@ -2,6 +2,16 @@ import pygame, sys
 
 #BIENVENIDA Y PLAY
 def pantalla_de_inicio(screen, pizarra, font, ANCHO, ALTO):
+    """
+    Pantalla de inicio
+    Muestra la pantalla de bienvenida con un botón "Play".
+    Parámetros:
+    - screen: La superficie de la pantalla donde se dibujará.
+    - pizarra: La imagen de fondo de la pantalla.
+    - font: La fuente que se utilizará para dibujar el texto.
+    - ANCHO: El ancho de la pantalla.
+    - ALTO: La altura de la pantalla.
+    """
     titulo = font.render("Bienvenido al juego del ahorcado", True, (255,255,255))
     boton_play = font.render("Play", True, (255,255,255), (255, 182, 193))
     
@@ -33,12 +43,23 @@ def pantalla_de_inicio(screen, pizarra, font, ANCHO, ALTO):
 
 #INGRESAR NOMBRE
 def pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO):
+    """
+    Pantalla para ingresar nombre
+    Muestra una pantalla donde el usuario puede ingresar su nombre.
+    Parámetros:
+    - screen: La superficie de la pantalla donde se dibujará.
+    - pizarra: La imagen de fondo de la pantalla.
+    - font: La fuente que se utilizará para dibujar el texto.
+    - ANCHO: El ancho de la pantalla.
+    - ALTO: La altura de la pantalla.
+    """
     input_box = pygame.Rect(ANCHO // 2 - 150, ALTO // 2, 300, 50)
     color_inactivo = pygame.Color((255, 255, 255))
     color_activo = pygame.Color((255, 182, 193))
     color_actual = color_inactivo
     activo = False
     text = ""
+    pregunta = ""
     pregunta = ""
 
     run = False
@@ -65,6 +86,7 @@ def pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO):
                             return text
                         else:
                             pregunta = "Debe ingresar un nombre para continuar"
+                            pregunta = "Debe ingresar un nombre para continuar"
                     elif event.key == pygame.K_BACKSPACE:
                         text = text[:-1]
                     elif len(text) < 10:
@@ -81,6 +103,9 @@ def pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO):
         if pregunta:
             pregunta_surface = font.render(pregunta, True, (255,255,255))
             screen.blit(pregunta_surface,(ANCHO // 2 - pregunta_surface.get_width() // 2, ALTO // 2 + 50 ))
+        if pregunta:
+            pregunta_surface = font.render(pregunta, True, (255,255,255))
+            screen.blit(pregunta_surface,(ANCHO // 2 - pregunta_surface.get_width() // 2, ALTO // 2 + 50 ))
         pygame.draw.rect(screen, color_actual, input_box, 2)
         pygame.display.flip()
         
@@ -88,16 +113,30 @@ def pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO):
 
 #PANTALLAS FINALES
 def mostrar_mensaje_final(screen, pizarra, pregunta, palabra, ANCHO, ALTO):
+    """
+    Muestra el mensaje final
+    Muestra un mensaje final con la palabra correcta.
+    Parámetros:
+    - screen: La superficie de la pantalla donde se dibujará.
+    - pizarra: La imagen de fondo de la pantalla.
+    - pregunta: El mensaje a mostrar.
+    - palabra: La palabra correcta.
+    - ANCHO: El ancho de la pantalla.
+    - ALTO: La altura de la pantalla.
+    """
     font = pygame.font.SysFont("appleberry", 50)
     screen.fill((255,255,255))
     screen.blit(pizarra, (0,0))
 
     pregunta_final = font.render(pregunta, True,(255,255,255))
+    pregunta_final = font.render(pregunta, True,(255,255,255))
     palabra_oculta = font.render(f"La palabra era: {palabra}", True, (255,255,255))
 
     pregunta_rect = pregunta_final.get_rect(center=(ANCHO // 2, ALTO // 2 - 50))
+    pregunta_rect = pregunta_final.get_rect(center=(ANCHO // 2, ALTO // 2 - 50))
     palabra_rect = palabra_oculta.get_rect(center=(ANCHO // 2, ALTO // 2 + 50))
 
+    screen.blit(pregunta_final, pregunta_rect)
     screen.blit(pregunta_final, pregunta_rect)
     screen.blit(palabra_oculta, palabra_rect)
     pygame.display.flip()
@@ -105,6 +144,17 @@ def mostrar_mensaje_final(screen, pizarra, pregunta, palabra, ANCHO, ALTO):
 
 #PANTALLA PREGUNTA
 def desea_seguir_jugando(screen, pizarra, ANCHO, ALTO):
+    """
+    Pantalla para preguntar si desea seguir jugando
+    Muestra una pantalla donde el usuario puede responder si desea seguir jugando.
+    Parámetros:
+    - screen: La superficie de la pantalla donde se dibujará.
+    - pizarra: La imagen de fondo de la pantalla.
+    - ANCHO: El ancho de la pantalla.
+    - ALTO: La altura de la pantalla.
+    Retorna:
+    - bool: True si el usuario desea seguir jugando, False en caso contrario.
+    """
     input_box = pygame.Rect(ANCHO // 2 - 150, ALTO // 2, 300, 50)
     color_inactivo = pygame.Color((255, 255, 255))
     color_activo = pygame.Color((255, 182, 193))
