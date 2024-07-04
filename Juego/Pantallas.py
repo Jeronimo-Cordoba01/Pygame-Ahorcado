@@ -82,10 +82,9 @@ def pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO):
             elif event.type == pygame.KEYDOWN:
                 if activo:
                     if event.key == pygame.K_RETURN:
-                        if len(text.strip()) > 0: #asegura que cualquier nombre ingresado solo con espacios en blanco (o incluso vacío) no sea considerado válido.
+                        if len(text.strip()) > 0: #para que no tome los espacios en blanco
                             return text
                         else:
-                            pregunta = "Debe ingresar un nombre para continuar"
                             pregunta = "Debe ingresar un nombre para continuar"
                     elif event.key == pygame.K_BACKSPACE:
                         text = text[:-1]
@@ -192,7 +191,7 @@ def desea_seguir_jugando(screen, pizarra, ANCHO, ALTO):
                             respuesta = ""
                     elif event.key == pygame.K_BACKSPACE:
                         respuesta = respuesta[:-1]
-                    else:
+                    elif len(respuesta) < 10:
                         respuesta += event.unicode
         
         screen.fill((255, 255, 255))

@@ -121,7 +121,7 @@ def main():
     - limpiar_letras_incorrectas(): Limpia las letras incorrectas registradas del jugador.
     - tematica, palabra = seleccionar_palabra(tematicas_palabras): Selecciona una nueva palabra y su temática.
     - letras_adivinadas = []: Reinicia la lista de letras adivinadas.
-    - data_jugador = cargar_json(r"Recursos\Archivos\Data_jugador.json"): Carga los datos del jugador desde el archivo JSON.
+    - data_jugador = cargar_json(r"Recursos\\Archivos\\Data_jugador.json"): Carga los datos del jugador desde el archivo JSON.
     - letras_incorrectas = data_jugador.get('letras_incorrectas', []): Obtiene la lista de letras incorrectas del jugador.
     - puntuacion = data_jugador.get('puntuacion', 0): Obtiene la puntuación del jugador.
     - tiempo_restante = 60: Reinicia el tiempo restante a 60 segundos.
@@ -266,9 +266,9 @@ def main():
                             pygame.time.delay(1000)
                             pygame.mixer.Sound.stop(musica_fondo)
                             pygame.mixer.Sound.play(musica_perdedor)
-                            mostrar_mensaje_final(screen, pizarra, "No te quedan mas intentos, perdiste!", palabra, ANCHO, ALTO) ##
+                            mostrar_mensaje_final(screen, pizarra, "No te quedan mas intentos, perdiste!", palabra, ANCHO, ALTO)
                             pygame.time.delay(4000)
-                            break
+                            sys.exit()
                             """
                             Gestión de eventos del juego:
                             - for event in pygame.event.get():
