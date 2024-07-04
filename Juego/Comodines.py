@@ -45,4 +45,5 @@ def multi_tiempo(tiempo_restante, tiempo_transcurrido):
     """
     if tiempo_transcurrido <= 10:
         return tiempo_restante * 2
-    return tiempo_restante
+    else:
+        return tiempo_restante

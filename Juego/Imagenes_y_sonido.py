@@ -2,7 +2,6 @@ import pygame
 
 pygame.mixer.init()
 
-
 """
 Configuración de pantalla
 Define las dimensiones de la ventana del juego y establece el modo de pantalla y el título.
