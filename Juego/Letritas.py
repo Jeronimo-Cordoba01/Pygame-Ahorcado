@@ -1,13 +1,13 @@
 import pygame, string
 
-"""
-Dibuja las letras del abecedario en la pantalla.
-Parámetros:
-- screen: La superficie de la pantalla donde se dibujarán las letras.
-- font: La fuente que se utilizará para dibujar las letras.
-- letras_ingresadas: Lista de letras que ya han sido ingresadas por el usuario.
-"""
 def dibujar_letras(screen, font, letras_ingresadas):
+    """
+    Dibuja las letras del abecedario en la pantalla.
+    Parámetros:
+    - screen: La superficie de la pantalla donde se dibujarán las letras.
+    - font: La fuente que se utilizará para dibujar las letras.
+    - letras_ingresadas: Lista de letras que ya han sido ingresadas por el usuario.
+    """
     letras = string.ascii_lowercase #para obtener el abecedario
     letra_eje_x = 500 #derecha
     letra_eje_y = 500 #arriba
@@ -24,16 +24,16 @@ def dibujar_letras(screen, font, letras_ingresadas):
 
         if letra not in letras_ingresadas:
             screen.blit(letra_surface, letra_rect)
-            
-"""
-Detecta si una letra ha sido clickeada.
-Parámetros:
-- pos: La posición (x, y) del clic del mouse.
-Retorna:
-- str: La letra clickeada si está dentro del área de alguna letra.
-- None: Si el clic no está dentro del área de ninguna letra.
-"""
-def letra_click(pos):
+
+def letra_click(pos):       
+    """
+    Detecta si una letra ha sido clickeada.
+    Parámetros:
+    - pos: La posición (x, y) del clic del mouse.
+    Retorna:
+    - str: La letra clickeada si está dentro del área de alguna letra.
+    - None: Si el clic no está dentro del área de ninguna letra.
+    """
     letras = string.ascii_lowercase
     letra_eje_x = 500
     letra_eje_y = 500

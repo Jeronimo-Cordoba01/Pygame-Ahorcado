@@ -60,6 +60,7 @@ def pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO):
     activo = False
     text = ""
     pregunta = ""
+    pregunta = ""
 
     run = False
     while not run:
@@ -85,6 +86,7 @@ def pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO):
                             return text
                         else:
                             pregunta = "Debe ingresar un nombre para continuar"
+                            pregunta = "Debe ingresar un nombre para continuar"
                     elif event.key == pygame.K_BACKSPACE:
                         text = text[:-1]
                     elif len(text) < 10:
@@ -98,6 +100,9 @@ def pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO):
         texto_surface = font.render(text, True, color_actual)
         screen.blit(texto_surface,(input_box.x + 5, input_box.y + 5))
 
+        if pregunta:
+            pregunta_surface = font.render(pregunta, True, (255,255,255))
+            screen.blit(pregunta_surface,(ANCHO // 2 - pregunta_surface.get_width() // 2, ALTO // 2 + 50 ))
         if pregunta:
             pregunta_surface = font.render(pregunta, True, (255,255,255))
             screen.blit(pregunta_surface,(ANCHO // 2 - pregunta_surface.get_width() // 2, ALTO // 2 + 50 ))
@@ -124,11 +129,14 @@ def mostrar_mensaje_final(screen, pizarra, pregunta, palabra, ANCHO, ALTO):
     screen.blit(pizarra, (0,0))
 
     pregunta_final = font.render(pregunta, True,(255,255,255))
+    pregunta_final = font.render(pregunta, True,(255,255,255))
     palabra_oculta = font.render(f"La palabra era: {palabra}", True, (255,255,255))
 
     pregunta_rect = pregunta_final.get_rect(center=(ANCHO // 2, ALTO // 2 - 50))
+    pregunta_rect = pregunta_final.get_rect(center=(ANCHO // 2, ALTO // 2 - 50))
     palabra_rect = palabra_oculta.get_rect(center=(ANCHO // 2, ALTO // 2 + 50))
 
+    screen.blit(pregunta_final, pregunta_rect)
     screen.blit(pregunta_final, pregunta_rect)
     screen.blit(palabra_oculta, palabra_rect)
     pygame.display.flip()

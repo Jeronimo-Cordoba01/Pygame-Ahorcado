@@ -464,76 +464,7 @@ def main():
             pygame.mixer.Sound.stop(musica_fondo)
             pygame.mixer.Sound.play(musica_ganador)
             pygame.time.delay(4000)
-            """
-            Verificación de la adivinanza correcta de la palabra:
-            - if set(palabra) <= set(letras_adivinadas):
-            Verifica si todas las letras de la palabra han sido adivinadas.
-            - print("¡Adivinaste la palabra!"):
-                Imprime un mensaje en la consola indicando que la palabra ha sido adivinada.
-            - mostrar_mensaje_final(screen, pizarra, "¡Adivinaste la palabra!", palabra, ANCHO, ALTO):
-                Muestra un mensaje final indicando que la palabra ha sido adivinada.
-            - actualizar_puntuacion(tiempo_restante, nombre_jugador):
-                Añade los puntos correspondientes al tiempo restante a la puntuación del jugador.
-            - pygame.mixer.Sound.stop(musica_fondo):
-                Detiene la música de fondo.
-            - pygame.mixer.Sound.play(musica_ganador):
-                Reproduce el sonido de ganador.
-            - pygame.time.delay(4000):
-                Espera 4 segundos antes de continuar.
-            """
-            
-            continuar_jugando = desea_seguir_jugando(screen, pizarra, ANCHO, ALTO)
-            if continuar_jugando:
-                limpiar_letras_incorrectas()
-                tematica, palabra = seleccionar_palabra(tematicas_palabras)
-                letras_adivinadas = []
-                letras_incorrectas = []
-                puntuacion = 0
-                tiempo_restante = 60
-                letras_ingresadas = set()
-                comodin_letra_usado = False
-                comodin_tiempo_extra_usado = False
-                comodin_multiplicar_tiempo_usado = False
-                intentos_restantes = 6
-                tiempo_inicial = pygame.time.get_ticks()
-            else:
-                jugando = False
-                
-            """
-            Verificación para continuar jugando y reinicio del juego si es necesario:
-            - continuar_jugando = desea_seguir_jugando(screen, pizarra, ANCHO, ALTO):
-            Pregunta al jugador si desea seguir jugando.
-            - if continuar_jugando:
-            Si el jugador decide continuar:
-            - limpiar_letras_incorrectas():
-                Limpia las letras incorrectas registradas del jugador.
-            - tematica, palabra = seleccionar_palabra(tematicas_palabras):
-                Selecciona una nueva palabra y su temática.
-            - letras_adivinadas = []:
-                Reinicia la lista de letras adivinadas.
-            - letras_incorrectas = []:
-                Reinicia la lista de letras incorrectas.
-            - puntuacion = 0:
-                Reinicia la puntuación a 0.
-            - tiempo_restante = 60:
-                Reinicia el tiempo restante a 60 segundos.
-            - letras_ingresadas = set():
-                Reinicia el conjunto de letras ingresadas.
-            - comodin_letra_usado = False:
-                Reinicia el estado del comodín "descubrir letra".
-            - comodin_tiempo_extra_usado = False:
-                Reinicia el estado del comodín "tiempo extra".
-            - comodin_multiplicar_tiempo_usado = False:
-                Reinicia el estado del comodín "multiplicar tiempo".
-            - intentos_restantes = 6:
-                Reinicia el número de intentos restantes.
-            - tiempo_inicial = pygame.time.get_ticks():
-                Registra el tiempo inicial en milisegundos desde que Pygame fue inicializado.
-            - else:
-            Si el jugador decide no continuar:
-            - jugando = False:
-                Cambia el estado del juego a inactivo, terminando el bucle principal.
-            """
+            break
 
         clock.tick(30)
         """
