@@ -71,77 +71,39 @@ from Funciones import *
 from Pantallas import *
 from Letritas import *
 from Comodines import *
+from Imagenes_y_sonido import *
 
 # Inicialización de Pygame
 pygame.init()
-
-# Configuración de pantalla
-ANCHO = 1000
-ALTO = 800
-DIMENSIONES = (ANCHO, ALTO)
-screen = pygame.display.set_mode(DIMENSIONES)
-pygame.display.set_caption("Ahorcado")
-
-# Cargar imágenes
-icono = pygame.image.load(r"Recursos\Imagenes\Icono.jpg")
-pygame.display.set_icon(icono)
-pizarra = pygame.image.load(r'Recursos\Imagenes\Pizzaron.png')
-pizarra = pygame.transform.scale(pizarra, DIMENSIONES)
-comodin_letra = pygame.image.load(r"Recursos\Imagenes\Comodines\Adivinar_letra.jpg")
-comodin_letra = pygame.transform.scale(comodin_letra, (100,100))
-comodin_tiempo_extra = pygame.image.load(r"Recursos\Imagenes\Comodines\Tiempo_extra.jpg")
-comodin_tiempo_extra = pygame.transform.scale(comodin_tiempo_extra, (100,100))
-comodin_multiplicar_tiempo = pygame.image.load(r"Recursos\Imagenes\Comodines\Multiplicar_tiempo.jpg")
-comodin_multiplicar_tiempo = pygame.transform.scale(comodin_multiplicar_tiempo, (100,100))
-
-ahorcado_imagenes = [
-    pygame.image.load(r"Recursos\Imagenes\Horca\1.horca.png"),
-    pygame.image.load(r"Recursos\Imagenes\Horca\2.Ahorcado_cabeza.png"),
-    pygame.image.load(r"Recursos\Imagenes\Horca\3.Ahorcado_torse.png"),
-    pygame.image.load(r"Recursos\Imagenes\Horca\4.Ahorcado_brazo.png"),
-    pygame.image.load(r"Recursos\Imagenes\Horca\5.Ahorcado_dos_brazos.png"),
-    pygame.image.load(r"Recursos\Imagenes\Horca\6.Ahorcado_pierna.png"),
-    pygame.image.load(r"Recursos\Imagenes\Horca\7.ahorcado_completo.png"),
-]
-
-ahorcado_imagenes = [pygame.transform.scale(img, (450,450)) for img in ahorcado_imagenes]
-
-# Crear botones
-#botones = Boton.crear_botones(screen, pizarra, 100, 100)
 
 #posicion de los comodines 
 comodin_letra_pos = comodin_letra.get_rect(topleft=(50, 500))
 comodin_tiempo_pos = comodin_tiempo_extra.get_rect(topleft=(200, 500))
 comodin_multiplicar_pos = comodin_multiplicar_tiempo.get_rect(topleft=(350, 500))
 
-# Cargar sonidos
-sonido_falla = pygame.mixer.Sound(r'Recursos\Audio\Falla-letra.mp3')
-pygame.mixer.Sound.set_volume(sonido_falla, 0.1)
-sonido_acierto = pygame.mixer.Sound(r'Recursos\Audio\Letra-correcta.mp3')
-pygame.mixer.Sound.set_volume(sonido_acierto, 0.1)
-musica_fondo = pygame.mixer.Sound(r'Recursos\Audio\Musica-de-fondo.mp3')
-pygame.mixer.Sound.play(musica_fondo, loops=-1)
-pygame.mixer.Sound.set_volume(musica_fondo, 0.1)
-musica_ganador = pygame.mixer.Sound(r'Recursos\Audio\Happy-wheels.mp3')
-musica_perdedor = pygame.mixer.Sound(r"Recursos\Audio\Sonido de perdedor.mp3")
-pygame.mixer.Sound.set_volume(musica_perdedor, 0.1)
-
 # Cargar palabras desde el CSV
 tematicas_palabras = leer_palabras(r'Recursos\Archivos\tematicas_palabras.csv')
-puntuacion_inicial = {"puntuacion": 0}
-guardar_puntuacion = guardar_json(r"Recursos\Archivos\Puntuacion.json", puntuacion_inicial)
 
 # Función principal del juego
 def main():
     font = pygame.font.SysFont("appleberry", 50)
     pantalla_de_inicio(screen, pizarra, font, ANCHO, ALTO)
-    pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO)
+    nombre_jugador = pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO)
+
+    data_jugador = {
+        "nombre": nombre_jugador,
+        "puntuacion": 0,
+        "letras_incorrectas": []
+    }
+
+    guardar_json(r"Recursos\Archivos\Data_jugador.json", data_jugador)
 
     limpiar_letras_incorrectas()
     tematica, palabra = seleccionar_palabra(tematicas_palabras)
     letras_adivinadas = []
-    letras_incorrectas = cargar_json(r'Recursos\Archivos\Letras_incorrectas.json').get('letras', [])
-    puntuacion = cargar_json(r"Recursos\Archivos\Puntuacion.json").get('puntuacion', 0)
+    data_jugador = cargar_json(r"Recursos\Archivos\Data_jugador.json")
+    letras_incorrectas = data_jugador.get('letras_incorrectas', [])
+    puntuacion = data_jugador.get('puntuacion', 0)
     tiempo_restante = 60
     letras_ingresadas = set()
     comodin_letra_usado = False
@@ -179,15 +141,12 @@ def main():
         tiempo_transcurrido = (tiempo_actual - tiempo_inicial)  * 0.001
         tiempo_restante -= tiempo_transcurrido
         tiempo_inicial = tiempo_actual
-        if tiempo_restante == 0:
+        if tiempo_restante <= 0:
             print("¡Se acabó el tiempo!")
-            volver_a_jugar = mostrar_mensaje_final(screen, pizarra, "¡Se acabo el tiempo!", palabra, ANCHO, ALTO )
+            mostrar_mensaje_final(screen, pizarra, "¡Se acabo el tiempo!", palabra, ANCHO, ALTO )
             pygame.mixer.Sound.stop(musica_fondo)
             pygame.mixer.Sound.play(musica_perdedor)
             pygame.time.delay(4000)
-            if not volver_a_jugar:
-                pygame.quit()
-                sys.exit()
             break
 
         for event in pygame.event.get():
@@ -201,14 +160,14 @@ def main():
                     if letra in palabra:
                         letras_adivinadas.append(letra)
                         pygame.mixer.Sound.play(sonido_acierto)
-                        actualizar_puntuacion(10)
+                        actualizar_puntuacion(10, nombre_jugador)
                         puntuacion += 10
                     else:
                         letras_incorrectas.append(letra)
                         pygame.mixer.Sound.play(sonido_falla)
-                        actualizar_puntuacion(-5)
+                        actualizar_puntuacion(-5, nombre_jugador)
                         puntuacion -= 5
-                        registrar_letra_incorrecta(letra)
+                        registrar_letra_incorrecta(letra, nombre_jugador)
                         intentos_restantes -= 1
                         if intentos_restantes == 0:
                             print("No te quedan mas intentos, perdiste!")
@@ -217,11 +176,8 @@ def main():
                             pygame.time.delay(1000)
                             pygame.mixer.Sound.stop(musica_fondo)
                             pygame.mixer.Sound.play(musica_perdedor)
-                            volver_a_jugar = mostrar_mensaje_final(screen, pizarra, "No te quedan mas intentos, perdiste!", palabra, ANCHO, ALTO) ##
+                            mostrar_mensaje_final(screen, pizarra, "No te quedan mas intentos, perdiste!", palabra, ANCHO, ALTO) ##
                             pygame.time.delay(4000)
-                            if not volver_a_jugar: 
-                                pygame.quit()
-                                sys.exit()
                             break
 
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -229,18 +185,17 @@ def main():
                 letra_clic = letra_click(pos)
                 if letra_clic and letra_clic not in letras_ingresadas:
                     letras_ingresadas.add(letra_clic)
-                    # Lógica para procesar la letra ingresada por clic
                     if letra_clic in palabra:
                         letras_adivinadas.append(letra_clic)
                         pygame.mixer.Sound.play(sonido_acierto)
-                        actualizar_puntuacion(10)
+                        actualizar_puntuacion(10, nombre_jugador)
                         puntuacion += 10
                     else:
                         letras_incorrectas.append(letra_clic)
                         pygame.mixer.Sound.play(sonido_falla)
-                        actualizar_puntuacion(-5)
+                        actualizar_puntuacion(-5, nombre_jugador)
                         puntuacion -= 5
-                        registrar_letra_incorrecta(letra_clic)
+                        registrar_letra_incorrecta(letra_clic, nombre_jugador)
                         intentos_restantes -= 1
                         if intentos_restantes == 0:
                             print("No te quedan mas intentos, perdiste!")
@@ -253,8 +208,6 @@ def main():
                             pygame.time.delay(4000)
                             return 
 
-            #elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                #pos = pygame.mouse.get_pos()
                 elif comodin_letra_pos.collidepoint(pos) and not comodin_letra_usado:
                     letra_descubierta = descubrir_letra(palabra, letras_adivinadas)
                     if letra_descubierta:
@@ -269,18 +222,14 @@ def main():
 
         if set(palabra) <= set(letras_adivinadas):
             print("¡Adivinaste la palabra!")
-            volver_a_jugar = mostrar_mensaje_final(screen, pizarra, "¡Adivinaste la palabra!", palabra, ANCHO, ALTO)
-            actualizar_puntuacion(tiempo_restante) #se añaden los puntos del tiempo restante
+            mostrar_mensaje_final(screen, pizarra, "¡Adivinaste la palabra!", palabra, ANCHO, ALTO)
+            actualizar_puntuacion(tiempo_restante, nombre_jugador) #se añaden los puntos del tiempo restante
             pygame.mixer.Sound.stop(musica_fondo)
             pygame.mixer.Sound.play(musica_ganador)
             pygame.time.delay(4000)
-            if not volver_a_jugar: 
-                pygame.quit()
-                sys.exit()
             break
 
         clock.tick(30)
 
-# Ejecutar juego
 if __name__ == "__main__":
     main()
