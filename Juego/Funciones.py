@@ -1,10 +1,10 @@
 import csv, json, random
 
-def leer_palabras(path: str = r"Recursos\Archivos\tematicas_palabras.csv"):
+def leer_palabras(path: str = r"Recursos\\Archivos\tematicas_palabras.csv"):
     """
     Lee las palabras desde un archivo CSV y las organiza por temáticas.
     Parámetros:
-    - path (str): La ruta al archivo CSV. Por defecto, se asume que está en "Recursos\Archivos\tematicas_palabras.csv".
+    - path (str): La ruta al archivo CSV. Por defecto, se asume que está en "Recursos\\Archivos\tematicas_palabras.csv".
     Retorna:
     - dict: Un diccionario donde las claves son las temáticas y los valores son listas de palabras asociadas a cada temática.
     """

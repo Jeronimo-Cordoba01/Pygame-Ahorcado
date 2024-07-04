@@ -130,7 +130,7 @@ def main():
         palabra_mostrada = ' '.join([letra if letra in letras_adivinadas else '_' for letra in palabra])
         mostrar_texto(f"Temática: {tematica}", (50, 50))
         mostrar_texto(palabra_mostrada, (50, 150))
-        mostrar_texto(f"Puntuación: {puntuacion}", (50, 250))
+        mostrar_texto(f"Puntuación: {round(puntuacion)}", (50, 250))
         mostrar_texto(f"Tiempo: {round(tiempo_restante)}", (50, 350))
         mostrar_texto(f"Letras Incorrectas: {', '.join(letras_incorrectas)}", (50, 450))
         mostrar_texto(f"Intentos restantes: {intentos_restantes}", (50,600))
@@ -223,7 +223,8 @@ def main():
         if set(palabra) <= set(letras_adivinadas):
             print("¡Adivinaste la palabra!")
             mostrar_mensaje_final(screen, pizarra, "¡Adivinaste la palabra!", palabra, ANCHO, ALTO)
-            actualizar_puntuacion(tiempo_restante, nombre_jugador) #se añaden los puntos del tiempo restante
+            puntuacion += int(tiempo_restante)
+            actualizar_puntuacion(int(tiempo_restante), nombre_jugador) 
             pygame.mixer.Sound.stop(musica_fondo)
             pygame.mixer.Sound.play(musica_ganador)
             pygame.time.delay(4000)
@@ -245,7 +246,9 @@ def main():
             else:
                 jugando = False
 
-        clock.tick(30)
+    actualizar_jugador(nombre_jugador, puntuacion, letras_incorrectas)
+    
+    clock.tick(30)
 
 if __name__ == "__main__":
     main()
