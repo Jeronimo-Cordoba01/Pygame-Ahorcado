@@ -2,6 +2,10 @@ import pygame
 
 pygame.mixer.init()
 
+"""
+Configuración de pantalla
+Define las dimensiones de la ventana del juego y establece el modo de pantalla y el título.
+"""
 #configuracion de pantalla
 ANCHO = 1000
 ALTO = 800
@@ -9,6 +13,10 @@ DIMENSIONES = (ANCHO, ALTO)
 screen = pygame.display.set_mode(DIMENSIONES)
 pygame.display.set_caption("Ahorcado")
 
+"""
+Carga de imágenes
+Se cargan y transforman las imágenes necesarias para el juego.
+"""
 #imagenes
 icono = pygame.image.load(r"Recursos\Imagenes\Icono.jpg")
 pygame.display.set_icon(icono)
@@ -33,6 +41,10 @@ ahorcado_imagenes = [
 
 ahorcado_imagenes = [pygame.transform.scale(img, (450,450)) for img in ahorcado_imagenes]
 
+"""
+Carga de sonidos
+Se cargan y configuran los sonidos y la música del juego.
+"""
 #Sonido
 sonido_falla = pygame.mixer.Sound(r'Recursos\Audio\Falla-letra.mp3')
 pygame.mixer.Sound.set_volume(sonido_falla, 0.1)
