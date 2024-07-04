@@ -426,7 +426,7 @@ def main():
                 elif comodin_tiempo_pos.collidepoint(pos) and not comodin_tiempo_extra_usado:
                     tiempo_restante = tiempo_extra(tiempo_restante)
                     comodin_tiempo_extra_usado = True
-                elif comodin_multiplicar_pos.collidepoint(pos) and not comodin_multiplicar_tiempo_usado and tiempo_transcurrido >= 10:
+                elif comodin_multiplicar_pos.collidepoint(pos) and not comodin_multiplicar_tiempo_usado and tiempo_transcurrido:
                     tiempo_restante = multi_tiempo(tiempo_restante, tiempo_transcurrido)
                     comodin_multiplicar_tiempo_usado = True
                 """
