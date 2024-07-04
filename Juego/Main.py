@@ -426,9 +426,10 @@ def main():
                 elif comodin_tiempo_pos.collidepoint(pos) and not comodin_tiempo_extra_usado:
                     tiempo_restante = tiempo_extra(tiempo_restante)
                     comodin_tiempo_extra_usado = True
-                elif comodin_multiplicar_pos.collidepoint(pos) and not comodin_multiplicar_tiempo_usado and tiempo_transcurrido:
-                    tiempo_restante = multi_tiempo(tiempo_restante, tiempo_transcurrido)
-                    comodin_multiplicar_tiempo_usado = True
+                elif comodin_multiplicar_pos.collidepoint(pos) and not comodin_multiplicar_tiempo_usado:
+                    if tiempo_transcurrido <= 10:
+                        tiempo_restante = multi_tiempo(tiempo_restante, tiempo_transcurrido)
+                        comodin_multiplicar_tiempo_usado = True
                 """
                 Gestión del uso de comodines:
                 - elif comodin_letra_pos.collidepoint(pos) and not comodin_letra_usado:
@@ -450,7 +451,7 @@ def main():
                     Marca el comodín "tiempo extra" como usado.
 
                 - elif comodin_multiplicar_pos.collidepoint(pos) and not comodin_multiplicar_tiempo_usado and tiempo_transcurrido >= 10:
-                Verifica si se ha clickeado el comodín "multiplicar tiempo", si no ha sido usado y si han transcurrido al menos 10 segundos desde el inicio.
+                Verifica si se ha clickeado el comodín "multiplicar tiempo", si no ha sido usado y si han transcurrido menos de 10 segundos.
                 - tiempo_restante = multi_tiempo(tiempo_restante, tiempo_transcurrido):
                     Duplica el tiempo restante.
                 - comodin_multiplicar_tiempo_usado = True:
@@ -482,8 +483,6 @@ def main():
                 tiempo_inicial = pygame.time.get_ticks()
             else:
                 jugando = False
-
-    #actualizar_jugador(nombre_jugador, puntuacion, letras_incorrectas)
     
     clock.tick(30)
 
