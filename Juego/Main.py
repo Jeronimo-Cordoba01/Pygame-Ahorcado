@@ -72,6 +72,11 @@ from Pantallas import *
 from Letritas import *
 from Comodines import *
 from Imagenes_y_sonido import *
+from Datos_iniciales import *
+from Eventos_juego import *
+from Fin_juego import *
+from Parametros_juego import *
+from Uso_comodines import *
 
 # Inicialización de Pygame
 pygame.init()

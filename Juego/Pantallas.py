@@ -202,3 +202,19 @@ def desea_seguir_jugando(screen, pizarra, ANCHO, ALTO):
         screen.blit(respuesta_surface, (input_box.x + 5, input_box.y + 5))
 
         pygame.display.flip()
+        
+#PANTALLA INFO FINAL
+def pantalla_info_final(screen, pizarra, ANCHO, ALTO):
+    """
+    Pantalla de información final
+    Muestra una pantalla con información sobre el juego.
+    Parámetros:
+    - screen: La superficie de la pantalla donde se dibujará.
+    - pizarra: La imagen de fondo de la pantalla.
+    - ANCHO: El ancho de la pantalla.
+    - ALTO: La altura de la pantalla.
+    """
+    font = pygame.font.SysFont("appleberry", 50)
+    screen.fill((255,255,255))
+    screen.blit(pizarra, (0,0))
+    info = font.render("Información sobre el juego", True, (255,255,255))
