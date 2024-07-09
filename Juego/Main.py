@@ -102,6 +102,8 @@ def main():
     }
     guardar_json(r"Recursos\Archivos\Data_jugador.json", data_jugador)
 
+# Ciclo principal del juego
+#   inicializar_datos()
     limpiar_letras_incorrectas()
     tematica, palabra = seleccionar_palabra(tematicas_palabras)
     letras_adivinadas = []
@@ -152,7 +154,8 @@ def main():
             pygame.mixer.Sound.play(musica_perdedor)
             pygame.time.delay(4000)
             break
-
+#Evento principal
+#       manejar_eventos()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -213,6 +216,8 @@ def main():
                             pygame.time.delay(4000)
                             return
 
+# Comodines
+#               usar_comodines()
                 elif comodin_letra_pos.collidepoint(pos) and not comodin_letra_usado:
                     letra_descubierta = descubrir_letra(palabra, letras_adivinadas)
                     if letra_descubierta:
@@ -225,7 +230,8 @@ def main():
                     if tiempo_transcurrido <= 10:
                         tiempo_restante = multi_tiempo(tiempo_restante, tiempo_transcurrido)
                         comodin_multiplicar_tiempo_usado = True
-
+#Fin del juego
+#       finalizar_juego()
         if set(palabra) <= set(letras_adivinadas):
             print("¡Adivinaste la palabra!")
             mostrar_mensaje_final(screen, pizarra, "¡Adivinaste la palabra!", palabra, ANCHO, ALTO)
