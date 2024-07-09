@@ -1,4 +1,5 @@
 import pygame, sys
+from Letritas import dibujar_letras
 
 #BIENVENIDA Y PLAY
 def pantalla_de_inicio(screen, pizarra, font, ANCHO, ALTO):
@@ -218,3 +219,22 @@ def pantalla_info_final(screen, pizarra, ANCHO, ALTO):
     screen.fill((255,255,255))
     screen.blit(pizarra, (0,0))
     info = font.render("Información sobre el juego", True, (255,255,255))
+
+def renderizar_pantalla(screen, pizarra, comodin_letra, comodin_tiempo_extra, comodin_multiplicar_tiempo, ahorcado_imagenes, estado_juego, font):
+    screen.fill((255, 255, 255))
+    screen.blit(pizarra, (0, 0))
+    screen.blit(comodin_letra, estado_juego["comodin_letra_pos"])
+    screen.blit(comodin_tiempo_extra, estado_juego["comodin_tiempo_pos"])
+    screen.blit(comodin_multiplicar_tiempo, estado_juego["comodin_multiplicar_pos"])
+    screen.blit(ahorcado_imagenes[6 - estado_juego["intentos_restantes"]], (400, 50))
+    dibujar_letras(screen, font, estado_juego["letras_ingresadas"])
+
+def mostrar_textos(screen, font, estado_juego, tiempo_restante):
+    mostrar_texto = lambda texto, pos: screen.blit(font.render(texto, True, (255,255,255)), pos)
+    palabra_mostrada = ' '.join([letra if letra in estado_juego["letras_adivinadas"] else '_' for letra in estado_juego["palabra"]])
+    mostrar_texto(f"Temática: {estado_juego['tematica']}", (50, 50))
+    mostrar_texto(palabra_mostrada, (50, 150))
+    mostrar_texto(f"Puntuación: {round(estado_juego['puntuacion'])}", (50, 250))
+    mostrar_texto(f"Tiempo: {round(tiempo_restante)}", (50, 350))
+    mostrar_texto(f"Letras Incorrectas: {', '.join(estado_juego['letras_incorrectas'])}", (50, 450))
+    mostrar_texto(f"Intentos restantes: {estado_juego['intentos_restantes']}", (50, 600))
