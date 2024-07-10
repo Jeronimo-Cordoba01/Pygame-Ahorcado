@@ -1,4 +1,5 @@
 import random
+from Datos_iniciales import *
 
 # Comodín descubrir letra
 def descubrir_letra(palabra, letras_adivinadas):
@@ -32,9 +33,9 @@ def tiempo_extra(tiempo_restante, tiempo_extra=30):
     return tiempo_restante + tiempo_extra
 
 # Comodín multiplicar tiempo
-def multi_tiempo(tiempo_restante, tiempo_transcurrido):
+def multi_puntuacion(tiempo_transcurrido, tiempo_restante):
     """
-    Comodín multiplicar tiempo
+    Comodín multiplicar ountuacion
     Esta función multiplica el tiempo restante si el tiempo transcurrido es menor o igual a 10 segundos.
     Parámetros:
     - tiempo_restante (int): Tiempo restante en segundos.
@@ -44,11 +45,24 @@ def multi_tiempo(tiempo_restante, tiempo_transcurrido):
     de lo contrario, retorna el tiempo restante sin cambios.
     """
     if tiempo_transcurrido <= 10:
-        return tiempo_restante * 2
+        return tiempo_restante * 2 
     else:
         return tiempo_restante
     
 def manejar_comodines(estado_juego, tipo_comodin, pos, tiempo_restante, tiempo_transcurrido):
+    """
+    Maneja los comdines del juego
+
+    Parámetros:
+    estado_juego: Diccionario con el estado actual del juego.
+    tipo_comodin: El tipo de comodín a usar ("letra", "tiempo", "multiplicar_tiempo").
+    pos: La posición del clic del ratón.
+    tiempo_restante: El tiempo restante del juego.
+    tiempo_transcurrido: El tiempo transcurrido del juego.
+
+    Retorna:
+    El tiempo restante actualizado después de usar el comodín.
+    """
     if tipo_comodin == "letra":
         if estado_juego["comodin_letra_pos"].collidepoint(pos) and not estado_juego["comodin_letra_usado"]:
             letra_descubierta = descubrir_letra(estado_juego["palabra"], estado_juego["letras_adivinadas"])
@@ -61,8 +75,29 @@ def manejar_comodines(estado_juego, tipo_comodin, pos, tiempo_restante, tiempo_t
             estado_juego["comodin_tiempo_extra_usado"] = True
     elif tipo_comodin == "multiplicar_tiempo":
         if estado_juego["comodin_multiplicar_pos"].collidepoint(pos) and not estado_juego["comodin_multiplicar_tiempo_usado"]:
-            if tiempo_transcurrido <= 10:
-                tiempo_restante = multi_tiempo(tiempo_restante, tiempo_transcurrido)
-                estado_juego["comodin_multiplicar_tiempo_usado"] = True
+            # if tiempo_transcurrido <= 10:
+            tiempo_restante =  multi_puntuacion(tiempo_transcurrido, tiempo_restante)
+            estado_juego["comodin_multiplicar_tiempo_usado"] = True
     
     return tiempo_restante
+
+def actualizar_puntuacion(puntos, nombre, comodin_multiplicar_tiempo_usado, path: str =r'Recursos\\Archivos\Data_jugador.json'):
+    """
+    Actualiza la puntuación de un jugador en un archivo JSON.
+    Parámetros:
+    - puntos (int): La cantidad de puntos a añadir.
+    - nombre (str): El nombre del jugador.
+    - comodin_multiplicar_tiempo_usado(bool): True o False
+    - path (str): La ruta al archivo JSON del jugador.
+
+    retorna la puntuacion actualizada del jugador
+    """
+    data_jugador = cargar_json(path)
+    if data_jugador.get('nombre') == nombre:
+        if comodin_multiplicar_tiempo_usado:
+            puntos *= 2 
+        
+        data_jugador['puntuacion'] = data_jugador.get('puntuacion', 0) + puntos
+        guardar_json(path, data_jugador)
+    
+    return data_jugador['puntuacion']

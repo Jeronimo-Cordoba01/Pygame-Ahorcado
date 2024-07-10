@@ -55,6 +55,13 @@ musica_perdedor = pygame.mixer.Sound(r"Recursos\Audio\Sonido de perdedor.mp3")
 pygame.mixer.Sound.set_volume(musica_perdedor, 0.1)
 
 def reproducir_musica(musica_fondo, musica):
+    """
+    Reproduce una música específica deteniendo la música de fondo actual.
+
+    Parámetros:
+    musica_fondo: Objeto de sonido de Pygame que representa la música de fondo.
+    musica: Objeto de sonido de Pygame que representa la música que se quiere reproducir.
+    """
     pygame.mixer.Sound.stop(musica_fondo)
     pygame.mixer.Sound.play(musica)
     pygame.time.delay(4000)
