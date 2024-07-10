@@ -1,7 +1,7 @@
 Historia,Matemáticas,Ciencias,Entretenimiento,Deportes,Programación,Literatura,Geografía
 Belgrano,Algebra,Quimica,Cine,Futbol,Python,Shakespeare,Asia
 Rosas,Geometria,Fisica,Teatro,Baloncesto,Java,Cervantes,Europa
-Milei,Calculo,Biologia,Musica,Tenis,C++,GarciaMarquez,Africa
+Milei,Calculo,Biologia,Musica,Tenis,C,GarciaMarquez,Africa
 SanMartin,Trigonometria,Astronomia,Television,Atletismo,JavaScript,Borges,America
 Sarmiento,Aritmetica,Geologia,Videojuegos,Natacion,HTML,Kafka,Oceania
 Peron,Probabilidad,Ecologia,Literatura,Ciclismo,CSS,Poe,Antartida
@@ -15,11 +15,11 @@ Churchill,Integrales,Geofisica,Karaoke,Patinaje,Perl,Aesop,Rockies
 LutherKing,NumerosComplejos,Evolucion,Opera,Carrera,MATLAB,Dante,Himalayas
 Colon,Topologia,Astrobiologia,Novela,Boxeo,COBOL,Faulkner,Ganges
 Gandhi,TeoriadeNumeros,Epidemiologia,Magia,Parapente,Scala,Hemingway,Amazonas
-Mandela,AnalisisReal,Climatologia,Stand-up,Skate,Fortran,Chekhov,Siberia
+Mandela,AnalisisReal,Climatologia,Standup,Skate,Fortran,Chekhov,Siberia
 Lincoln,MatematicasDiscretas,Oceanografia,Baile,Escalada,Lua,Chaucer,Mediterraneo
 Einstein,TeoriadeJuegos,GeografiaFisica,Circo,Atletismo,Kotlin,Twain,Baltico
 Dante,InvestigaciondeOperaciones,Astroquimica,Ballet,Surf,R,Cummings,Carpatos
-Darwin,MatematicasAplicadas,Antropologia,Cuentos,Equitacion,Objective-C,Yeats,CordilleraCantabrica
+Darwin,MatematicasAplicadas,Antropologia,Cuentos,Equitacion,ObjectiveC,Yeats,CordilleraCantabrica
 Freud,EstadisticaDescriptiva,Ecologia,Circo,Tiro,Bash,Milton,Apalaches
 Bach,EstadisticaInferencial,Geologia,Series,Kayak,Clojure,Eliot,Andes
 Descartes,AlgebraLineal,Zoologia,Karaoke,Natacion,Elixir,Woolf,Caribe
@@ -45,7 +45,7 @@ Cleopatra,GeometriaComputacional,Biogeografia,Performance,Fencing,PostScript,Hom
 JulioCesar,GeometriaDiscreta,Astrogeologia,Danza,Badminton,OCaml,Aesop,Rockies
 Tutankamon,GeometriaHiperbolica,Fisicoquimica,Mimo,Judo,Cython,Tolstoy,Atlantico
 DaVinci,GeometriaIntegral,GeneticaPoblacional,Musical,Kitesurf,Ring,Stendhal,Pacifico
-MiguelAngel,GeometriadeFractales,Oceanografia,Literatura,Esgrima,Modula-2,Zola,Africa
+MiguelAngel,GeometriadeFractales,Oceanografia,Literatura,Esgrima,Modula2,Zola,Africa
 Rousseau,GeometriaConvexa,Palinologia,Baile,Billar,Simula,Goethe,Asia
 Hobbes,GeometriaDescriptiva,QuimicaAnalitica,Cuentos,Rugby,Prolog,Hugo,Europa
 Locke,GeometriaAxiomatica,Fotogrametria,Opera,Triatlon,Simula,Mann,Oceania
@@ -55,7 +55,7 @@ Voltaire,GeometriaMultidimensional,Toxicologia,Magia,Tiro,Fortran,Ibsen,Siberia
 Comte,GeometriaPlana,Virologia,Novelas,Tiro,Bash,Cummings,Andes
 Proudhon,GeometriaProyectiva,Entomologia,Ballet,Rapel,Elixir,Lawrence,Caribe
 Bakunin,GeometriaSagrada,GeneticaHumana,Opera,Ciclismo,Clojure,Tennyson,Pacifico
-Saint-Simon,GeometriaTridimensional,Embriologia,Teatro,Triatlon,Haskell,Bronte,Antartida
+SaintSimon,GeometriaTridimensional,Embriologia,Teatro,Triatlon,Haskell,Bronte,Antartida
 Fourier,GeometriaNoEuclidiana,Neurobiologia,Series,Parkour,Rust,Shelley,Atlantico
 Hume,GeometriaComputacional,Fisiopatologia,Musica,Boxeo,Scala,Blake,Andes
 Berkeley,GeometriaAlgebraica,Microbiologia,Ballet,Buceo,Kotlin,Crane,Sahara
@@ -73,7 +73,7 @@ Marx,GeometriaHiperbolica,Virologia,Podcast,Escalada,LabVIEW,Blake,Pamirs
 Engels,GeometriaProyectiva,Neurobiologia,Mimo,Badminton,AWK,Bronte,Rockies
 Rousseau,GeometriaAnalitica,Fisicoquimica,Opera,Ski,Ring,Shelley,Ural
 Kierkegaard,GeometriaTridimensional,Biotecnologia,Karaoke,Tenis,Prolog,Proust,Andes
-Husserl,GeometriaDiferencial,Microbiologia,Novela,Natacion,Modula-2,Gorki,Alpes
+Husserl,GeometriaDiferencial,Microbiologia,Novela,Natacion,Modula2,Gorki,Alpes
 Heidegger,GeometriaEuclidiana,QuimicaAnalitica,Ballet,Golf,TypeScript,Fitzgerald,Siberia
 Sartre,GeometriaAnalitica,BiologiaMolecular,Radio,Tiro,Fortran,Stendhal,Mediterraneo
 Foucault,GeometriaProyectiva,FisiologiaAnimal,Teatro,Parapente,Scala,Zola,Himalayas
@@ -101,6 +101,6 @@ Temistocles,GeometriaDiferencial,Geologia,Podcast,Tenis,Eiffel,Whitman,Himalayas
 Aristides,GeometriaAlgebraica,Oceanografia,Opera,Golf,TypeScript,Hughes,Rockies
 Alcibiades,GeometriaProyectiva,Antropologia,Teatro,Karate,Fortran,Hesse,Alpes
 Milciades,GeometriaAnalitica,Fisiologia,Series,Parkour,OCaml,Musil,Sahara
-Pisistrato,GeometriaTridimensional,GeneticaHumana,Karaoke,Fencing,Modula-2,Pound,Urales
+Pisistrato,GeometriaTridimensional,GeneticaHumana,Karaoke,Fencing,Modula2,Pound,Urales
 Hipias,GeometriaEuclidiana,Bioquimica,Novelas,Boxeo,Nim,Eliot,Caucaso
 Clistenes,GeometriaDiferencial,Zoologia,Opera,Judo,Smalltalk,Auden,Pirineos
