@@ -1,4 +1,5 @@
-import csv, json, random
+import json, random
+#from Datos_iniciales import * 
 
 def leer_palabras(path: str = r"Recursos\\Archivos\tematicas_palabras.csv"):
     """
@@ -10,11 +11,9 @@ def leer_palabras(path: str = r"Recursos\\Archivos\tematicas_palabras.csv"):
     """
     tematicas_palabras = {}
     with open(path, newline='', encoding="utf-8") as csvfile:
-        contenido = csvfile.read().splitlines()
-        
+        contenido = csvfile.read().splitlines() 
         headers = contenido[0].split(',')
         datos = contenido[1:]
-        
         for row in datos:
             columnas = row.split(',')
             for i, palabra in enumerate(columnas):
@@ -62,19 +61,6 @@ def guardar_json(path: str, data):
     """
     with open(path, 'w', encoding= "utf-8") as file:
         json.dump(data, file)
-
-def actualizar_puntuacion(puntos, nombre, path: str =r'Recursos\\Archivos\Data_jugador.json'):
-    """
-    Actualiza la puntuación de un jugador en un archivo JSON.
-    Parámetros:
-    - puntos (int): La cantidad de puntos a añadir.
-    - nombre (str): El nombre del jugador.
-    - path (str): La ruta al archivo JSON del jugador.
-    """
-    data_jugador = cargar_json(path)
-    if data_jugador.get('nombre') == nombre:
-        data_jugador['puntuacion'] = data_jugador.get('puntuacion', 0) + puntos
-        guardar_json(path, data_jugador)
 
 def registrar_letra_incorrecta(letra, nombre, path: str =r"Recursos\\Archivos\Data_jugador.json"):
     """

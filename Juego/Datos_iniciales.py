@@ -1,6 +1,18 @@
 from Funciones import *
 
 def inicializar_datos(tematicas_palabras, comodin_letra, comodin_tiempo_extra, comodin_multiplicar_tiempo):
+    """
+    Inicializa el estado del juego con los datos necesarios.
+
+    Parámetros:
+    tematicas_palabras: Diccionario que contiene las temáticas y sus respectivas palabras.
+    comodin_letra: Objeto de imagen del comodín de letra.
+    comodin_tiempo_extra: Objeto de imagen del comodín de tiempo extra.
+    comodin_multiplicar_tiempo: Objeto de imagen del comodín de multiplicar tiempo.
+
+    Retorna:
+    Un diccionario con el estado inicial del juego.
+    """
     estado_juego = {}
 
     limpiar_letras_incorrectas()
