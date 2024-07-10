@@ -47,3 +47,22 @@ def multi_tiempo(tiempo_restante, tiempo_transcurrido):
         return tiempo_restante * 2
     else:
         return tiempo_restante
+    
+def manejar_comodines(estado_juego, tipo_comodin, pos, tiempo_restante, tiempo_transcurrido):
+    if tipo_comodin == "letra":
+        if estado_juego["comodin_letra_pos"].collidepoint(pos) and not estado_juego["comodin_letra_usado"]:
+            letra_descubierta = descubrir_letra(estado_juego["palabra"], estado_juego["letras_adivinadas"])
+            if letra_descubierta:
+                estado_juego["letras_adivinadas"].append(letra_descubierta)
+            estado_juego["comodin_letra_usado"] = True
+    elif tipo_comodin == "tiempo":
+        if estado_juego["comodin_tiempo_pos"].collidepoint(pos) and not estado_juego["comodin_tiempo_extra_usado"]:
+            tiempo_restante = tiempo_extra(tiempo_restante)
+            estado_juego["comodin_tiempo_extra_usado"] = True
+    elif tipo_comodin == "multiplicar_tiempo":
+        if estado_juego["comodin_multiplicar_pos"].collidepoint(pos) and not estado_juego["comodin_multiplicar_tiempo_usado"]:
+            if tiempo_transcurrido <= 10:
+                tiempo_restante = multi_tiempo(tiempo_restante, tiempo_transcurrido)
+                estado_juego["comodin_multiplicar_tiempo_usado"] = True
+    
+    return tiempo_restante

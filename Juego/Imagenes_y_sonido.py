@@ -53,3 +53,8 @@ pygame.mixer.Sound.set_volume(musica_fondo, 0.1)
 musica_ganador = pygame.mixer.Sound(r'Recursos\Audio\Happy-wheels.mp3')
 musica_perdedor = pygame.mixer.Sound(r"Recursos\Audio\Sonido de perdedor.mp3")
 pygame.mixer.Sound.set_volume(musica_perdedor, 0.1)
+
+def reproducir_musica(musica_fondo, musica):
+    pygame.mixer.Sound.stop(musica_fondo)
+    pygame.mixer.Sound.play(musica)
+    pygame.time.delay(4000)

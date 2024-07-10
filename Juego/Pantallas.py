@@ -1,117 +1,37 @@
 import pygame, sys
+from Letritas import dibujar_letras
+from Manejo_pantallas import *
 
 #BIENVENIDA Y PLAY
 def pantalla_de_inicio(screen, pizarra, font, ANCHO, ALTO):
-    """
-    Pantalla de inicio
-    Muestra la pantalla de bienvenida con un botón "Play".
-    Parámetros:
-    - screen: La superficie de la pantalla donde se dibujará.
-    - pizarra: La imagen de fondo de la pantalla.
-    - font: La fuente que se utilizará para dibujar el texto.
-    - ANCHO: El ancho de la pantalla.
-    - ALTO: La altura de la pantalla.
-    """
-    titulo = font.render("Bienvenido al juego del ahorcado", True, (255,255,255))
-    boton_play = font.render("Play", True, (255,255,255), (255, 182, 193))
-    
-    boton_play_rect = boton_play.get_rect()
-    boton_play_rect.center = (ANCHO // 2, ALTO // 2)
+    titulo = font.render("Bienvenido al juego del ahorcado", True, (255, 255, 255))
+    boton_play = font.render("Play", True, (255, 255, 255), (255, 182, 193))
+    boton_play_rect = boton_play.get_rect(center=(ANCHO // 2, ALTO // 2))
 
-    pos_titulo = (ANCHO // 2 - titulo.get_width() // 2, 270)
-
-    screen.blit(pizarra, (0,0))
-    screen.blit(titulo, pos_titulo)
-    screen.blit(boton_play, boton_play_rect)
-
-    pygame.display.flip()
-    
-    jugando = False
-    while not jugando:
+    while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:
-                    jugando = True
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    pos = pygame.mouse.get_pos()
-                    if boton_play_rect.collidepoint(pos):
-                        jugando = True
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
+                return
+            elif event.type == pygame.MOUSEBUTTONDOWN and boton_play_rect.collidepoint(event.pos):
+                return
+        
+        screen.fill((255, 255, 255))
+        screen.blit(pizarra, (0, 0))
+        screen.blit(titulo, (ANCHO // 2 - titulo.get_width() // 2, 270))
+        screen.blit(boton_play, boton_play_rect)
+        pygame.display.flip()
 
 #INGRESAR NOMBRE
 def pantalla_ingresar_nombre(screen, pizarra, font, ANCHO, ALTO):
-    """
-    Pantalla para ingresar nombre
-    Muestra una pantalla donde el usuario puede ingresar su nombre.
-    Parámetros:
-    - screen: La superficie de la pantalla donde se dibujará.
-    - pizarra: La imagen de fondo de la pantalla.
-    - font: La fuente que se utilizará para dibujar el texto.
-    - ANCHO: El ancho de la pantalla.
-    - ALTO: La altura de la pantalla.
-    """
-    input_box = pygame.Rect(ANCHO // 2 - 150, ALTO // 2, 300, 50)
-    color_inactivo = pygame.Color((255, 255, 255))
-    color_activo = pygame.Color((255, 182, 193))
-    color_actual = color_inactivo
-    activo = False
-    text = ""
-    pregunta = ""
-    pregunta = ""
-
-    run = False
-    while not run:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if input_box.collidepoint(event.pos):
-                    activo = True
-                else:
-                    activo = False
-                
-                if activo:
-                    color_actual = color_activo
-                else:
-                    color_actual = color_inactivo
-                
-            elif event.type == pygame.KEYDOWN:
-                if activo:
-                    if event.key == pygame.K_RETURN:
-                        if len(text.strip()) > 0: #para que no tome los espacios en blanco
-                            return text
-                        else:
-                            pregunta = "Debe ingresar un nombre para continuar"
-                    elif event.key == pygame.K_BACKSPACE:
-                        text = text[:-1]
-                    elif len(text) < 10:
-                        text += event.unicode 
-            
-        screen.fill((255,255,255))
-        screen.blit(pizarra,(0,0))
-        texto = font.render("Ingrese su nombre: ", True, (255,255,255))
-        screen.blit(texto, (ANCHO // 2 - texto.get_width() // 2, ALTO // 2 - 50))
-        
-        texto_surface = font.render(text, True, color_actual)
-        screen.blit(texto_surface,(input_box.x + 5, input_box.y + 5))
-
-        if pregunta:
-            pregunta_surface = font.render(pregunta, True, (255,255,255))
-            screen.blit(pregunta_surface,(ANCHO // 2 - pregunta_surface.get_width() // 2, ALTO // 2 + 50 ))
-        if pregunta:
-            pregunta_surface = font.render(pregunta, True, (255,255,255))
-            screen.blit(pregunta_surface,(ANCHO // 2 - pregunta_surface.get_width() // 2, ALTO // 2 + 50 ))
-        pygame.draw.rect(screen, color_actual, input_box, 2)
-        pygame.display.flip()
-        
-    return text
+    pregunta = "Ingrese su nombre:"
+    nombre = pantalla_input(screen, pizarra, pregunta, ANCHO, ALTO, font)
+    return nombre
 
 #PANTALLAS FINALES
-def mostrar_mensaje_final(screen, pizarra, pregunta, palabra, ANCHO, ALTO):
+def mostrar_mensaje_final(screen, pizarra, pregunta, palabra, puntuacion, ANCHO, ALTO):
     """
     Muestra el mensaje final
     Muestra un mensaje final con la palabra correcta.
@@ -129,79 +49,30 @@ def mostrar_mensaje_final(screen, pizarra, pregunta, palabra, ANCHO, ALTO):
 
     pregunta_final = font.render(pregunta, True,(255,255,255))
     palabra_oculta = font.render(f"La palabra era: {palabra}", True, (255,255,255))
+    # puntuacion_texto = font.render(f"tu puntuacion fue de: {puntuacion}", True, (255, 182, 193) )
 
     pregunta_rect = pregunta_final.get_rect(center=(ANCHO // 2, ALTO // 2 - 50))
     palabra_rect = palabra_oculta.get_rect(center=(ANCHO // 2, ALTO // 2 + 50))
+    # puntuacion_rect = puntuacion_texto.get_rect(center=(ANCHO // 2, ALTO // 2))
 
     screen.blit(pregunta_final, pregunta_rect)
     screen.blit(palabra_oculta, palabra_rect)
+    # screen.blit(puntuacion_texto, puntuacion_rect)
     pygame.display.flip()
     pygame.time.delay(1000)
 
 #PANTALLA PREGUNTA
 def desea_seguir_jugando(screen, pizarra, ANCHO, ALTO):
-    """
-    Pantalla para preguntar si desea seguir jugando
-    Muestra una pantalla donde el usuario puede responder si desea seguir jugando.
-    Parámetros:
-    - screen: La superficie de la pantalla donde se dibujará.
-    - pizarra: La imagen de fondo de la pantalla.
-    - ANCHO: El ancho de la pantalla.
-    - ALTO: La altura de la pantalla.
-    Retorna:
-    - bool: True si el usuario desea seguir jugando, False en caso contrario.
-    """
-    input_box = pygame.Rect(ANCHO // 2 - 150, ALTO // 2, 300, 50)
-    color_inactivo = pygame.Color((255, 255, 255))
-    color_activo = pygame.Color((255, 182, 193))
-    color_actual = color_inactivo
-    activo = False
-    respuesta = ""
+    font = pygame.font.SysFont("appleberry", 50)
+    pregunta = "¿Desea seguir jugando? (Si / No)"
+    respuesta = pantalla_input(screen, pizarra, pregunta, ANCHO, ALTO, font)
+    respuesta = respuesta.lower().strip()  # Convertir a minúsculas y quitar espacios
+    if respuesta == "si":
+        return True
+    elif respuesta == "no":
+        return False
 
-    pregunta_font = pygame.font.SysFont("appleberry", 50)
-    respuesta_font = pygame.font.SysFont("appleberry", 50)
-
-    run = False
-    while not run:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                if input_box.collidepoint(event.pos):
-                    activo = True
-                else:
-                    activo = False 
-                
-                if activo:
-                    color_actual = color_activo
-                else:
-                    color_activo = color_inactivo
-            elif event.type == pygame.KEYDOWN:
-                if activo: 
-                    if event.key == pygame.K_RETURN:
-                        if respuesta.lower() == "si":
-                            return True
-                        elif respuesta.lower() == "no":
-                            return False
-                        else:
-                            respuesta = ""
-                    elif event.key == pygame.K_BACKSPACE:
-                        respuesta = respuesta[:-1]
-                    elif len(respuesta) < 10:
-                        respuesta += event.unicode
-        
-        screen.fill((255, 255, 255))
-        screen.blit(pizarra, (0, 0))
-        pygame.draw.rect(screen, color_actual, input_box, 2)
-
-        pregunta = pregunta_font.render("¿Desea seguir jugando? (Si / No)", True, (255, 255, 255))
-        screen.blit(pregunta, (ANCHO // 2 - pregunta.get_width() // 2, ALTO // 2 - 50))
-
-        respuesta_surface = respuesta_font.render(respuesta, True, color_actual)
-        screen.blit(respuesta_surface, (input_box.x + 5, input_box.y + 5))
-
-        pygame.display.flip()
+    return desea_seguir_jugando(screen, pizarra, ANCHO, ALTO)
         
 #PANTALLA INFO FINAL
 def pantalla_info_final(screen, pizarra, ANCHO, ALTO):
@@ -218,3 +89,22 @@ def pantalla_info_final(screen, pizarra, ANCHO, ALTO):
     screen.fill((255,255,255))
     screen.blit(pizarra, (0,0))
     info = font.render("Información sobre el juego", True, (255,255,255))
+
+def renderizar_pantalla(screen, pizarra, comodin_letra, comodin_tiempo_extra, comodin_multiplicar_tiempo, ahorcado_imagenes, estado_juego, font):
+    screen.fill((255, 255, 255))
+    screen.blit(pizarra, (0, 0))
+    screen.blit(comodin_letra, estado_juego["comodin_letra_pos"])
+    screen.blit(comodin_tiempo_extra, estado_juego["comodin_tiempo_pos"])
+    screen.blit(comodin_multiplicar_tiempo, estado_juego["comodin_multiplicar_pos"])
+    screen.blit(ahorcado_imagenes[6 - estado_juego["intentos_restantes"]], (400, 50))
+    dibujar_letras(screen, font, estado_juego["letras_ingresadas"])
+
+def mostrar_textos(screen, font, estado_juego, tiempo_restante):
+    mostrar_texto = lambda texto, pos: screen.blit(font.render(texto, True, (255,255,255)), pos)
+    palabra_mostrada = ' '.join([letra if letra in estado_juego["letras_adivinadas"] else '_' for letra in estado_juego["palabra"]])
+    mostrar_texto(f"Temática: {estado_juego['tematica']}", (50, 50))
+    mostrar_texto(palabra_mostrada, (50, 150))
+    mostrar_texto(f"Puntuación: {round(estado_juego['puntuacion'])}", (50, 250))
+    mostrar_texto(f"Tiempo: {round(tiempo_restante)}", (50, 350))
+    mostrar_texto(f"Letras Incorrectas: {', '.join(estado_juego['letras_incorrectas'])}", (50, 450))
+    mostrar_texto(f"Intentos restantes: {estado_juego['intentos_restantes']}", (50, 600))
