@@ -57,5 +57,5 @@ El juego del ahorcado consiste en adivinar una palabra relacionada con una temá
 ![]()
 - **Tiempo extra**: Aumenta 30 segundos al tiempo de la partida actual.
 ![]()
-- **Multiplicar tiempo restante**: Duplica el tiempo restante al encontrar la palabra (disponible solo durante los primeros 10 segundos de la partida).
+- **Multiplicar tiempo restante**: Duplica la puntación una vez descubierta la palabra(disponible solo durante los primeros 10 segundos de la partida).
 ![]()
