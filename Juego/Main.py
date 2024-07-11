@@ -1,8 +1,6 @@
 """
 Miembros: Jerónimo Facundo Lucas Córdoba, Sophia Antonella Augusto Valenzuela
----
 2° Parcial - Pygame - Ahorcado 
----
 """
 
 import pygame, sys
