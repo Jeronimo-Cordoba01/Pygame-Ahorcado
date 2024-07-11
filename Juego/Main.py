@@ -1,21 +1,11 @@
-"""
-Miembros: Jerónimo Facundo Lucas Córdoba, Sophia Antonella Augusto Valenzuela
----
-2° Parcial - Pygame - Ahorcado 
----
-"""
-
 import pygame, sys
 from Funciones import *; from Letritas import *;from Pantallas import *; from Comodines import *; 
 from Imagenes_y_sonido import *; from Datos_iniciales import *
 
-# Inicialización de Pygame
 pygame.init()
 
-# Cargar palabras desde el CSV
 tematicas_palabras = leer_palabras(r'Recursos\Archivos\tematicas_palabras.csv')
 
-# Función principal del juego
 def main():
     font = pygame.font.SysFont("appleberry", 50)
     pantalla_de_inicio(screen, pizarra, font, ANCHO, ALTO)
