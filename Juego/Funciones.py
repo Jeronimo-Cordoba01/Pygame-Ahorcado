@@ -10,8 +10,8 @@ def leer_palabras(path: str = r"Recursos\\Archivos\tematicas_palabras.csv"):
     - dict: Un diccionario donde las claves son las temáticas y los valores son listas de palabras asociadas a cada temática.
     """
     tematicas_palabras = {}
-    with open(path, newline='', encoding="utf-8") as csvfile:
-        contenido = csvfile.read().splitlines() 
+    with open(path, newline='', encoding="utf-8") as archivo:
+        contenido = archivo.read().splitlines() 
         headers = contenido[0].split(',')
         datos = contenido[1:]
         for row in datos:

@@ -75,7 +75,6 @@ def manejar_comodines(estado_juego, tipo_comodin, pos, tiempo_restante, tiempo_t
             estado_juego["comodin_tiempo_extra_usado"] = True
     elif tipo_comodin == "multiplicar_tiempo":
         if estado_juego["comodin_multiplicar_pos"].collidepoint(pos) and not estado_juego["comodin_multiplicar_tiempo_usado"]:
-            # if tiempo_transcurrido <= 10:
             tiempo_restante =  multi_puntuacion(tiempo_transcurrido, tiempo_restante)
             estado_juego["comodin_multiplicar_tiempo_usado"] = True
     

@@ -17,7 +17,7 @@ def manejar_eventos_input_box(event, input_box, activo, text, color_inactivo, co
     text: El texto actualizado.
     activo: El estado actualizado de la caja de entrada.
     color_actual: El color actual de la caja de entrada.
-    return_text: Booleano que indica si se debe retornar el texto.
+    texto_retornado: Booleano que indica si se debe retornar el texto.
     """
     color_actual = color_inactivo
 
@@ -89,10 +89,10 @@ def pantalla_input(screen, pizarra, pregunta, ANCHO, ALTO, font):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            text, activo, color_actual, return_text = manejar_eventos_input_box(event, input_box, activo, text, color_inactivo, color_activo)
-            if return_text and len(text.strip()) > 0:  # Para que no tome espacios en blanco
+            text, activo, color_actual, texto_retornado = manejar_eventos_input_box(event, input_box, activo, text, color_inactivo, color_activo)
+            if texto_retornado and len(text.strip()) > 0:  # Para que no tome espacios en blanco
                 return text
-            elif return_text:
+            elif texto_retornado:
                 pregunta = "Debe ingresar algo para continuar"
         
         screen.fill((255, 255, 255))
